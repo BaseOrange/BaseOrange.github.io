@@ -26,13 +26,15 @@
 <meta property="og:site_name" content="大橙子">
 <meta property="og:description" content="【Datawhale AI 夏令营】Task3-模型微调">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://log.660066.xyz/2024/07/31/datawhale-task3-fine-tuning/image-20240801230819863.png">
 <meta property="article:published_time" content="2024-07-31T06:03:28.000Z">
-<meta property="article:modified_time" content="2024-07-31T06:05:11.067Z">
+<meta property="article:modified_time" content="2024-08-02T15:33:03.718Z">
 <meta property="article:author" content="BigOrange">
 <meta property="article:tag" content="Datawhale">
 <meta property="article:tag" content="大模型">
 <meta property="article:tag" content="AI">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://log.660066.xyz/2024/07/31/datawhale-task3-fine-tuning/image-20240801230819863.png">
 
 
 <link rel="canonical" href="https://log.660066.xyz/2024/07/31/datawhale-task3-fine-tuning/">
@@ -102,7 +104,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -115,6 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BE%AE%E8%B0%83"><span class="nav-text">一、微调</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E8%B0%83"><span class="nav-text">1.1 什么是微调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%BE%AE%E8%B0%83%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-text">1.2 微调的意义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81LoRa"><span class="nav-text">二、LoRa</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E4%BB%80%E4%B9%88%E6%98%AFLoRa"><span class="nav-text">2.1 什么是LoRa</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-LoRa%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text">2.2 LoRa的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-LoRa%E5%8E%9F%E7%90%86"><span class="nav-text">2.3 LoRa原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82"><span class="nav-text">2.4 通俗易懂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-%E5%90%8E%E8%AF%9D"><span class="nav-text">2.5 后话</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81vllm%E5%8A%A0%E9%80%9F"><span class="nav-text">三、vllm加速</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-vllm"><span class="nav-text">3.1 vllm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-vllm%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-text">3.2 vllm的用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-vllm%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-text">3.3 vllm使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82"><span class="nav-text">3.4 通俗易懂</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%A4%9A%E8%B7%AFLLM%E6%8A%95%E7%A5%A8"><span class="nav-text">四、多路LLM投票</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%9A%E8%B7%AFLLM%E6%8A%95%E7%A5%A8"><span class="nav-text">4.1 什么是多路LLM投票</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Baseline%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-text">4.2 Baseline中的实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%90%8E%E7%BB%AD"><span class="nav-text">五、后续</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -188,9 +191,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-07-31 14:03:28 / 修改时间：14:05:11" itemprop="dateCreated datePublished" datetime="2024-07-31T14:03:28+08:00">2024-07-31</time>
+      <time title="创建时间：2024-07-31 14:03:28" itemprop="dateCreated datePublished" datetime="2024-07-31T14:03:28+08:00">2024-07-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-08-02 23:33:03" itemprop="dateModified" datetime="2024-08-02T23:33:03+08:00">2024-08-02</time>
     </span>
 
   
@@ -203,7 +212,49 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><h1 id="一、微调"><a href="#一、微调" class="headerlink" title="一、微调"></a>一、微调</h1><h2 id="1-1-什么是微调"><a href="#1-1-什么是微调" class="headerlink" title="1.1 什么是微调"></a>1.1 什么是微调</h2><p>在预训练模型的基础上，针对特定任务或数据集进行进一步的训练，以适应更具体的应用场景。</p>
+<h2 id="1-2-微调的意义"><a href="#1-2-微调的意义" class="headerlink" title="1.2 微调的意义"></a>1.2 微调的意义</h2><ol>
+<li><strong>上下文理解提升</strong>：使用的特定数据集可以帮助模型更好地理解特定任务的上下文，从而在推理时能够考虑到更多的相关信息和细节。</li>
+<li><strong>性能优化</strong>：使其在处理该任务时达到更高的准确率和更低的错误率。这对于需要高可靠性和准确性的推理任务尤为重要。</li>
+<li><strong>减少数据需求</strong>：对于一些数据稀缺的领域或任务，微调可以在相对较少的数据量下实现较好的性能提升，因为模型已经具备了大量的通用语言知识。</li>
+<li><strong>适应性增强</strong>：微调使模型能够更好地适应特定用户或场景的需求，提供更加个性化和定制化的推理服务。</li>
+</ol>
+<h1 id="二、LoRa"><a href="#二、LoRa" class="headerlink" title="二、LoRa"></a>二、LoRa</h1><h2 id="2-1-什么是LoRa"><a href="#2-1-什么是LoRa" class="headerlink" title="2.1 什么是LoRa"></a>2.1 什么是LoRa</h2><p>LoRA（Low-Rank Adaptation）微调是一种高效的模型微调技术，特别适用于大型预训练语言模型的适应性调整。LoRA的核心思想是通过引入低秩矩阵来调整模型的权重，从而在不显著增加模型参数数量的情况下，实现对模型的微调。</p>
+<p>通俗点说就是，在原有的权重矩阵之外，增加一组更小的矩阵，这些矩阵可以视为对原有权重的小幅调整。这些调整矩阵（低秩矩阵）可以以较小的成本学习到新任务的特定模式，而无需改变预训练模型的大部分权重。</p>
+<h2 id="2-2-LoRa的优势"><a href="#2-2-LoRa的优势" class="headerlink" title="2.2 LoRa的优势"></a>2.2 LoRa的优势</h2><ul>
+<li><p>可以针对不同的下游任务构建小型 LoRA 模块，从而在共享预训练模型参数基础上有效地切换下游任务。</p>
+</li>
+<li><p>LoRA 使用自适应优化器（Adaptive Optimizer），不需要计算梯度或维护大多数参数的优化器状态，训练更有效、硬件门槛更低。</p>
+</li>
+<li><p>LoRA 使用简单的线性设计，在部署时将可训练矩阵与冻结权重合并，不存在推理延迟。</p>
+</li>
+<li><p>LoRA 与其他方法正交，可以组合。</p>
+</li>
+</ul>
+<h2 id="2-3-LoRa原理"><a href="#2-3-LoRa原理" class="headerlink" title="2.3 LoRa原理"></a>2.3 LoRa原理</h2><p><img src="/2024/07/31/datawhale-task3-fine-tuning/image-20240801230819863.png" alt="image-20240801230819863"></p>
+<h2 id="2-4-通俗易懂"><a href="#2-4-通俗易懂" class="headerlink" title="2.4 通俗易懂"></a>2.4 通俗易懂</h2><p>想象一下，有一个非常复杂的拼图，拼图代表了一个预训练好的大型语言模型。拼图已经完成，而且做得非常好，它能够识别和理解各种语言模式和语义。但是，当你需要这个拼图适应一个新的场景或任务时，比如说要它理解一种特殊的行业术语或者特定的文化背景，你不想打乱整个拼图，因为那会破坏它原有的功能和性能。</p>
+<p>LoRA就像是为这个拼图添加了几块额外的、可移动的小拼图。这些小拼图被设计成可以插在原拼图的某些部分上，改变那些部分的功能，但不会影响整个拼图的完整性和稳定性。这些小拼图是专门定制的，它们只需要学习如何适应新任务，而不是整个模型的所有部分。</p>
+<h2 id="2-5-后话"><a href="#2-5-后话" class="headerlink" title="2.5 后话"></a>2.5 后话</h2><p>跟着相关的参考资料，目前我个人的理解是LoRa就是使用模型和部分数据，来生成一个小模型，然后将小模型整合进大模型中。使大模型对特定数据的更好的理解和处理。</p>
+<p>感觉通过LoRa进行微调，是可以满足开源模型服务实际业务需求的。所以后面打算继续学习一下LoRa的使用，也会将相关的学习记录在本博客下。</p>
+<h1 id="三、vllm加速"><a href="#三、vllm加速" class="headerlink" title="三、vllm加速"></a>三、vllm加速</h1><h2 id="3-1-vllm"><a href="#3-1-vllm" class="headerlink" title="3.1 vllm"></a>3.1 vllm</h2><p>[vLLM（Virtual Large Language Model）是一个由伯克利大学LMSYS组织开源的大规模语言模型高速推理框架。它的设计目标是在实时应用场景中大幅提升语言模型服务的吞吐量和内存使用效率。vLLM的特点包括易于使用、与Hugging Face等流行工具无缝集成以及高效的性能。</p>
+<h2 id="3-2-vllm的用途"><a href="#3-2-vllm的用途" class="headerlink" title="3.2 vllm的用途"></a>3.2 vllm的用途</h2><p>主要用来加速大模型的文本生成过程。当涉及到长文本生成或需要处理大量输入时，大模型的计算成本较高（好像主要是电费，跟挖矿的了）。</p>
+<p>vllm通过优化模型的推理流程，来解决大模型的实时部署和高性能生成。</p>
+<h2 id="3-3-vllm使用步骤"><a href="#3-3-vllm使用步骤" class="headerlink" title="3.3 vllm使用步骤"></a>3.3 vllm使用步骤</h2><ol>
+<li>安装vllm库。</li>
+<li>加载预训练的模型和配置。</li>
+<li>配置vllm参数，如批量大小、最大序列长度等。</li>
+<li>调用vllm的API进行文本生成。</li>
+</ol>
+<h2 id="3-4-通俗易懂"><a href="#3-4-通俗易懂" class="headerlink" title="3.4 通俗易懂"></a>3.4 通俗易懂</h2><p>想象一下，你正在玩一个数独，比较复杂，每次你填下一个数后，可能会影响后续所有可能的选择。如果你每次都要重新思考所有可能的后续选项，非常耗时。vllm就像一个聪明的游戏助手，它会记住你已经填过的数，并且只给你接下来合理的几个选项，这样你就不用考虑那些明显不合适的数，从而大大加快了游戏的速度。</p>
+<p>vllm根据已经生成的文本动态调整生成的词汇范围，从而加速了文本生成的过程。</p>
+<h1 id="四、多路LLM投票"><a href="#四、多路LLM投票" class="headerlink" title="四、多路LLM投票"></a>四、多路LLM投票</h1><h2 id="4-1-什么是多路LLM投票"><a href="#4-1-什么是多路LLM投票" class="headerlink" title="4.1 什么是多路LLM投票"></a>4.1 什么是多路LLM投票</h2><p>即多模型融合或模型集成，是一种在多个大模型之间采用决策融合策略的方法，用于提高预测的准确性和稳定性。</p>
+<p>这种方法在机器学习和深度学习领域中很常见，尤其在面对复杂或高风险的应用场景时，比如自动驾驶、医疗诊断或金融预测等。</p>
+<h2 id="4-2-Baseline中的实现"><a href="#4-2-Baseline中的实现" class="headerlink" title="4.2 Baseline中的实现"></a>4.2 Baseline中的实现</h2><p>其实看到讲义中写的实现逻辑（通过三次结果推理，将选择答案最多的结果作为最终结果），我突然就想起了一个区块链的共识机制——拜占庭算法。与之类似，大概得意思就是，少数服从多数。</p>
+<h1 id="五、后续"><a href="#五、后续" class="headerlink" title="五、后续"></a>五、后续</h1><p>到目前为止，感觉有开源模型及其开源生态的加持，大模型的开发和应用，对于一般企业来说不是什么太难的事，重点就是在微调和量化上。微调能解决模型服务于业务需求。而量化可以解决，在较低性能的机器上运行大模型。</p>
+<p>个人感觉，大模型在AI领域近几年很流行，也比较趋于成熟化了。但是训练数据，运行环境要求还是不太完美。感觉后面肯定会有更好的解决方案，也会从大模型这一块衍生出更多新的AI技术。</p>
+<p>本Task所需文件：</p>
+<p><a target="_blank" rel="noopener" href="https://www.modelscope.cn/datasets/Datawhale/DW2024_Complex_reasoning_ability_assessment_qwen2-7b-lora">https://www.modelscope.cn/datasets/Datawhale/DW2024_Complex_reasoning_ability_assessment_qwen2-7b-lora</a></p>
+
     </div>
 
     
