@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://log.660066.xyz/2024/08/02/datawhale-task4-appendix/</loc>
+    
+    <lastmod>2024-08-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://log.660066.xyz/2024/07/31/datawhale-task3-fine-tuning/</loc>
     
     <lastmod>2024-08-02</lastmod>
@@ -371,6 +380,41 @@
 
   
   <url>
+    <loc>https://log.660066.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2024-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
+    <lastmod>2024-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/Datawhale/</loc>
+    <lastmod>2024-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2024-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/AI/</loc>
+    <lastmod>2024-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://log.660066.xyz/tags/%E5%BC%80%E5%8F%91%E7%BA%AA%E5%AE%9E/</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -385,20 +429,6 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/DataX-Web/</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://log.660066.xyz/tags/Docx4j/</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -406,7 +436,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
+    <loc>https://log.660066.xyz/tags/DataX-Web/</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -441,27 +471,6 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/Datawhale/</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/AI/</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://log.660066.xyz/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -469,14 +478,14 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/%E9%94%81/</loc>
+    <loc>https://log.660066.xyz/tags/%E8%A1%97%E6%BA%9C%E5%AD%90%E7%B3%BB%E5%88%97/</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/%E8%A1%97%E6%BA%9C%E5%AD%90%E7%B3%BB%E5%88%97/</loc>
+    <loc>https://log.660066.xyz/tags/%E9%94%81/</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
