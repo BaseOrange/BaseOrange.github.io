@@ -389,6 +389,20 @@
 
   
   <url>
+    <loc>https://log.660066.xyz/tags/%E5%BC%80%E5%8F%91%E7%BA%AA%E5%AE%9E/</loc>
+    <lastmod>2024-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</loc>
+    <lastmod>2024-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://log.660066.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2024-08-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -396,7 +410,49 @@
   </url>
   
   <url>
+    <loc>https://log.660066.xyz/tags/DataX-Web/</loc>
+    <lastmod>2024-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/Docx4j/</loc>
+    <lastmod>2024-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://log.660066.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
+    <lastmod>2024-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/Logback/</loc>
+    <lastmod>2024-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/Bat/</loc>
+    <lastmod>2024-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/Oracle/</loc>
+    <lastmod>2024-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/XBRL/</loc>
     <lastmod>2024-08-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -418,62 +474,6 @@
   
   <url>
     <loc>https://log.660066.xyz/tags/AI/</loc>
-    <lastmod>2024-08-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/%E5%BC%80%E5%8F%91%E7%BA%AA%E5%AE%9E/</loc>
-    <lastmod>2024-08-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</loc>
-    <lastmod>2024-08-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/DataX-Web/</loc>
-    <lastmod>2024-08-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/Docx4j/</loc>
-    <lastmod>2024-08-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/Bat/</loc>
-    <lastmod>2024-08-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/Logback/</loc>
-    <lastmod>2024-08-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/Oracle/</loc>
-    <lastmod>2024-08-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/XBRL/</loc>
     <lastmod>2024-08-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
