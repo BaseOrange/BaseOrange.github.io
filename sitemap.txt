@@ -1,4 +1,4 @@
-https://log.660066.xyz/2024/09/01/inside.git/
+https://log.660066.xyz/2024/09/01/inside-git/
 https://log.660066.xyz/about/index.html
 https://log.660066.xyz/2024/08/21/RunLLM-onCpuEnv-withOllama/
 https://log.660066.xyz/links/index.html
