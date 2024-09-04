@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://log.660066.xyz/baidu_verify_codeva-tXW0RgD5OZ.html</loc>
+    
+    <lastmod>2024-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://log.660066.xyz/2024/09/01/inside-git/</loc>
     
     <lastmod>2024-09-01</lastmod>
@@ -407,14 +416,14 @@
 
   
   <url>
-    <loc>https://log.660066.xyz/tags/%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</loc>
+    <loc>https://log.660066.xyz/tags/%E5%BC%80%E5%8F%91%E7%BA%AA%E5%AE%9E/</loc>
     <lastmod>2024-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/%E5%BC%80%E5%8F%91%E7%BA%AA%E5%AE%9E/</loc>
+    <loc>https://log.660066.xyz/tags/%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</loc>
     <lastmod>2024-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -470,13 +479,6 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/XBRL/</loc>
-    <lastmod>2024-09-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://log.660066.xyz/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2024-09-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -485,6 +487,13 @@
   
   <url>
     <loc>https://log.660066.xyz/tags/AI/</loc>
+    <lastmod>2024-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/XBRL/</loc>
     <lastmod>2024-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -512,14 +521,14 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/%E9%94%81/</loc>
+    <loc>https://log.660066.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
     <lastmod>2024-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
+    <loc>https://log.660066.xyz/tags/%E9%94%81/</loc>
     <lastmod>2024-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
