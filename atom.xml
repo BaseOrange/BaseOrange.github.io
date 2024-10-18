@@ -11,8 +11,12 @@
   
   <author>
     <name>BigOrange</name>
-    
   </author>
+
+  <follow_challenge>
+    <feedId>69913734499985408</feedId>
+    <userId>69909766348505088</userId>
+  </follow_challenge>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
