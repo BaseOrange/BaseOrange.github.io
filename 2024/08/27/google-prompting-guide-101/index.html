@@ -16,10 +16,10 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"log.660066.xyz","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"onmobile":false,"dimmer":true},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"log.660066.xyz","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"onmobile":false,"dimmer":true},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Google官方的prompt提示教程是一本四十多页的书，对入门小白来说比较友好，简单使用翻译软件阅读。">
 <meta property="og:type" content="article">
@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://log.660066.xyz/2024/08/27/google-prompting-guide-101/image-20241113163616893.png">
 <meta property="og:image" content="https://log.660066.xyz/2024/08/27/google-prompting-guide-101/image-20241113163731312.png">
 <meta property="article:published_time" content="2024-08-27T07:10:21.000Z">
-<meta property="article:modified_time" content="2024-11-13T09:06:46.038Z">
+<meta property="article:modified_time" content="2024-11-13T09:22:57.001Z">
 <meta property="article:author" content="BigOrange">
 <meta property="article:tag" content="大模型">
 <meta property="article:tag" content="AI">
@@ -134,7 +134,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BC%96%E5%86%99%E6%9C%89%E6%95%88%E7%9A%84%E6%8F%90%E7%A4%BA"><span class="nav-text">一、编写有效的提示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BB%8B%E7%BB%8D"><span class="nav-text">二、介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Gemini-for-Google-Workspace%EF%BC%9A%E6%8F%90%E7%A4%BA-101"><span class="nav-text">2.1 Gemini for Google Workspace：提示 101</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%BF%99%E4%BB%BD%E6%8F%90%E7%A4%BA%E8%AF%AD%E6%8C%87%E5%8D%97"><span class="nav-text">2.2 如何使用这份提示语指南</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1"><span class="nav-text">三、客户服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%85%A5%E9%97%A8"><span class="nav-text">3.1 入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">3.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">3.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1%E7%BB%8F%E7%90%86%E6%88%96%E4%BB%A3%E8%A1%A8"><span class="nav-text">3.3.1 客户服务经理或代表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E6%A0%87%E5%87%86%E5%8C%96%E6%B2%9F%E9%80%9A%E6%A1%86%E6%9E%B6"><span class="nav-text">用例：标准化沟通框架</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E6%94%B9%E5%96%84%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1"><span class="nav-text">用例：改善客户服务</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-%E5%AE%A2%E6%88%B7%E6%94%AF%E6%8C%81%E4%B8%93%E5%AE%B6"><span class="nav-text">3.3.2 客户支持专家</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%AE%A2%E6%88%B7%E8%87%AA%E5%8A%A9%E6%9C%8D%E5%8A%A1"><span class="nav-text">用例：实现客户自助服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%AE%A2%E6%88%B7%E4%B9%8B%E5%A3%B0%E7%A0%94%E7%A9%B6"><span class="nav-text">用例：客户之声研究</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3-%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%B0%83%E5%91%98"><span class="nav-text">3.3.3 客户服务协调员</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E4%B8%8E%E5%AE%A2%E6%88%B7%E4%BA%92%E5%8A%A8"><span class="nav-text">用例：与客户互动</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%87%86%E5%A4%87%E5%AE%A2%E6%88%B7%E4%BC%9A%E8%AE%AE"><span class="nav-text">用例：准备客户会议</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%AB%98%E7%AE%A1%E5%92%8C%E4%BC%81%E4%B8%9A%E5%AE%B6"><span class="nav-text">四、高管和企业家</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%85%A5%E9%97%A8"><span class="nav-text">4.1 入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">4.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">4.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-1-%E9%A6%96%E5%B8%AD%E8%BF%90%E8%90%A5%E5%AE%98"><span class="nav-text">4.3.1 首席运营官</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%87%86%E5%A4%87%E5%91%98%E5%B7%A5%E6%B2%9F%E9%80%9A%E4%BF%A1%E6%81%AF"><span class="nav-text">用例：准备员工沟通信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E7%AE%80%E5%8C%96%E9%9A%8F%E6%97%B6%E9%9A%8F%E5%9C%B0%E7%9A%84%E5%93%8D%E5%BA%94"><span class="nav-text">用例：简化随时随地的响应</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-2-%E9%A6%96%E5%B8%AD%E8%90%A5%E9%94%80%E5%AE%98"><span class="nav-text">4.3.2 首席营销官</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E9%9B%86%E6%80%9D%E5%B9%BF%E7%9B%8A%E5%86%85%E5%AE%B9%E5%92%8C%E6%80%9D%E6%83%B3%E9%A2%86%E5%AF%BC%E5%8A%9B"><span class="nav-text">用例：集思广益内容和思想领导力</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E8%BF%9B%E8%A1%8C%E7%AB%9E%E4%BA%89%E5%88%86%E6%9E%90"><span class="nav-text">用例：进行竞争分析</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-3-%E9%A6%96%E5%B8%AD%E6%8A%80%E6%9C%AF%E5%AE%98"><span class="nav-text">4.3.3 首席技术官</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E6%80%BB%E7%BB%93%E6%96%B0%E5%85%B4%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF"><span class="nav-text">用例：总结新兴技术趋势</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-4-%E9%A6%96%E5%B8%AD%E4%BF%A1%E6%81%AF%E5%AE%98"><span class="nav-text">4.3.4 首席信息官</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%BB%BA%E7%AB%8B%E6%8A%80%E6%9C%AF%E6%B2%9F%E9%80%9A"><span class="nav-text">用例：建立技术沟通</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-5-%E9%A6%96%E5%B8%AD%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90%E5%AE%98"><span class="nav-text">4.3.5 首席人力资源官</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-6-%E5%88%9B%E5%A7%8B%E4%BA%BA%E6%88%96%E4%BC%81%E4%B8%9A%E5%AE%B6"><span class="nav-text">4.3.6 创始人或企业家</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90"><span class="nav-text">五、人力资源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E5%85%A5%E9%97%A8"><span class="nav-text">5.1 入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">5.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">5.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-%E6%8B%9B%E8%81%98%E4%BA%BA%E5%91%98"><span class="nav-text">5.3.1 招聘人员</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2-%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90%E7%BB%8F%E7%90%86"><span class="nav-text">5.3.2 人力资源经理</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80"><span class="nav-text">六、市场营销</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E5%85%A5%E9%97%A8"><span class="nav-text">6.1  入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">6.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">6.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-1-%E5%93%81%E7%89%8C%E7%BB%8F%E7%90%86"><span class="nav-text">6.3.1 品牌经理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-2-%E6%95%B0%E5%AD%97%E8%90%A5%E9%94%80%E7%BB%8F%E7%90%86"><span class="nav-text">6.3.2 数字营销经理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-3-%E5%86%85%E5%AE%B9%E8%90%A5%E9%94%80%E7%BB%8F%E7%90%86"><span class="nav-text">6.3.3 内容营销经理</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86"><span class="nav-text">七、项目管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-%E5%85%A5%E9%97%A8"><span class="nav-text">7.1  入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">7.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">7.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-1-%E9%A1%B9%E7%9B%AE%E7%BB%8F%E7%90%86"><span class="nav-text">7.3.1 项目经理</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E9%94%80%E5%94%AE"><span class="nav-text">八、销售</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-%E5%85%A5%E9%97%A8"><span class="nav-text">8.1  入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">8.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">8.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-3-1-%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86"><span class="nav-text">8.3.1 销售经理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-3-2-%E5%AE%A2%E6%88%B7%E7%BB%8F%E7%90%86%E5%92%8C%E5%AE%A2%E6%88%B7%E4%B8%BB%E7%AE%A1"><span class="nav-text">8.3.2 客户经理和客户主管</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-3-3-%E4%B8%9A%E5%8A%A1%E5%8F%91%E5%B1%95%E7%BB%8F%E7%90%86"><span class="nav-text">8.3.3 业务发展经理</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9D%9F-%E6%8F%90%E9%AB%98%E4%BD%A0%E7%9A%84%E6%8F%90%E7%A4%BA%E5%86%99%E4%BD%9C%E6%B0%B4%E5%B9%B3"><span class="nav-text">结束. 提高你的提示写作水平</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5"><span class="nav-text">下载链接</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BC%96%E5%86%99%E6%9C%89%E6%95%88%E7%9A%84%E6%8F%90%E7%A4%BA"><span class="nav-text">一、编写有效的提示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BB%8B%E7%BB%8D"><span class="nav-text">二、介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Gemini-for-Google-Workspace%EF%BC%9A%E6%8F%90%E7%A4%BA-101"><span class="nav-text">2.1 Gemini for Google Workspace：提示 101</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%BF%99%E4%BB%BD%E6%8F%90%E7%A4%BA%E8%AF%AD%E6%8C%87%E5%8D%97"><span class="nav-text">2.2 如何使用这份提示语指南</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1"><span class="nav-text">三、客户服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%85%A5%E9%97%A8"><span class="nav-text">3.1 入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">3.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">3.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1%E7%BB%8F%E7%90%86%E6%88%96%E4%BB%A3%E8%A1%A8"><span class="nav-text">3.3.1 客户服务经理或代表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E6%A0%87%E5%87%86%E5%8C%96%E6%B2%9F%E9%80%9A%E6%A1%86%E6%9E%B6"><span class="nav-text">用例：标准化沟通框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E6%94%B9%E5%96%84%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1"><span class="nav-text">用例：改善客户服务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-%E5%AE%A2%E6%88%B7%E6%94%AF%E6%8C%81%E4%B8%93%E5%AE%B6"><span class="nav-text">3.3.2 客户支持专家</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%AE%A2%E6%88%B7%E8%87%AA%E5%8A%A9%E6%9C%8D%E5%8A%A1"><span class="nav-text">用例：实现客户自助服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%AE%A2%E6%88%B7%E4%B9%8B%E5%A3%B0%E7%A0%94%E7%A9%B6"><span class="nav-text">用例：客户之声研究</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%B0%83%E5%91%98"><span class="nav-text">3.3.3 客户服务协调员</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E4%B8%8E%E5%AE%A2%E6%88%B7%E4%BA%92%E5%8A%A8"><span class="nav-text">用例：与客户互动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%87%86%E5%A4%87%E5%AE%A2%E6%88%B7%E4%BC%9A%E8%AE%AE"><span class="nav-text">用例：准备客户会议</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%AB%98%E7%AE%A1%E5%92%8C%E4%BC%81%E4%B8%9A%E5%AE%B6"><span class="nav-text">四、高管和企业家</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%85%A5%E9%97%A8"><span class="nav-text">4.1 入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">4.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">4.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-%E9%A6%96%E5%B8%AD%E8%BF%90%E8%90%A5%E5%AE%98"><span class="nav-text">4.3.1 首席运营官</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%87%86%E5%A4%87%E5%91%98%E5%B7%A5%E6%B2%9F%E9%80%9A%E4%BF%A1%E6%81%AF"><span class="nav-text">用例：准备员工沟通信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E7%AE%80%E5%8C%96%E9%9A%8F%E6%97%B6%E9%9A%8F%E5%9C%B0%E7%9A%84%E5%93%8D%E5%BA%94"><span class="nav-text">用例：简化随时随地的响应</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-%E9%A6%96%E5%B8%AD%E8%90%A5%E9%94%80%E5%AE%98"><span class="nav-text">4.3.2 首席营销官</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E9%9B%86%E6%80%9D%E5%B9%BF%E7%9B%8A%E5%86%85%E5%AE%B9%E5%92%8C%E6%80%9D%E6%83%B3%E9%A2%86%E5%AF%BC%E5%8A%9B"><span class="nav-text">用例：集思广益内容和思想领导力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E8%BF%9B%E8%A1%8C%E7%AB%9E%E4%BA%89%E5%88%86%E6%9E%90"><span class="nav-text">用例：进行竞争分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-%E9%A6%96%E5%B8%AD%E6%8A%80%E6%9C%AF%E5%AE%98"><span class="nav-text">4.3.3 首席技术官</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E6%80%BB%E7%BB%93%E6%96%B0%E5%85%B4%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF"><span class="nav-text">用例：总结新兴技术趋势</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-4-%E9%A6%96%E5%B8%AD%E4%BF%A1%E6%81%AF%E5%AE%98"><span class="nav-text">4.3.4 首席信息官</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%BB%BA%E7%AB%8B%E6%8A%80%E6%9C%AF%E6%B2%9F%E9%80%9A"><span class="nav-text">用例：建立技术沟通</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-5-%E9%A6%96%E5%B8%AD%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90%E5%AE%98"><span class="nav-text">4.3.5 首席人力资源官</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E8%A1%A8%E8%BE%BE%E5%AF%B9%E5%91%98%E5%B7%A5%E7%9A%84%E8%B5%9E%E8%B5%8F"><span class="nav-text">用例：表达对员工的赞赏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E8%AF%84%E4%BC%B0%E5%91%98%E5%B7%A5%E6%BB%A1%E6%84%8F%E5%BA%A6"><span class="nav-text">用例：评估员工满意度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-6-%E5%88%9B%E5%A7%8B%E4%BA%BA%E6%88%96%E4%BC%81%E4%B8%9A%E5%AE%B6"><span class="nav-text">4.3.6 创始人或企业家</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E8%BF%9B%E8%A1%8C%E7%AB%9E%E4%BA%89%E5%88%86%E6%9E%90-1"><span class="nav-text">用例：进行竞争分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E8%BF%9B%E8%A1%8C%E7%AD%B9%E6%AC%BE%E5%92%8C%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB"><span class="nav-text">用例：进行筹款和投资者关系</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90"><span class="nav-text">五、人力资源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E5%85%A5%E9%97%A8"><span class="nav-text">5.1 入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">5.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">5.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-%E6%8B%9B%E8%81%98%E4%BA%BA%E5%91%98"><span class="nav-text">5.3.1 招聘人员</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E7%AE%A1%E7%90%86%E6%8B%9B%E8%81%98%E6%B5%81%E7%A8%8B"><span class="nav-text">用例：管理招聘流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E7%AE%A1%E7%90%86%E9%9D%A2%E8%AF%95%E6%B5%81%E7%A8%8B"><span class="nav-text">用例：管理面试流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%80%99%E9%80%89%E4%BA%BA%E6%B2%9F%E9%80%9A"><span class="nav-text">用例：候选人沟通</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2-%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90%E7%BB%8F%E7%90%86"><span class="nav-text">5.3.2 人力资源经理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%85%A5%E8%81%8C%E5%91%98%E5%B7%A5"><span class="nav-text">用例：入职员工</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E4%BC%A0%E8%BE%BE%E5%85%B3%E9%94%AE%E5%8F%91%E7%8E%B0%E5%B9%B6%E8%B5%B7%E8%8D%89%E5%90%8E%E7%BB%AD%E8%B0%83%E6%9F%A5"><span class="nav-text">用例：传达关键发现并起草后续调查</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80"><span class="nav-text">六、市场营销</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E5%85%A5%E9%97%A8"><span class="nav-text">6.1  入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">6.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">6.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-1-%E5%93%81%E7%89%8C%E7%BB%8F%E7%90%86"><span class="nav-text">6.3.1 品牌经理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E8%BF%9B%E8%A1%8C%E5%B8%82%E5%9C%BA%E8%B0%83%E7%A0%94%E5%B9%B6%E7%A1%AE%E5%AE%9A%E8%B6%8B%E5%8A%BF"><span class="nav-text">用例：进行市场调研并确定趋势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%88%9B%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E5%86%85%E5%AE%B9%E5%92%8C%E5%88%86%E5%8F%91"><span class="nav-text">用例：创建和管理内容和分发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-2-%E6%95%B0%E5%AD%97%E8%90%A5%E9%94%80%E7%BB%8F%E7%90%86"><span class="nav-text">6.3.2 数字营销经理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E8%B5%B7%E8%8D%89%E5%AE%A2%E6%88%B7%E8%8E%B7%E5%8F%96%E9%80%9A%E8%AE%AF"><span class="nav-text">用例：起草客户获取通讯</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E7%94%9F%E6%88%90%E5%85%A5%E7%AB%99%E8%90%A5%E9%94%80%E6%B4%BB%E5%8A%A8"><span class="nav-text">用例：生成入站营销活动</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-3-%E5%86%85%E5%AE%B9%E8%90%A5%E9%94%80%E7%BB%8F%E7%90%86"><span class="nav-text">6.3.3 内容营销经理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E4%B8%BA%E6%82%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%BA%A7%E7%94%9F%E7%81%B5%E6%84%9F"><span class="nav-text">用例：为您的博客产生灵感</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%88%9B%E5%BB%BA%E7%A4%BE%E4%BA%A4%E5%AA%92%E4%BD%93%E5%B8%96%E5%AD%90"><span class="nav-text">用例：创建社交媒体帖子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%88%B6%E5%AE%9A%E6%88%98%E7%95%A5%E8%90%A5%E9%94%80%E8%AE%A1%E5%88%92"><span class="nav-text">用例：制定战略营销计划</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86"><span class="nav-text">七、项目管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-%E5%85%A5%E9%97%A8"><span class="nav-text">7.1  入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">7.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">7.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-1-%E9%A1%B9%E7%9B%AE%E7%BB%8F%E7%90%86"><span class="nav-text">7.3.1 项目经理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E6%8A%A5%E5%91%8A%E9%A1%B9%E7%9B%AE%E7%8A%B6%E6%80%81"><span class="nav-text">用例：报告项目状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%9B%9E%E9%A1%BE"><span class="nav-text">用例：创建项目回顾</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%B7%9F%E8%B8%AA%E5%99%A8%E5%92%8C%E7%9B%B8%E5%85%B3%E9%80%9A%E4%BF%A1"><span class="nav-text">用例：开发问题跟踪器和相关通信</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E9%94%80%E5%94%AE"><span class="nav-text">八、销售</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-%E5%85%A5%E9%97%A8"><span class="nav-text">8.1  入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-%E6%8F%90%E7%A4%BA%E8%BF%AD%E4%BB%A3%E7%A4%BA%E4%BE%8B"><span class="nav-text">8.2 提示迭代示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-%E6%8F%90%E7%A4%BA%E6%8C%87%E5%8D%97"><span class="nav-text">8.3 提示指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-1-%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86"><span class="nav-text">8.3.1 销售经理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%8F%91%E5%B1%95%E5%AE%A2%E6%88%B7%E5%85%B3%E7%B3%BB"><span class="nav-text">用例：发展客户关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E6%94%AF%E6%8C%81%E9%94%80%E5%94%AE%E5%9B%A2%E9%98%9F"><span class="nav-text">用例：支持销售团队</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E6%8C%87%E5%AF%BC%E5%92%8C%E5%9F%B9%E8%AE%AD%E9%94%80%E5%94%AE%E5%9B%A2%E9%98%9F"><span class="nav-text">用例：指导和培训销售团队</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-2-%E5%AE%A2%E6%88%B7%E7%BB%8F%E7%90%86%E5%92%8C%E5%AE%A2%E6%88%B7%E4%B8%BB%E7%AE%A1"><span class="nav-text">8.3.2 客户经理和客户主管</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%BB%BA%E7%AB%8B%E5%AE%A2%E6%88%B7%E5%85%B3%E7%B3%BB"><span class="nav-text">用例：建立客户关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E4%B8%BA%E6%96%B0%E5%AE%A2%E6%88%B7%E6%9D%A5%E7%94%B5%E5%81%9A%E5%87%86%E5%A4%87"><span class="nav-text">用例：为新客户来电做准备</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-3-%E4%B8%9A%E5%8A%A1%E5%8F%91%E5%B1%95%E7%BB%8F%E7%90%86"><span class="nav-text">8.3.3 业务发展经理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%9F%B9%E5%85%BB%E5%85%B3%E7%B3%BB%E3%80%81%E4%B8%AA%E6%80%A7%E5%8C%96%E6%8E%A8%E5%B9%BF%E5%92%8C%E6%80%9D%E6%83%B3%E9%A2%86%E5%AF%BC%E5%8A%9B"><span class="nav-text">用例：培养关系、个性化推广和思想领导力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%EF%BC%9A%E7%94%9F%E6%88%90%E4%B8%AA%E6%80%A7%E5%8C%96%E7%9A%84%E5%AE%A2%E6%88%B7%E5%85%A5%E8%81%8C%E6%9D%90%E6%96%99"><span class="nav-text">用例：生成个性化的客户入职材料</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9D%9F-%E6%8F%90%E9%AB%98%E4%BD%A0%E7%9A%84%E6%8F%90%E7%A4%BA%E5%86%99%E4%BD%9C%E6%B0%B4%E5%B9%B3"><span class="nav-text">结束. 提高你的提示写作水平</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5"><span class="nav-text">下载链接</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -216,7 +216,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-13 17:06:46" itemprop="dateModified" datetime="2024-11-13T17:06:46+08:00">2024-11-13</time>
+      <time title="修改时间：2024-11-13 17:22:57" itemprop="dateModified" datetime="2024-11-13T17:22:57+08:00">2024-11-13</time>
     </span>
 
   
@@ -289,7 +289,7 @@
 <p>​	 <font style="background: #F9D2CF">帮我写10个替代加急运输的方案，</font><font style="background: #FDEEC3">以解决客户收到损坏包裹时的沮丧情绪。</font></p>
 <p><img src="/2024/08/27/google-prompting-guide-101/image-20240829163603135.png" alt="image-20240829163603135"></p>
 <p>​	这 10 条建议很有帮助。单击“插入”将文本添加到草稿中。</p>
-<h2 id="3-3-提示指南"><a href="#3-3-提示指南" class="headerlink" title="3.3 提示指南"></a>3.3 提示指南</h2><h4 id="3-3-1-客户服务经理或代表"><a href="#3-3-1-客户服务经理或代表" class="headerlink" title="3.3.1 客户服务经理或代表"></a>3.3.1 客户服务经理或代表</h4><h5 id="用例：标准化沟通框架"><a href="#用例：标准化沟通框架" class="headerlink" title="用例：标准化沟通框架"></a>用例：标准化沟通框架</h5><p>​	您是客户服务团队经理。您的团队已经扩大，您需要创建可扩展的资源来标准化整个团队的沟通。您打开一个新的 Google 文档。您想集思广益，因此您向 Docs 中的 Gemini 寻求帮助。您选择“帮我写”并输入：</p>
+<h2 id="3-3-提示指南"><a href="#3-3-提示指南" class="headerlink" title="3.3 提示指南"></a>3.3 提示指南</h2><h3 id="3-3-1-客户服务经理或代表"><a href="#3-3-1-客户服务经理或代表" class="headerlink" title="3.3.1 客户服务经理或代表"></a>3.3.1 客户服务经理或代表</h3><h4 id="用例：标准化沟通框架"><a href="#用例：标准化沟通框架" class="headerlink" title="用例：标准化沟通框架"></a>用例：标准化沟通框架</h4><p>​	您是客户服务团队经理。您的团队已经扩大，您需要创建可扩展的资源来标准化整个团队的沟通。您打开一个新的 Google 文档。您想集思广益，因此您向 Docs 中的 Gemini 寻求帮助。您选择“帮我写”并输入：</p>
 <blockquote>
 <p>为三种不同类型的客户沟通草拟模板。为道歉电子邮件、订单确认信息和忠诚客户的感谢信创建模板。将每个模板限制为一段文字，并使用友好的语气。</p>
 </blockquote>
@@ -301,7 +301,7 @@
 <blockquote>
 <p>我是一名 [客户服务经理]。我正在尝试创建标准化语言，以便团队在与客户进行电话交流时使用。为零售店的客户服务代表生成常见的通话开始、问候和结束语模板。这些模板应允许使用客户详细信息进行个性化设置。目标是确保一致性和专业性，同时允许使用特定客户信息进行区分。</p>
 </blockquote>
-<h5 id="用例：改善客户服务"><a href="#用例：改善客户服务" class="headerlink" title="用例：改善客户服务"></a>用例：改善客户服务</h5><p>​	您注意到客户投诉有所增加。您需要跨部门协作，以了解如何解决反复出现的问题。您首先向其他团队负责人发送电子邮件。您在 Gmail 中选择“帮我写”，提示 Gemini。您输入：</p>
+<h4 id="用例：改善客户服务"><a href="#用例：改善客户服务" class="headerlink" title="用例：改善客户服务"></a>用例：改善客户服务</h4><p>​	您注意到客户投诉有所增加。您需要跨部门协作，以了解如何解决反复出现的问题。您首先向其他团队负责人发送电子邮件。您在 Gmail 中选择“帮我写”，提示 Gemini。您输入：</p>
 <blockquote>
 <p>草拟一封电子邮件给我的同事们，提议召开一次会议讨论客户体验改进计划。请求市场、销售和产品相关人员在下周会面，以明确各自的职责和角色。</p>
 </blockquote>
@@ -310,7 +310,7 @@
 <p>创建一个表格来跟踪不同客户体验改进策略的进展和影响，使用相关指标包括支持工单数量和优先级（高、中、低）。</p>
 </blockquote>
 <p>​	您看到一个已经按照您要求的类别格式化好的电子表格模板。现在您只需填入具体的细节即可。</p>
-<h4 id="3-3-2-客户支持专家"><a href="#3-3-2-客户支持专家" class="headerlink" title="3.3.2 客户支持专家"></a>3.3.2 客户支持专家</h4><h5 id="用例：实现客户自助服务"><a href="#用例：实现客户自助服务" class="headerlink" title="用例：实现客户自助服务"></a>用例：实现客户自助服务</h5><p>​	作为客户支持专家，您的团队收到了很多关于退货政策的问题电子邮件。客户反馈一致认为您的指导方针不明确。您打开一份 Google 文档，其中说明了退货、退款和商店信用政策。您通过选择“帮助我撰写”提示 Docs 中的 Gemini。您输入：</p>
+<h3 id="3-3-2-客户支持专家"><a href="#3-3-2-客户支持专家" class="headerlink" title="3.3.2 客户支持专家"></a>3.3.2 客户支持专家</h3><h4 id="用例：实现客户自助服务"><a href="#用例：实现客户自助服务" class="headerlink" title="用例：实现客户自助服务"></a>用例：实现客户自助服务</h4><p>​	作为客户支持专家，您的团队收到了很多关于退货政策的问题电子邮件。客户反馈一致认为您的指导方针不明确。您打开一份 Google 文档，其中说明了退货、退款和商店信用政策。您通过选择“帮助我撰写”提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>总结此内容，制定一个清晰简洁的产品退货政策，并概述客户需依次采取的5个步骤</p>
 </blockquote>
@@ -322,7 +322,7 @@
 <blockquote>
 <p>起草一份发给客户的电子邮件模板，重点介绍 [支持问题] 的自助服务资源 [博客链接]。并感谢客户的惠顾，向他们保证我们致力于满足他们的需求。</p>
 </blockquote>
-<h5 id="用例：客户之声研究"><a href="#用例：客户之声研究" class="headerlink" title="用例：客户之声研究"></a>用例：客户之声研究</h5><p>​	公司的新政策是，您将向每一位不满意的客户发送电子邮件，以尝试解决问题。您打开一封包含客户投诉的电子邮件。您选择“帮我写”，在 Gmail 中提示 Gemini。您输入：</p>
+<h4 id="用例：客户之声研究"><a href="#用例：客户之声研究" class="headerlink" title="用例：客户之声研究"></a>用例：客户之声研究</h4><p>​	公司的新政策是，您将向每一位不满意的客户发送电子邮件，以尝试解决问题。您打开一封包含客户投诉的电子邮件。您选择“帮我写”，在 Gmail 中提示 Gemini。您输入：</p>
 <blockquote>
 <p>请求在 [日期] 的 [时间] 与提供负面反馈的客户进行跟进对话，以了解他们的关切并提供解决方案。包括示例解决方案。</p>
 </blockquote>
@@ -330,7 +330,7 @@
 <blockquote>
 <p>创建五个不同的问题，针对刚刚与客服代表通过电话的客户。这些问题应衡量通话的有效性，客户的关切是否得到解决，以及他们是否会向其他人推荐我们的业务。</p>
 </blockquote>
-<h4 id="3-3-3-客户服务协调员"><a href="#3-3-3-客户服务协调员" class="headerlink" title="3.3.3 客户服务协调员"></a>3.3.3 客户服务协调员</h4><h5 id="用例：与客户互动"><a href="#用例：与客户互动" class="headerlink" title="用例：与客户互动"></a>用例：与客户互动</h5><p>​	您在更新政策方面取得了很大进展，并希望从最忠实的客户那里获得有关这些变化的反馈。您计划举办一次倾听之旅，与他们互动。您打开 Gmail 并在 Gmail 中提示 Gemini。您选择“帮我写”并输入</p>
+<h3 id="3-3-3-客户服务协调员"><a href="#3-3-3-客户服务协调员" class="headerlink" title="3.3.3 客户服务协调员"></a>3.3.3 客户服务协调员</h3><h4 id="用例：与客户互动"><a href="#用例：与客户互动" class="headerlink" title="用例：与客户互动"></a>用例：与客户互动</h4><p>​	您在更新政策方面取得了很大进展，并希望从最忠实的客户那里获得有关这些变化的反馈。您计划举办一次倾听之旅，与他们互动。您打开 Gmail 并在 Gmail 中提示 Gemini。您选择“帮我写”并输入</p>
 <blockquote>
 <p>写一封电子邮件，邀请我最忠实的客户参加下周在 [地点] [日期] [时间] 举行的有关我们更新的 [政策] 的反馈会议。</p>
 </blockquote>
@@ -338,7 +338,7 @@
 <blockquote>
 <p>给客户 [姓名] 写一封个性化的感谢信，感谢他们参加反馈会议，并解释我们将如何使用反馈来改进我们的政策。</p>
 </blockquote>
-<h5 id="用例：准备客户会议"><a href="#用例：准备客户会议" class="headerlink" title="用例：准备客户会议"></a>用例：准备客户会议</h5><p>​	您需要准备与一位重要客户会面。他们的帐户对您来说是新客户，他们的行业和业务线也是新客户。您需要帮助进行研究，因此您打开 gemini.google.com 并输入：</p>
+<h4 id="用例：准备客户会议"><a href="#用例：准备客户会议" class="headerlink" title="用例：准备客户会议"></a>用例：准备客户会议</h4><p>​	您需要准备与一位重要客户会面。他们的帐户对您来说是新客户，他们的行业和业务线也是新客户。您需要帮助进行研究，因此您打开 gemini.google.com 并输入：</p>
 <blockquote>
 <p>撰写五个问题，用于调研[行业]行业的公司，以了解他们面临的最大挑战并为首次会议做准备。</p>
 </blockquote>
@@ -361,7 +361,7 @@
 <p>电子邮件看起来不错，但您想确保语气尽可能正式。您选择“优化-&gt;正式化”。</p>
 <p><img src="/2024/08/27/google-prompting-guide-101/image-20240829172821285.png" alt="image-20240829172821285"></p>
 <p>您阅读电子邮件，然后选择“插入”。在发送之前，您进行了简单的编辑，以感谢团队在旅途中为您提供帮助。</p>
-<h2 id="4-3-提示指南"><a href="#4-3-提示指南" class="headerlink" title="4.3 提示指南"></a>4.3 提示指南</h2><h4 id="4-3-1-首席运营官"><a href="#4-3-1-首席运营官" class="headerlink" title="4.3.1 首席运营官"></a>4.3.1 首席运营官</h4><h5 id="用例：准备员工沟通信息"><a href="#用例：准备员工沟通信息" class="headerlink" title="用例：准备员工沟通信息"></a>用例：准备员工沟通信息</h5><p>​	您正在主持全公司季度全体会议。本季度取得了许多积极进展和发展势头，但您担心多个团队在遭遇意外挫折后士气低落。您想集思广益并练习如何回答可能很棘手的问题。您打开 gemini.google.com，然后输入</p>
+<h2 id="4-3-提示指南"><a href="#4-3-提示指南" class="headerlink" title="4.3 提示指南"></a>4.3 提示指南</h2><h3 id="4-3-1-首席运营官"><a href="#4-3-1-首席运营官" class="headerlink" title="4.3.1 首席运营官"></a>4.3.1 首席运营官</h3><h4 id="用例：准备员工沟通信息"><a href="#用例：准备员工沟通信息" class="headerlink" title="用例：准备员工沟通信息"></a>用例：准备员工沟通信息</h4><p>​	您正在主持全公司季度全体会议。本季度取得了许多积极进展和发展势头，但您担心多个团队在遭遇意外挫折后士气低落。您想集思广益并练习如何回答可能很棘手的问题。您打开 gemini.google.com，然后输入</p>
 <blockquote>
 <p>我是一家中型公司的首席运营官。我将主持全公司季度员工大会。本季度取得了许多积极进展和发展势头，但我担心多个团队由于一些不可预见的挫折而士气低落。我想集思广益并练习如何回答可能棘手的问题。帮我写一些有挑战性的问题，员工可能会在即将到来的员工大会上询问我们的收入、领导层变动和公司愿景。为每个问题生成可能的答案，并使用自信而坚定的语气。</p>
 </blockquote>
@@ -373,11 +373,11 @@
 <blockquote>
 <p>帮我为刚刚结束一个充满挑战的季度的员工写两段振奋人心的文字。承认[困难]并强调即将到来的季度的[积极因素]。使用一种激励人心、乐观并培养团结和协作意识的语气。</p>
 </blockquote>
-<h5 id="用例：简化随时随地的响应"><a href="#用例：简化随时随地的响应" class="headerlink" title="用例：简化随时随地的响应"></a>用例：简化随时随地的响应</h5><p>由于您正在处理一项紧急任务，您的计划突然发生了变化。您无法参加会议，只需要确保团队对几个关键项目有答案。您打开 Gmail 并使用语音命令提示 Gmail 中的 Gemini。你说：</p>
+<h4 id="用例：简化随时随地的响应"><a href="#用例：简化随时随地的响应" class="headerlink" title="用例：简化随时随地的响应"></a>用例：简化随时随地的响应</h4><p>由于您正在处理一项紧急任务，您的计划突然发生了变化。您无法参加会议，只需要确保团队对几个关键项目有答案。您打开 Gmail 并使用语音命令提示 Gmail 中的 Gemini。你说：</p>
 <blockquote>
 <p>给 [项目负责人] 写一封电子邮件，告知他们我因紧急事项无法参加会议。请他们做详细记录，确保团队就 [关键主题] 做出决定，并将事后分析报告的查看权分配给 [同事]。</p>
 </blockquote>
-<h4 id="4-3-2-首席营销官"><a href="#4-3-2-首席营销官" class="headerlink" title="4.3.2 首席营销官"></a>4.3.2 首席营销官</h4><h5 id="用例：集思广益内容和思想领导力"><a href="#用例：集思广益内容和思想领导力" class="headerlink" title="用例：集思广益内容和思想领导力"></a>用例：集思广益内容和思想领导力</h5><p>​	您刚与社交媒体团队负责人进行了会议。在一份Google文档中，您记录了许多关于受众共鸣的内容、热门话题、目标受众数据以及能够有效提升品牌互动的关键词。您希望利用这些见解来头脑风暴一些潜在的思想领导文章。您通过在现有的Google文档中选择“帮助我写作”来向Docs中的Gemini发出提示。您输入：</p>
+<h3 id="4-3-2-首席营销官"><a href="#4-3-2-首席营销官" class="headerlink" title="4.3.2 首席营销官"></a>4.3.2 首席营销官</h3><h4 id="用例：集思广益内容和思想领导力"><a href="#用例：集思广益内容和思想领导力" class="headerlink" title="用例：集思广益内容和思想领导力"></a>用例：集思广益内容和思想领导力</h4><p>​	您刚与社交媒体团队负责人进行了会议。在一份Google文档中，您记录了许多关于受众共鸣的内容、热门话题、目标受众数据以及能够有效提升品牌互动的关键词。您希望利用这些见解来头脑风暴一些潜在的思想领导文章。您通过在现有的Google文档中选择“帮助我写作”来向Docs中的Gemini发出提示。您输入：</p>
 <blockquote>
 <p>根据热门话题、目标受众分析和品牌关键词，为 [公司] 列出四个相关且引人入胜的思想领导力博客文章创意。</p>
 </blockquote>
@@ -389,7 +389,7 @@
 <blockquote>
 <p>创建一张使用橙色和蓝色的贸易展会展位图像。该展位应该是现代风格，并展示互动电脑站。</p>
 </blockquote>
-<h5 id="用例：进行竞争分析"><a href="#用例：进行竞争分析" class="headerlink" title="用例：进行竞争分析"></a>用例：进行竞争分析</h5><p>​	您的团队正在考虑拓展一条新的业务线。这对您来说是一个全新的领域，您希望能够迅速了解这对业务意味着什么。您决定进行调研。您前往gemini.google.com，并输入：</p>
+<h4 id="用例：进行竞争分析"><a href="#用例：进行竞争分析" class="headerlink" title="用例：进行竞争分析"></a>用例：进行竞争分析</h4><p>​	您的团队正在考虑拓展一条新的业务线。这对您来说是一个全新的领域，您希望能够迅速了解这对业务意味着什么。您决定进行调研。您前往gemini.google.com，并输入：</p>
 <blockquote>
 <p>我是一名 CMO，正在进行竞争分析。我的公司正在考虑拓展 [新的业务线]。列出 [行业] 中排名前五的竞争对手，并列出他们的定价、优势、劣势和目标受众。</p>
 </blockquote>
@@ -397,7 +397,7 @@
 <blockquote>
 <p>好的，我打算说服我的CEO我们应该拓展进入 [业务领域]。请为北美的[行业]行业起草一个为期五年的精炼的竞争战略，包括目标、策略和战术。</p>
 </blockquote>
-<h4 id="4-3-3-首席技术官"><a href="#4-3-3-首席技术官" class="headerlink" title="4.3.3 首席技术官"></a>4.3.3 首席技术官</h4><h5 id="用例：总结新兴技术趋势"><a href="#用例：总结新兴技术趋势" class="headerlink" title="用例：总结新兴技术趋势"></a>用例：总结新兴技术趋势</h5><p>​	您需要了解新兴技术趋势，因为形势瞬息万变。您打开gemini.google.com，然后输入：</p>
+<h3 id="4-3-3-首席技术官"><a href="#4-3-3-首席技术官" class="headerlink" title="4.3.3 首席技术官"></a>4.3.3 首席技术官</h3><h4 id="用例：总结新兴技术趋势"><a href="#用例：总结新兴技术趋势" class="headerlink" title="用例：总结新兴技术趋势"></a>用例：总结新兴技术趋势</h4><p>​	您需要了解新兴技术趋势，因为形势瞬息万变。您打开gemini.google.com，然后输入：</p>
 <blockquote>
 <p>我是 [行业] 的 [公司] 的首席技术官。我想了解新兴技术趋势。总结对 [行业] 最具潜在影响的五大新兴技术。对于每项技术，列出其潜在的优势和挑战，并提出其在未来两到三年内可能对 [公司] 产生的影响。</p>
 </blockquote>
@@ -405,7 +405,7 @@
 <blockquote>
 <p>推荐三个领域让[我的组织]可以采取积极措施，以保持在[特定领域]的领先优势。</p>
 </blockquote>
-<h4 id="4-3-4-首席信息官"><a href="#4-3-4-首席信息官" class="headerlink" title="4.3.4 首席信息官"></a>4.3.4 首席信息官</h4><h5 id="用例：建立技术沟通"><a href="#用例：建立技术沟通" class="headerlink" title="用例：建立技术沟通"></a>用例：建立技术沟通</h5><p>​	您的团队刚刚提供了一份关于您的安全状况和关键漏洞的冗长技术报告。您需要立即与 CEO 讨论这个问题，但您知道目前一份多页的报告太多了，难以消化。您打开包含完整报告的 Google Doc，然后选择“帮助我撰写”以提示 Docs 中的 Gemini。您输入：</p>
+<h3 id="4-3-4-首席信息官"><a href="#4-3-4-首席信息官" class="headerlink" title="4.3.4 首席信息官"></a>4.3.4 首席信息官</h3><h4 id="用例：建立技术沟通"><a href="#用例：建立技术沟通" class="headerlink" title="用例：建立技术沟通"></a>用例：建立技术沟通</h4><p>​	您的团队刚刚提供了一份关于您的安全状况和关键漏洞的冗长技术报告。您需要立即与 CEO 讨论这个问题，但您知道目前一份多页的报告太多了，难以消化。您打开包含完整报告的 Google Doc，然后选择“帮助我撰写”以提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>总结本报告对[受众]的主要发现和影响。重点介绍已发现的主要[弱点]以及解决这些弱点的建议措施。使用正式语气。</p>
 </blockquote>
@@ -417,7 +417,7 @@
 <blockquote>
 <p>为员工创建软件许可证跟踪器，并包括许可证类型、使用权和续订日期等列。</p>
 </blockquote>
-<h4 id="4-3-5-首席人力资源官"><a href="#4-3-5-首席人力资源官" class="headerlink" title="4.3.5 首席人力资源官"></a>4.3.5 首席人力资源官</h4><p><strong>用例：表达对员工的赞赏</strong><br>    您想建立一个新计划，帮助组织中的每个人都感到被包容、被欣赏和被认可。但是对于这么大的公司，您需要深思熟虑。您想集思广益，因此您打开了一个新的 Google 文档并提示 Docs 中的 Gemini。您输入</p>
+<h3 id="4-3-5-首席人力资源官"><a href="#4-3-5-首席人力资源官" class="headerlink" title="4.3.5 首席人力资源官"></a>4.3.5 首席人力资源官</h3><h4 id="用例：表达对员工的赞赏"><a href="#用例：表达对员工的赞赏" class="headerlink" title="用例：表达对员工的赞赏"></a><strong>用例：表达对员工的赞赏</strong></h4><p>​	您想建立一个新计划，帮助组织中的每个人都感到被包容、被欣赏和被认可。但是对于这么大的公司，您需要深思熟虑。您想集思广益，因此您打开了一个新的 Google 文档并提示 Docs 中的 Gemini。您输入</p>
 <blockquote>
 <p>根据 [类型] 的公司文化和员工的多样化兴趣（如烹饪、园艺、运动、阅读和旅行），集思广益，提出 10 个员工赞赏想法。</p>
 </blockquote>
@@ -425,7 +425,7 @@
 <blockquote>
 <p>起草一份电子邮件模板，感谢 [员工] 的辛勤工作和 [近期成就]。为他们的奉献精神提供额外奖励，例如咖啡礼品卡。使用乐观而专业的语气。</p>
 </blockquote>
-<p><strong>用例：评估员工满意度</strong><br>    您担心您的团队最近不堪重负。在与直接下属通话之前，您想起草一份匿名调查问卷，让人们能够公开、诚实地评估自己的感受。要起草问题，请打开一份新的 Google 文档，然后选择“帮助我写作”以提示 Docs 中的 Gemini。您输入：</p>
+<h4 id="用例：评估员工满意度"><a href="#用例：评估员工满意度" class="headerlink" title="用例：评估员工满意度"></a><strong>用例：评估员工满意度</strong></h4><p>​	您担心您的团队最近不堪重负。在与直接下属通话之前，您想起草一份匿名调查问卷，让人们能够公开、诚实地评估自己的感受。要起草问题，请打开一份新的 Google 文档，然后选择“帮助我写作”以提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>起草一份匿名员工满意度调查问卷，问卷中的问题和答案应涉及工作量、工作与生活平衡、薪酬和职业发展机会等关键领域。确保问题清晰、简洁，避免引导性答案。</p>
 </blockquote>
@@ -433,7 +433,7 @@
 <blockquote>
 <p>总结员工反馈的结果以确定关键主题。</p>
 </blockquote>
-<h4 id="4-3-6-创始人或企业家"><a href="#4-3-6-创始人或企业家" class="headerlink" title="4.3.6 创始人或企业家"></a>4.3.6 创始人或企业家</h4><p><strong>用例：进行竞争分析</strong><br>    您是一家初创公司的创始人，您的在线业务正在获得发展。您一直梦想着开设一家<br>实体店，现在可能是最佳时机。您需要一位思想伙伴来帮助您更好地了解当前形势。您打开 gemini.google.com，然后输入：</p>
+<h3 id="4-3-6-创始人或企业家"><a href="#4-3-6-创始人或企业家" class="headerlink" title="4.3.6 创始人或企业家"></a>4.3.6 创始人或企业家</h3><h4 id="用例：进行竞争分析-1"><a href="#用例：进行竞争分析-1" class="headerlink" title="用例：进行竞争分析"></a><strong>用例：进行竞争分析</strong></h4><p>​	您是一家初创公司的创始人，您的在线业务正在获得发展。您一直梦想着开设一家<br>实体店，现在可能是最佳时机。您需要一位思想伙伴来帮助您更好地了解当前形势。您打开 gemini.google.com，然后输入：</p>
 <blockquote>
 <p>我是一家初创公司的创始人。我正在考虑开设一家实体店。对[重点领域]的竞争格局进行分析。提供[主要竞争对手]在此领域的优势和劣势，包括他们的具体战略、策略和结果。确定[我的公司]如何改进其方法并获得竞争优势的18条可操作的见解和建议。</p>
 </blockquote>
@@ -441,7 +441,7 @@
 <blockquote>
 <p>在当前市场格局下对 [公司] 与 [竞争对手] 进行竞争分析。</p>
 </blockquote>
-<p><strong>用例：进行筹款和投资者关系</strong><br>    您已准备好联系潜在投资者，让您的实体店成为现实。您需要帮助开始给投资者写电子邮件，因此在包含所有笔记和研究的同一个 Google 文档中，您通过选择“帮助我写作”来提示 Docs 中的 Gemini。您输入：</p>
+<h4 id="用例：进行筹款和投资者关系"><a href="#用例：进行筹款和投资者关系" class="headerlink" title="用例：进行筹款和投资者关系"></a><strong>用例：进行筹款和投资者关系</strong></h4><p>​	您已准备好联系潜在投资者，让您的实体店成为现实。您需要帮助开始给投资者写电子邮件，因此在包含所有笔记和研究的同一个 Google 文档中，您通过选择“帮助我写作”来提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>为潜在投资者起草一份个性化的电子邮件模板，重点介绍[公司]独特的价值主张和[计划]的最新进展。请求安排会面时间，讨论下个月的合作机会。</p>
 </blockquote>
@@ -468,7 +468,7 @@
 <p>​	您选择“插入”。现在，您需要一些关于如何构思脚本结尾的想法。您在 Google Doc 中突出显示了关于预期团队行为的注释，并在 Docs 中提示 Gemini 以下内容：<br>​	<font style="background: #F9D2CF">写一份有力的结束语，</font><font style="background: #FDEEC3">说明我们的期望，即每个人都要为营造一个尊重和热情的工作场所做出贡献。</font><font style="background: #CEEAD5">使用专业的语气。</font></p>
 <p><img src="/2024/08/27/google-prompting-guide-101/image-20241113153543458.png" alt="image-20241113153543458"></p>
 <p>​	生成的内容让您在编写脚本方面有了先机。您只需添加一些详细信息，然后就可以创建与您的谈话要点一起提供的 Google 幻灯片草稿。</p>
-<h2 id="5-3-提示指南"><a href="#5-3-提示指南" class="headerlink" title="5.3 提示指南"></a>5.3 提示指南</h2><h4 id="5-3-1-招聘人员"><a href="#5-3-1-招聘人员" class="headerlink" title="5.3.1 招聘人员"></a>5.3.1 招聘人员</h4><p><strong>用例：管理招聘流程</strong><br>    业务正在增长，您正在进行大规模的招聘工作。首先，您想使用 Gemini 进行头脑风暴，看看公司如何更好地管理招聘流程。您打开团队的“招聘策略”Google Doc，其中包含有关招聘策略和渠道的注释，以及用于从 LinkedIn 和其他来源向候选人进行冷门推广的电子邮件和消息模板。您首先使用 Docs 中的 Gemini 选择“帮助我写作”，输入以下提示。您输入：</p>
+<h2 id="5-3-提示指南"><a href="#5-3-提示指南" class="headerlink" title="5.3 提示指南"></a>5.3 提示指南</h2><h3 id="5-3-1-招聘人员"><a href="#5-3-1-招聘人员" class="headerlink" title="5.3.1 招聘人员"></a>5.3.1 招聘人员</h3><h4 id="用例：管理招聘流程"><a href="#用例：管理招聘流程" class="headerlink" title="用例：管理招聘流程"></a><strong>用例：管理招聘流程</strong></h4><p>​	业务正在增长，您正在进行大规模的招聘工作。首先，您想使用 Gemini 进行头脑风暴，看看公司如何更好地管理招聘流程。您打开团队的“招聘策略”Google Doc，其中包含有关招聘策略和渠道的注释，以及用于从 LinkedIn 和其他来源向候选人进行冷门推广的电子邮件和消息模板。您首先使用 Docs 中的 Gemini 选择“帮助我写作”，输入以下提示。您输入：</p>
 <blockquote>
 <p>创建一份我们的招聘人员可以使用的策略列表，以改进我们现有的招聘流程并确定<br>潜在的求职者。</p>
 </blockquote>
@@ -480,7 +480,7 @@
 <blockquote>
 <p>建议更新 [职位描述] 的方法，并提供建议以使其对[受众] 更具吸引力。</p>
 </blockquote>
-<p><strong>用例：管理面试流程</strong><br>    现在，您想要准备电话面试的问题。职位描述已获批准并在线发布。您决定通过访问 gemini.google.com 进行准备。您输入：</p>
+<h4 id="用例：管理面试流程"><a href="#用例：管理面试流程" class="headerlink" title="用例：管理面试流程"></a><strong>用例：管理面试流程</strong></h4><p>​	现在，您想要准备电话面试的问题。职位描述已获批准并在线发布。您决定通过访问 gemini.google.com 进行准备。您输入：</p>
 <blockquote>
 <p>我是一名招聘人员，正在为候选人面试做准备。为 [open role URL] 写一份 20 个开放式面试问题清单，我可以使用它们来筛选候选人。</p>
 </blockquote>
@@ -492,7 +492,7 @@
 <blockquote>
 <p>生成一封电子邮件发送给招聘经理，其中包含 [候选人] 的摘要。</p>
 </blockquote>
-<p><strong>用例：候选人沟通</strong><br>    团队已做出招聘决定。您打开 Google 文档，其中包含每个候选人的注释。您通过选择“帮助我写作”提示 Docs 中的 Gemini。您输入：</p>
+<h4 id="用例：候选人沟通"><a href="#用例：候选人沟通" class="headerlink" title="用例：候选人沟通"></a><strong>用例：候选人沟通</strong></h4><p>​	团队已做出招聘决定。您打开 Google 文档，其中包含每个候选人的注释。您通过选择“帮助我写作”提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>我正在给刚完成面试流程的求职者写一封电子邮件。为 [选定的候选人] 创建一个模板，用于 [职位] 的录用通知，并请求安排电话讨论福利、薪酬和开始日期。</p>
 </blockquote>
@@ -500,7 +500,7 @@
 <blockquote>
 <p>我正在给完成面试流程但未被选中的求职者写一封电子邮件。帮我为 [候选人] 写一封拒绝信，拒绝 [职位]。使用富有同理心的语气。</p>
 </blockquote>
-<h4 id="5-3-2-人力资源经理"><a href="#5-3-2-人力资源经理" class="headerlink" title="5.3.2 人力资源经理"></a>5.3.2 人力资源经理</h4><p><strong>用例：入职员工</strong><br>    您是人力资源经理。招聘人员刚刚填补了公司两个空缺职位。现在，您负责确保候选人拥有顺畅的入职体验。您需要帮助为新员工构建信息，因此您打开 Google 表格，并通过选择“帮助我组织”提示 Gemini。您输入：</p>
+<h3 id="5-3-2-人力资源经理"><a href="#5-3-2-人力资源经理" class="headerlink" title="5.3.2 人力资源经理"></a>5.3.2 人力资源经理</h3><h4 id="用例：入职员工"><a href="#用例：入职员工" class="headerlink" title="用例：入职员工"></a><strong>用例：入职员工</strong></h4><p>​	您是人力资源经理。招聘人员刚刚填补了公司两个空缺职位。现在，您负责确保候选人拥有顺畅的入职体验。您需要帮助为新员工构建信息，因此您打开 Google 表格，并通过选择“帮助我组织”提示 Gemini。您输入：</p>
 <blockquote>
 <p>创建一个表格，概述新员工第一周的日程安排，包括关键会议、培训课程和介绍。为每项活动提供一列关键联系人和优先级（低、中、高）。</p>
 </blockquote>
@@ -512,8 +512,7 @@
 <blockquote>
 <p>起草一封电子邮件给 [团队] 中的新员工，让他们与团队的其他成员见面，并解释会议的团队建设目的。</p>
 </blockquote>
-<p><strong>用例：传达关键发现并起草后续调查</strong></p>
-<p>​	现在您已经完成了新员工入职培训，您需要专注于确保领导层能够轻松理解最新的公司研究数据。您致力于为所有员工创造一个温馨的环境，让他们能够发展自己的技能。您打开包含最终报告的 Google 文档。您通过选择“帮助我撰写”提示 Docs 中的 Gemini。您输入：</p>
+<h4 id="用例：传达关键发现并起草后续调查"><a href="#用例：传达关键发现并起草后续调查" class="headerlink" title="用例：传达关键发现并起草后续调查"></a><strong>用例：传达关键发现并起草后续调查</strong></h4><p>​	现在您已经完成了新员工入职培训，您需要专注于确保领导层能够轻松理解最新的公司研究数据。您致力于为所有员工创造一个温馨的环境，让他们能够发展自己的技能。您打开包含最终报告的 Google 文档。您通过选择“帮助我撰写”提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>起草一封电子邮件给高层领导，总结我们[报告]的主要发现。包括一个简短的介绍段落，其中列出最重要的发现的要点。</p>
 </blockquote>
@@ -534,7 +533,7 @@
 <p>​	现在你已经知道了徽标的外观，接下来你需要集思广益想出名字。你输入：</p>
 <p>​	<font style="background: #FDEEC3">为企业</font><font style="background: #F9D2CF">写一个标语和 10 个可能的名称</font><font style="background: #FDEEC3">以与这些标识相匹配。</font></p>
 <p><img src="/2024/08/27/google-prompting-guide-101/image-20241113155553223.png" alt="image-20241113155553223"></p>
-<h2 id="6-3-提示指南"><a href="#6-3-提示指南" class="headerlink" title="6.3 提示指南"></a>6.3 提示指南</h2><h4 id="6-3-1-品牌经理"><a href="#6-3-1-品牌经理" class="headerlink" title="6.3.1 品牌经理"></a>6.3.1 品牌经理</h4><p><strong>用例：进行市场调研并确定趋势</strong><br>    您所在行业的格局正在迅速变化，您需要进行市场调研以更好地确定和了解新兴趋势。您访问 gemini.google.com，然后输入：</p>
+<h2 id="6-3-提示指南"><a href="#6-3-提示指南" class="headerlink" title="6.3 提示指南"></a>6.3 提示指南</h2><h3 id="6-3-1-品牌经理"><a href="#6-3-1-品牌经理" class="headerlink" title="6.3.1 品牌经理"></a>6.3.1 品牌经理</h3><h4 id="用例：进行市场调研并确定趋势"><a href="#用例：进行市场调研并确定趋势" class="headerlink" title="用例：进行市场调研并确定趋势"></a><strong>用例：进行市场调研并确定趋势</strong></h4><p>​	您所在行业的格局正在迅速变化，您需要进行市场调研以更好地确定和了解新兴趋势。您访问 gemini.google.com，然后输入：</p>
 <blockquote>
 <p>我需要对 [行业] 行业进行市场调研以确定新趋势。使用 [URL] 发现新兴趋势和不断变化的消费者偏好。（gemini.google.com）</p>
 </blockquote>
@@ -542,8 +541,7 @@
 <blockquote>
 <p>我需要对新消息进行 A&#x2F;B 测试。这是我们的消息：[messaging]。生成三种不同的广告文案变体。</p>
 </blockquote>
-<p><strong>用例：创建和管理内容和分发</strong></p>
-<p>​	另一位客户正在进行一些激动人心的领导层变动。您需要创建内容来塑造公司进入下一个时代的品牌叙事。您打开 Google 文档开始撰写博客草稿。您通过选择“帮助我撰写”提示 Docs 中的 Gemini。您输入：</p>
+<h4 id="用例：创建和管理内容和分发"><a href="#用例：创建和管理内容和分发" class="headerlink" title="用例：创建和管理内容和分发"></a><strong>用例：创建和管理内容和分发</strong></h4><p>​	另一位客户正在进行一些激动人心的领导层变动。您需要创建内容来塑造公司进入下一个时代的品牌叙事。您打开 Google 文档开始撰写博客草稿。您通过选择“帮助我撰写”提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>创建博客草稿，宣布 [姓名] 将以 [职位] 身份加入 [公司]。[分享他们简历中的两三个细节，例如他们之前的职位和公司、他们在专业组织中的参与情况等。]</p>
 </blockquote>
@@ -551,7 +549,7 @@
 <blockquote>
 <p>为内容放大创建项目跟踪器，并包括渠道、所有者、URL 和优先级（低、中、高）的列。</p>
 </blockquote>
-<h4 id="6-3-2-数字营销经理"><a href="#6-3-2-数字营销经理" class="headerlink" title="6.3.2 数字营销经理"></a>6.3.2 数字营销经理</h4><p><strong>用例：起草客户获取通讯</strong><br>    电子邮件是贵公司与潜在客户和客户直接沟通的主要渠道之一。您需要帮助开始撰写新的电子邮件活动文案。您打开一个新的 Google 文档，然后通过选择“帮助我撰写”提示 Docs 中的 Gemini。您输入：</p>
+<h3 id="6-3-2-数字营销经理"><a href="#6-3-2-数字营销经理" class="headerlink" title="6.3.2 数字营销经理"></a>6.3.2 数字营销经理</h3><h4 id="用例：起草客户获取通讯"><a href="#用例：起草客户获取通讯" class="headerlink" title="用例：起草客户获取通讯"></a><strong>用例：起草客户获取通讯</strong></h4><p>​	电子邮件是贵公司与潜在客户和客户直接沟通的主要渠道之一。您需要帮助开始撰写新的电子邮件活动文案。您打开一个新的 Google 文档，然后通过选择“帮助我撰写”提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>撰写三个不同的电子邮件主题行，其中引用 [受众群体] 和我们的 [产品]。让它们引人注目但又专业。</p>
 </blockquote>
@@ -559,7 +557,7 @@
 <blockquote>
 <p>帮我写一封电子邮件，向文案团队提出 [建议的电子邮件主题行]。保持电子邮件简短明了，并在周末之前请求反馈。感谢他们的帮助。</p>
 </blockquote>
-<p><strong>用例：生成入站营销活动</strong><br>    团队刚刚使用我们的新解决方案创建了一本有关高管最佳实践的新电子书。您正在创建一个登陆页面来容纳门控资产，并且需要引人入胜的副本。您打开一个新的 Google 文档并选择帮我写。您输入：</p>
+<h4 id="用例：生成入站营销活动"><a href="#用例：生成入站营销活动" class="headerlink" title="用例：生成入站营销活动"></a><strong>用例：生成入站营销活动</strong></h4><p>​	团队刚刚使用我们的新解决方案创建了一本有关高管最佳实践的新电子书。您正在创建一个登陆页面来容纳门控资产，并且需要引人入胜的副本。您打开一个新的 Google 文档并选择帮我写。您输入：</p>
 <blockquote>
 <p>为宣传新[电子书&#x2F;网络研讨会&#x2F;免费试用和详细信息]的登陆页面创建引人注目的副本，该页面专为高管目标受众设计。突出主要优势并通过有说服力的行动号召来鼓励转化。</p>
 </blockquote>
@@ -567,7 +565,7 @@
 <blockquote>
 <p>生成一系列五封自动电子邮件的副本，以在潜在客户下载有关 [主题] 的电子书后培养他们。使用 [名称] 个性化电子邮件并鼓励进一步参与 [与其他有价值的资源或优惠]。</p>
 </blockquote>
-<h4 id="6-3-3-内容营销经理"><a href="#6-3-3-内容营销经理" class="headerlink" title="6.3.3 内容营销经理"></a>6.3.3 内容营销经理</h4><p><strong>用例：为您的博客产生灵感</strong><br>    您在一家旅游公司工作，担任该公司博客频道的内容营销经理。您需要启动新博客文章的头脑风暴过程。您决定通过与 gemini.google.com 上的 Gemini 合作来收集想法。您输入：</p>
+<h3 id="6-3-3-内容营销经理"><a href="#6-3-3-内容营销经理" class="headerlink" title="6.3.3 内容营销经理"></a>6.3.3 内容营销经理</h3><h4 id="用例：为您的博客产生灵感"><a href="#用例：为您的博客产生灵感" class="headerlink" title="用例：为您的博客产生灵感"></a><strong>用例：为您的博客产生灵感</strong></h4><p>​	您在一家旅游公司工作，担任该公司博客频道的内容营销经理。您需要启动新博客文章的头脑风暴过程。您决定通过与 gemini.google.com 上的 Gemini 合作来收集想法。您输入：</p>
 <blockquote>
 <p>我需要博文主题，这些主题对热爱旅行和旅游业的人来说很有趣。以下是我希望您关注的重点：让主题独一无二。现在有很多旅游博客——让我们想出一些引人注目的新角度。保持主题的相关性。在集思广益时，利用旅游业的当前趋势或最近的挑战&#x2F;创新。我希望每个主题都包括：</p>
 <p>目标受众：这个主题特别吸引谁？</p>
@@ -578,7 +576,7 @@
 <blockquote>
 <p>创建一张飞机在日出时飞过山脉和河流的云层之上的图像，我可以将其用于营销活动来推广我的旅游公司</p>
 </blockquote>
-<p><strong>用例：创建社交媒体帖子</strong><br>    您专注于创建针对社交媒体渠道优化的内容。您需要收集针对不同受众的不同内容的想法。您打开一个新的 Google 文档，并通过选择“帮助我撰写”来提示 Docs 中的 Gemini。您输入：</p>
+<h4 id="用例：创建社交媒体帖子"><a href="#用例：创建社交媒体帖子" class="headerlink" title="用例：创建社交媒体帖子"></a><strong>用例：创建社交媒体帖子</strong></h4><p>​	您专注于创建针对社交媒体渠道优化的内容。您需要收集针对不同受众的不同内容的想法。您打开一个新的 Google 文档，并通过选择“帮助我撰写”来提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>撰写三篇关于 [产品&#x2F;服务&#x2F;主题] 的引人入胜的社交媒体帖子，以吸引 [目标受众]。将每篇社交媒体帖子控制在两句话以内，并包含访问 [我们的网站] 的号召性用语。</p>
 </blockquote>
@@ -586,8 +584,7 @@
 <blockquote>
 <p>创建社交媒体帖子，宣传我们即将举行的 [活动名称]。包括吸引注意力的语言和与 [受众] 相关的主题标签。</p>
 </blockquote>
-<p><strong>用例：制定战略营销计划</strong></p>
-<p>​	您的公司正在推出一款新应用。您需要一个强大的营销计划，但您需要一些想法来开始。您通过访问 gemini.google.com 与 Gemini 聊天。您输入：</p>
+<h4 id="用例：制定战略营销计划"><a href="#用例：制定战略营销计划" class="headerlink" title="用例：制定战略营销计划"></a><strong>用例：制定战略营销计划</strong></h4><p>​	您的公司正在推出一款新应用。您需要一个强大的营销计划，但您需要一些想法来开始。您通过访问 gemini.google.com 与 Gemini 聊天。您输入：</p>
 <blockquote>
 <p>我正在为提供 [功能] 的新应用制定营销计划。我的目标受众是[受众]。请帮我制定一个以 [营销渠道] 为重点的计划。以下是我希望您涵盖的内容：竞争对手分析、理想的营销渠道组合及其理由、预算建议、关键信息传递想法以及带有 KPI 的拟议活动时间表。</p>
 </blockquote>
@@ -606,7 +603,7 @@
 <p>​	<font style="background: #F9D2CF">起草一封电子邮件</font><font style="background: #FDEEC3">给负责运行此 UAT 的 [我的同事]，并解释他们下一步需要做什么。</font></p>
 <p><img src="/2024/08/27/google-prompting-guide-101/image-20241113162901255.png" alt="image-20241113162901255"></p>
 <p>​	起草的电子邮件提供了一个有用的起点，因此您可以将结果导出到 Gmail，并在将邮件发送给同事之前直接进行编辑。</p>
-<h2 id="7-3-提示指南"><a href="#7-3-提示指南" class="headerlink" title="7.3 提示指南"></a>7.3 提示指南</h2><h4 id="7-3-1-项目经理"><a href="#7-3-1-项目经理" class="headerlink" title="7.3.1 项目经理"></a>7.3.1 项目经理</h4><p><strong>用例：报告项目状态</strong><br>    您刚刚与所有项目利益相关者进行了长时间的通话，现在您想总结讨论的内容并跟进分配的行动项目。在包含会议记录的 Google 文档中，您通过选择“帮助我撰写”提示 Docs 中的 Gemini。您输入：</p>
+<h2 id="7-3-提示指南"><a href="#7-3-提示指南" class="headerlink" title="7.3 提示指南"></a>7.3 提示指南</h2><h3 id="7-3-1-项目经理"><a href="#7-3-1-项目经理" class="headerlink" title="7.3.1 项目经理"></a>7.3.1 项目经理</h3><h4 id="用例：报告项目状态"><a href="#用例：报告项目状态" class="headerlink" title="用例：报告项目状态"></a><strong>用例：报告项目状态</strong></h4><p>​	您刚刚与所有项目利益相关者进行了长时间的通话，现在您想总结讨论的内容并跟进分配的行动项目。在包含会议记录的 Google 文档中，您通过选择“帮助我撰写”提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>用一个简短的段落总结此通话记录。在项目符号中，根据 [通话记录] 突出显示行动项目、做出的决定和每个项目的所有者。</p>
 </blockquote>
@@ -618,7 +615,7 @@
 <blockquote>
 <p>写一份团队午餐邀请函，庆祝项目进展，并注明 [日期、时间和地点]。感谢他们的辛勤工作，并承认这是一个具有挑战性的项目。</p>
 </blockquote>
-<p><strong>用例：创建项目回顾</strong><br>    您刚刚完成项目，您的高级领导团队需要进行项目回顾。要启动从整个团队收集反馈的过程，请打开 Google 文档，然后选择“帮助我撰写”，提示 Docs 中的 Gemini。您输入：</p>
+<h4 id="用例：创建项目回顾"><a href="#用例：创建项目回顾" class="headerlink" title="用例：创建项目回顾"></a><strong>用例：创建项目回顾</strong></h4><p>​	您刚刚完成项目，您的高级领导团队需要进行项目回顾。要启动从整个团队收集反馈的过程，请打开 Google 文档，然后选择“帮助我撰写”，提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>我需要撰写一份报告，详细说明 [项目] 的成功、失败和经验教训。起草一份包含 20 个问题的清单，以指导跨团队流程调查。包括一些问题，以发现哪些方法有效、哪些方法无效、特定流程故障、技术问题、沟通差距或任何其他可能导致项目问题或成功的因素。</p>
 </blockquote>
@@ -626,7 +623,7 @@
 <blockquote>
 <p>用两段话总结此文档。包括有关项目目标、主要贡献者、项目成果以及任何关键成功或失败的高级信息。</p>
 </blockquote>
-<p><strong>用例：开发问题跟踪器和相关通信</strong><br>    您需要创建一个项目问题跟踪器来跟踪风险并及时解决。您想快速创建一个模板，因此您打开一个新的 Google Sheet 并通过选择“帮助我整理”来提示 Sheets 中的 Gemini。您输入：</p>
+<h4 id="用例：开发问题跟踪器和相关通信"><a href="#用例：开发问题跟踪器和相关通信" class="headerlink" title="用例：开发问题跟踪器和相关通信"></a><strong>用例：开发问题跟踪器和相关通信</strong></h4><p>​	您需要创建一个项目问题跟踪器来跟踪风险并及时解决。您想快速创建一个模板，因此您打开一个新的 Google Sheet 并通过选择“帮助我整理”来提示 Sheets 中的 Gemini。您输入：</p>
 <blockquote>
 <p>创建一个电子表格来跟踪项目问题，包括描述、状态、分配的所有者和解决问题的行动项目。</p>
 </blockquote>
@@ -659,7 +656,7 @@
 <p>​	<font style="background: #F9D2CF">告诉我 [公司] 如何帮助 [客户公司] 实现他们的目标。</font></p>
 <p>​	结束对话后，您可以将结果导出到 Google 文档中。打开 Google 文档并在 Docs 中提示 Gemini。输入：</p>
 <p>​	<font style="background: #FDEEC3">为 [客户] </font><font style="background: #F9D2CF">创建一封电子邮件草稿，</font><font style="background: #FDEEC3">解释为什么 [贵公司] 是他们实现市场目标的完美合作伙伴。</font></p>
-<h2 id="8-3-提示指南"><a href="#8-3-提示指南" class="headerlink" title="8.3 提示指南"></a>8.3 提示指南</h2><h4 id="8-3-1-销售经理"><a href="#8-3-1-销售经理" class="headerlink" title="8.3.1 销售经理"></a>8.3.1 销售经理</h4><p><strong>用例：发展客户关系</strong><br>    您的年度会议即将召开，许多最重要的客户都会出席。您想亲自邀请他们参加您举办的欢乐时光活动。您还想邀请一些潜在客户，以便他们与现有客户建立联系。您打开 Gmail，选择“帮我写”以在 Gmail 中提示 Gemini。<br>您输入：</p>
+<h2 id="8-3-提示指南"><a href="#8-3-提示指南" class="headerlink" title="8.3 提示指南"></a>8.3 提示指南</h2><h3 id="8-3-1-销售经理"><a href="#8-3-1-销售经理" class="headerlink" title="8.3.1 销售经理"></a>8.3.1 销售经理</h3><h4 id="用例：发展客户关系"><a href="#用例：发展客户关系" class="headerlink" title="用例：发展客户关系"></a><strong>用例：发展客户关系</strong></h4><p>​	您的年度会议即将召开，许多最重要的客户都会出席。您想亲自邀请他们参加您举办的欢乐时光活动。您还想邀请一些潜在客户，以便他们与现有客户建立联系。您打开 Gmail，选择“帮我写”以在 Gmail 中提示 Gemini。<br>您输入：</p>
 <blockquote>
 <p>写一封电子邮件，邀请对 [重点领域] 感兴趣的人参加我们于 [日期、时间] 在 [贸易展览活动] 举行的欢乐时光活动。包括我们专注于 [重点领域]。</p>
 </blockquote>
@@ -671,7 +668,7 @@
 <blockquote>
 <p> 草拟 10 个问题，我可以使用这些问题来调查客户最近使用我们的 [产品&#x2F;服务] 的体验。包括一些问题来衡量 [产品] 有多有用、他们喜欢什么以及他们认为哪些方面可以改进。</p>
 </blockquote>
-<p><strong>用例：支持销售团队</strong><br>    不幸的是，公司的服务出现了区域性问题。您需要联系东南地区的所有团队负责人，以立即指导如何主动联系客户。您打开 Gmail，选择“帮我写”以提示 Gmail 中的 Gemini。您输入：</p>
+<h4 id="用例：支持销售团队"><a href="#用例：支持销售团队" class="headerlink" title="用例：支持销售团队"></a><strong>用例：支持销售团队</strong></h4><p>​	不幸的是，公司的服务出现了区域性问题。您需要联系东南地区的所有团队负责人，以立即指导如何主动联系客户。您打开 Gmail，选择“帮我写”以提示 Gmail 中的 Gemini。您输入：</p>
 <blockquote>
 <p>起草一封电子邮件给所有东南地区的销售主管。告知他们 [问题]。建议他们与团队沟通，联系客户，并在未来的订单中提供 20% 的折扣作为道歉。 </p>
 </blockquote>
@@ -679,7 +676,7 @@
 <blockquote>
 <p>起草一封电子邮件给区域销售代表，内容是下周需要就 [问题] 举行的紧急会议。请他们周一或周二安排时间</p>
 </blockquote>
-<p><strong>用例：指导和培训销售团队</strong><br>    您从许多团队成员那里听说他们想要更多的学习机会。您正在组织一个半天的学习计划来支持这一请求。您需要创建一个时间表，因此您打开一个新的 Google 文档，然后通过选择“帮助我写作”提示 Docs 中的 Gemini。您输入：</p>
+<h4 id="用例：指导和培训销售团队"><a href="#用例：指导和培训销售团队" class="headerlink" title="用例：指导和培训销售团队"></a><strong>用例：指导和培训销售团队</strong></h4><p>​	您从许多团队成员那里听说他们想要更多的学习机会。您正在组织一个半天的学习计划来支持这一请求。您需要创建一个时间表，因此您打开一个新的 Google 文档，然后通过选择“帮助我写作”提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>为销售团队创建一个半天的教育课程议程，介绍我们的最新技术 [产品]。包括产品开发团队的演示时间以及午餐时间。</p>
 </blockquote>
@@ -687,7 +684,7 @@
 <blockquote>
 <p>创建一个电子表格，跟踪卖家的在线课程。包括课程的主要主题、价格、持续时间和优先级别的列。</p>
 </blockquote>
-<h4 id="8-3-2-客户经理和客户主管"><a href="#8-3-2-客户经理和客户主管" class="headerlink" title="8.3.2 客户经理和客户主管"></a>8.3.2 客户经理和客户主管</h4><p><strong>用例：建立客户关系</strong><br>    您刚刚与客户进行了一次愉快的通话，现在您想使用在 Google Docs 中记录的会议笔记来起草一封发送给客户的电子邮件。在包含笔记的 Google Doc 中，选择“帮助我撰写”，提示 Docs 中的 Gemini。您输入：</p>
+<h3 id="8-3-2-客户经理和客户主管"><a href="#8-3-2-客户经理和客户主管" class="headerlink" title="8.3.2 客户经理和客户主管"></a>8.3.2 客户经理和客户主管</h3><h4 id="用例：建立客户关系"><a href="#用例：建立客户关系" class="headerlink" title="用例：建立客户关系"></a><strong>用例：建立客户关系</strong></h4><p>​	您刚刚与客户进行了一次愉快的通话，现在您想使用在 Google Docs 中记录的会议笔记来起草一封发送给客户的电子邮件。在包含笔记的 Google Doc 中，选择“帮助我撰写”，提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>在初次交谈后，为 [客户] 撰写个性化的后续电子邮件。总结我们讨论的关键点并解决任何未解决的问题。</p>
 </blockquote>
@@ -695,8 +692,7 @@
 <blockquote>
 <p>草拟四个电子邮件模板，以便每周检查我的客户，因为他们已经购买了我们的新[服务]。使用一个价值主张（成本、易用性、安全性、可用性和定制）作为每封电子邮件的主要主题，并在每封邮件中包含[号召性用语]。</p>
 </blockquote>
-<p><strong>用例：为新客户来电做准备</strong></p>
-<p>​	您即将与潜在客户通话。这对您来说是一个全新的用例，您需要帮助准备通话。您需要初步研究方面的帮助，因此您访问 gemini.google.com，然后输入：</p>
+<h4 id="用例：为新客户来电做准备"><a href="#用例：为新客户来电做准备" class="headerlink" title="用例：为新客户来电做准备"></a><strong>用例：为新客户来电做准备</strong></h4><p>​	您即将与潜在客户通话。这对您来说是一个全新的用例，您需要帮助准备通话。您需要初步研究方面的帮助，因此您访问 gemini.google.com，然后输入：</p>
 <blockquote>
 <p>为我起草一份定制脚本，供我在与潜在客户进行销售通话时遵循。通话将通过视频通话进行，并将持续 30 分钟。请确保在脚本中添加以下内容：[插入公司产品&#x2F;解决方案] 如何帮助解决潜在客户的痛点，[公司] 的交付系统如何保证无缝和及时交付，有竞争力的定价和批量折扣表，以及[客户行业] 行业中客户参考的空间。</p>
 </blockquote>
@@ -708,7 +704,7 @@
 <blockquote>
 <p>我即将与潜在客户通话。[用例] 对我来说是一个新的用例，我需要帮助准备通话。列出 [客户] 在销售电话中可能对我提出的最有可能的反对意见，并提出如何回应这些反对意见的建议。我在 [插入行业] 工作，我正在尝试销售 [产品]。还请提供如何处理异议的想法并建议回应方式。</p>
 </blockquote>
-<h4 id="8-3-3-业务发展经理"><a href="#8-3-3-业务发展经理" class="headerlink" title="8.3.3 业务发展经理"></a>8.3.3 业务发展经理</h4><p><strong>用例：培养关系、个性化推广和思想领导力</strong><br>    您希望与在商业影响者社交活动中遇到的潜在客户建立更深层次的关系。您想要起草一个可以为多个联系人自定义的模板。您打开一个新的Google 文档，并通过选择“帮我写”提示 Docs 中的 Gemini。您输入：</p>
+<h3 id="8-3-3-业务发展经理"><a href="#8-3-3-业务发展经理" class="headerlink" title="8.3.3 业务发展经理"></a>8.3.3 业务发展经理</h3><h4 id="用例：培养关系、个性化推广和思想领导力"><a href="#用例：培养关系、个性化推广和思想领导力" class="headerlink" title="用例：培养关系、个性化推广和思想领导力"></a><strong>用例：培养关系、个性化推广和思想领导力</strong></h4><p>​	您希望与在商业影响者社交活动中遇到的潜在客户建立更深层次的关系。您想要起草一个可以为多个联系人自定义的模板。您打开一个新的Google 文档，并通过选择“帮我写”提示 Docs 中的 Gemini。您输入：</p>
 <blockquote>
 <p>起草一份面向行业影响者的推广电子邮件模板。表达我们在 [活动] 上建立联系的感激之情，并提出合作机会，例如 [机会]。</p>
 </blockquote>
@@ -716,8 +712,7 @@
 <blockquote>
 <p>以要点形式总结此博客内容，并提出三个后续问题的想法，以便我可以询问客户他们的想法。</p>
 </blockquote>
-<p><strong>用例：生成个性化的客户入职材料</strong></p>
-<p>​	您已经入职了几个新的大客户，现在您想亲自感谢您的客户并查看是否还有其他可以提供的。您打开 Gmail 并选择“帮我写”以提示 Gmail 中的 Gemini。您输入：</p>
+<h4 id="用例：生成个性化的客户入职材料"><a href="#用例：生成个性化的客户入职材料" class="headerlink" title="用例：生成个性化的客户入职材料"></a><strong>用例：生成个性化的客户入职材料</strong></h4><p>​	您已经入职了几个新的大客户，现在您想亲自感谢您的客户并查看是否还有其他可以提供的。您打开 Gmail 并选择“帮我写”以提示 Gmail 中的 Gemini。您输入：</p>
 <blockquote>
 <p>在 [客户] 与 [公司] 合作一周年之际，为其生成个性化电子邮件。感谢他们成为客户。询问他们是否有任何问题。包括有关 [其他产品] 的信息。</p>
 </blockquote>
@@ -803,6 +798,7 @@
 </div>
 <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js?id=3HGFkqwJpvEGaeV9&ck=3HGFkqwJpvEGaeV9&autoTrack=true"></script>
 <script defer src="https://total.660066.xyz/script.js" data-website-id="79434618-ab49-48f6-8d25-61792472ef8e"></script>
+
     </div>
   </footer>
 
@@ -825,7 +821,7 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
   
 
