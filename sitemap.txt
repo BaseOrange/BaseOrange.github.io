@@ -1,4 +1,4 @@
-https://log.660066.xyz/baidu_verify_codeva-tXW0RgD5OZ.html
+https://log.660066.xyz/2024/08/27/google-prompting-guide-101/
 https://log.660066.xyz/2024/09/01/inside-git/
 https://log.660066.xyz/about/index.html
 https://log.660066.xyz/2024/08/21/RunLLM-onCpuEnv-withOllama/
@@ -45,16 +45,16 @@ https://log.660066.xyz/categories/index.html
 https://log.660066.xyz/404/index.html
 https://log.660066.xyz/
 https://log.660066.xyz/tags/%E5%BC%80%E5%8F%91%E7%BA%AA%E5%AE%9E/
-https://log.660066.xyz/tags/%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/
 https://log.660066.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/
-https://log.660066.xyz/tags/Docx4j/
+https://log.660066.xyz/tags/%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/
 https://log.660066.xyz/tags/DataX-Web/
+https://log.660066.xyz/tags/Docx4j/
 https://log.660066.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/
 https://log.660066.xyz/tags/Bat/
 https://log.660066.xyz/tags/Logback/
+https://log.660066.xyz/tags/Oracle/
 https://log.660066.xyz/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/
 https://log.660066.xyz/tags/AI/
-https://log.660066.xyz/tags/Oracle/
 https://log.660066.xyz/tags/XBRL/
 https://log.660066.xyz/tags/Datawhale/
 https://log.660066.xyz/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/
