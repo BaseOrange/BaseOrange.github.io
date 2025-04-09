@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/o.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/o.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/o.png">
+  <link rel="mask-icon" href="/images/o.svg" color="#222">
+  <meta name="google-site-verification" content="JyJm6tHJ1q5mhbqwbRl4KEUE_ms1dc_9MJ0G0GIHnq8">
+  <meta name="baidu-site-verification" content="codeva-tXW0RgD5OZ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"log.660066.xyz","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"onmobile":false,"dimmer":true},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="文档段落保留功能实现分析：基于层级与权限的标题保留策略">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文档段落保留功能实现分析：基于层级与权限的标题保留策略">
+<meta property="og:url" content="https://log.660066.xyz/2025/04/09/analysis-of-document-para-reservation-impl/index.html">
+<meta property="og:site_name" content="大橙子">
+<meta property="og:description" content="文档段落保留功能实现分析：基于层级与权限的标题保留策略">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-09T06:32:28.000Z">
+<meta property="article:modified_time" content="2025-04-09T06:38:12.348Z">
+<meta property="article:author" content="BigOrange">
+<meta property="article:tag" content="开发纪实">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://log.660066.xyz/2025/04/09/analysis-of-document-para-reservation-impl/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://log.660066.xyz/2025/04/09/analysis-of-document-para-reservation-impl/","path":"2025/04/09/analysis-of-document-para-reservation-impl/","title":"文档段落保留功能实现分析：基于层级与权限的标题保留策略"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>文档段落保留功能实现分析：基于层级与权限的标题保留策略 | 大橙子</title>
+  
+
+
+
+
+
+
+
+  <script defer data-domain="660066.xyz" src="https://plausible.io/js/script.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="大橙子" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="大橙子" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">大橙子</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-工具箱"><a href="/tools/" rel="section"><i class="fa fa-flask fa-fw"></i>工具箱</a></li><li class="menu-item menu-item-友情链接"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友情链接</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="nav-text">一、问题背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8%E7%9A%84%E5%85%B8%E5%9E%8B%E9%97%AE%E9%A2%98"><span class="nav-text">存在的典型问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-text">二、解决思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%86%E9%98%B6%E6%AE%B5%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91"><span class="nav-text">1. 分阶段处理逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%B3%E9%94%AE%E9%80%BB%E8%BE%91%E8%AE%BE%E8%AE%A1"><span class="nav-text">2. 关键逻辑设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A0%87%E9%A2%98%E8%8C%83%E5%9B%B4%E8%AE%A1%E7%AE%97"><span class="nav-text">(1) 标题范围计算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BF%9D%E7%95%99%E6%9D%A1%E4%BB%B6%E7%BB%86%E5%8C%96"><span class="nav-text">(2) 保留条件细化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%A0%87%E9%A2%98%E4%BF%9D%E7%95%99%E5%88%A4%E6%96%AD"><span class="nav-text">(3) 标题保留判断</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="nav-text">三、关键代码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E7%A1%80%E4%BF%9D%E7%95%99%E6%A0%87%E8%AE%B0%EF%BC%88retained%E6%95%B0%E7%BB%84%EF%BC%89"><span class="nav-text">1. 基础保留标记（retained数组）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A0%87%E9%A2%98%E8%8C%83%E5%9B%B4%E8%AE%A1%E7%AE%97%EF%BC%88%E6%A0%88%E7%BB%93%E6%9E%84%EF%BC%89"><span class="nav-text">2. 标题范围计算（栈结构）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%A0%87%E9%A2%98%E4%BF%9D%E7%95%99%E5%88%A4%E6%96%AD-1"><span class="nav-text">3. 标题保留判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BB%93%E6%9E%9C%E7%94%9F%E6%88%90"><span class="nav-text">4. 结果生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%AA%8C%E8%AF%81%E4%B8%8E%E6%B5%8B%E8%AF%95"><span class="nav-text">四、验证与测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%B5%8B%E8%AF%95%E6%A1%88%E4%BE%8B"><span class="nav-text">1. 测试案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95"><span class="nav-text">2. 边界条件测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%80%BB%E7%BB%93%E4%B8%8E%E6%89%A9%E5%B1%95"><span class="nav-text">五、总结与扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%BC%98%E5%8A%BF"><span class="nav-text">1. 解决方案优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8F%AF%E4%BC%98%E5%8C%96%E6%96%B9%E5%90%91"><span class="nav-text">2. 可优化方向</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">BigOrange</p>
+  <div class="site-description" itemprop="description">新的斗争开始了<br/>A new struggle has begun</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://log.660066.xyz/2025/04/09/analysis-of-document-para-reservation-impl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="BigOrange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大橙子">
+      <meta itemprop="description" content="新的斗争开始了<br/>A new struggle has begun">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="文档段落保留功能实现分析：基于层级与权限的标题保留策略 | 大橙子">
+      <meta itemprop="description" content="文档段落保留功能实现分析：基于层级与权限的标题保留策略">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          文档段落保留功能实现分析：基于层级与权限的标题保留策略
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-04-09 14:32:28 / 修改时间：14:38:12" itemprop="dateCreated datePublished" datetime="2025-04-09T14:32:28+08:00">2025-04-09</time>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">文档段落保留功能实现分析：基于层级与权限的标题保留策略</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="一、问题背景"><a href="#一、问题背景" class="headerlink" title="一、问题背景"></a>一、问题背景</h2><p>在文档处理场景中，用户踢出需求，需要根据以下规则隐藏或保留段落：</p>
+<ol>
+<li><strong>标题保留条件</strong>：仅当标题的子段落中存在<strong>有权限的填报项</strong>时，该标题才被保留。</li>
+<li>段落类型区分<ul>
+<li><strong>正文&#x2F;表格</strong>：根据权限决定是否保留。</li>
+<li><strong>标题</strong>：需结合子段落的保留状态判断是否保留。</li>
+</ul>
+</li>
+<li><strong>层级嵌套复杂性</strong>：标题的层级（如一级标题、二级标题）需通过段落层级信息（<code>OutLevel</code>）动态计算其子段落范围。</li>
+</ol>
+<h3 id="存在的典型问题"><a href="#存在的典型问题" class="headerlink" title="存在的典型问题"></a>存在的典型问题</h3><ul>
+<li><strong>标题范围计算错误</strong>：未正确记录标题的结束位置，导致误判子段落范围。</li>
+<li><strong>保留条件不精准</strong>：未区分“有权限填报项”与其他保留类型（如正文），导致标题被错误保留。</li>
+</ul>
+<hr>
+<h2 id="二、解决思路"><a href="#二、解决思路" class="headerlink" title="二、解决思路"></a>二、解决思路</h2><h3 id="1-分阶段处理逻辑"><a href="#1-分阶段处理逻辑" class="headerlink" title="1. 分阶段处理逻辑"></a>1. 分阶段处理逻辑</h3><p>将问题拆解为三个阶段，逐步解决：</p>
+<ol>
+<li><strong>基础保留标记</strong>：标记每个段落的保留状态（<code>retained</code>数组）。</li>
+<li><strong>标题范围与保留判断</strong>：通过层级嵌套关系确定标题的子段落范围，并判断是否保留。</li>
+<li><strong>结果生成</strong>：根据保留标记生成最终的删除&#x2F;保留指令。</li>
+</ol>
+<h3 id="2-关键逻辑设计"><a href="#2-关键逻辑设计" class="headerlink" title="2. 关键逻辑设计"></a>2. 关键逻辑设计</h3><h4 id="1-标题范围计算"><a href="#1-标题范围计算" class="headerlink" title="(1) 标题范围计算"></a>(1) 标题范围计算</h4><ul>
+<li><strong>使用栈结构</strong>：通过栈记录当前层级的标题，动态维护标题的嵌套关系。</li>
+<li><strong>层级比较</strong>：当遇到新标题时，若其层级≤栈顶标题层级，则弹出栈顶标题并记录其结束位置。</li>
+<li><strong>结束位置处理</strong>：遍历结束后，栈中剩余标题的结束位置设为文档末尾。</li>
+</ul>
+<h4 id="2-保留条件细化"><a href="#2-保留条件细化" class="headerlink" title="(2) 保留条件细化"></a>(2) 保留条件细化</h4><ul>
+<li>段落保留规则<ul>
+<li><strong>正文&#x2F;表格</strong>：仅保留有权限的填报项。</li>
+<li><strong>标题</strong>：仅保留子段落中存在有权限填报项的标题。</li>
+</ul>
+</li>
+<li><strong>权限判断</strong>：通过<code>FillInfo</code>对象获取段落的填报项权限信息。</li>
+</ul>
+<h4 id="3-标题保留判断"><a href="#3-标题保留判断" class="headerlink" title="(3) 标题保留判断"></a>(3) 标题保留判断</h4><ul>
+<li><strong>遍历子段落</strong>：对每个标题的子段落范围（<code>start</code>到<code>end</code>），检查是否存在有权限的填报项。</li>
+<li><strong>标记保留状态</strong>：若满足条件，将标题的<code>titleShouldKeep</code>标记为<code>true</code>。</li>
+</ul>
+<hr>
+<h2 id="三、关键代码解析"><a href="#三、关键代码解析" class="headerlink" title="三、关键代码解析"></a>三、关键代码解析</h2><h3 id="1-基础保留标记（retained数组）"><a href="#1-基础保留标记（retained数组）" class="headerlink" title="1. 基础保留标记（retained数组）"></a>1. 基础保留标记（<code>retained</code>数组）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标记每个段落的保留状态</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">    <span class="type">Para</span> <span class="variable">p</span> <span class="operator">=</span> paras.get(i);</span><br><span class="line">    <span class="type">int</span> <span class="variable">paraOutLevel</span> <span class="operator">=</span> XxxUtil.getParaOutLevel(p, styles);</span><br><span class="line">    <span class="type">FillInfo</span> <span class="variable">fillItemPermission</span> <span class="operator">=</span> getFillItemPermission(fillItemList, p.getPos());</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">hasPermission</span> <span class="operator">=</span> fillItemPermission.isHasPermission();</span><br><span class="line">    <span class="type">FillItem</span> <span class="variable">fillItem</span> <span class="operator">=</span> fillItemPermission.getFillItem();</span><br><span class="line">    <span class="keyword">if</span> (!hasPermission &amp;&amp; fillItem != <span class="literal">null</span>) &#123;</span><br><span class="line">        retained[i] = <span class="literal">false</span>; <span class="comment">// 无权限的填报项不保留</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (paraOutLevel == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 正文或填报项：仅保留有权限的</span></span><br><span class="line">        retained[i] = hasPermission;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 标题或表格：根据层级是否需要保留</span></span><br><span class="line">        <span class="keyword">if</span> (levelsToKeep.contains(paraOutLevel)) &#123;</span><br><span class="line">            retained[i] = <span class="literal">true</span>; <span class="comment">// 标题先标记为保留，后续根据子段落修正</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键点</strong>：</p>
+<ul>
+<li><strong>权限优先</strong>：无权限的填报项直接标记为不保留。</li>
+<li><strong>层级过滤</strong>：仅保留需要显示的层级（如<code>levelsToKeep</code>中的层级）。</li>
+</ul>
+<hr>
+<h3 id="2-标题范围计算（栈结构）"><a href="#2-标题范围计算（栈结构）" class="headerlink" title="2. 标题范围计算（栈结构）"></a>2. 标题范围计算（栈结构）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 确定标题的子段落范围</span></span><br><span class="line">List&lt;Range&gt; titleRanges = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">Stack&lt;Range&gt; stack = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">    <span class="type">Para</span> <span class="variable">p</span> <span class="operator">=</span> allPapx.get(i);</span><br><span class="line">    <span class="type">int</span> <span class="variable">paraOutLevel</span> <span class="operator">=</span> DocDataUtil.getParaOutLevel(p, styles);</span><br><span class="line">    <span class="keyword">if</span> (paraOutLevel &gt; <span class="number">0</span> &amp;&amp; levelsToKeep.contains(paraOutLevel)) &#123;</span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty() &amp;&amp; paraOutLevel &lt;= stack.peek().getLevel()) &#123;</span><br><span class="line">            <span class="type">Range</span> <span class="variable">popped</span> <span class="operator">=</span> stack.pop();</span><br><span class="line">            popped.setEnd(i - <span class="number">1</span>); <span class="comment">// 当前段落的前一个位置为结束</span></span><br><span class="line">            titleRanges.add(popped);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">Range</span> <span class="variable">newRange</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Range</span>();</span><br><span class="line">        newRange.setStart(i);</span><br><span class="line">        newRange.setLevel(paraOutLevel);</span><br><span class="line">        stack.push(newRange);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 处理栈中剩余标题</span></span><br><span class="line"><span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">    <span class="type">Range</span> <span class="variable">r</span> <span class="operator">=</span> stack.pop();</span><br><span class="line">    r.setEnd(size - <span class="number">1</span>); <span class="comment">// 结束位置为文档末尾</span></span><br><span class="line">    titleRanges.add(r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键点</strong>：</p>
+<ul>
+<li><strong>栈的层级判断</strong>：通过层级比较确保标题范围的正确嵌套。</li>
+<li><strong>结束位置修正</strong>：遍历结束后，确保所有标题范围到文档末尾。</li>
+</ul>
+<hr>
+<h3 id="3-标题保留判断-1"><a href="#3-标题保留判断-1" class="headerlink" title="3. 标题保留判断"></a>3. 标题保留判断</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断标题是否保留</span></span><br><span class="line"><span class="keyword">for</span> (Range r : titleRanges) &#123;</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">hasPermissionFilledForm</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> r.getStart() + <span class="number">1</span>; j &lt;= r.getEnd(); j++) &#123;</span><br><span class="line">        <span class="type">FillInfo</span> <span class="variable">fillItemPermission</span> <span class="operator">=</span> getFillItemPermission(fillItemList, allPapx.get(j).getPos());</span><br><span class="line">        <span class="keyword">if</span> (retained[j] &amp;&amp; fillItemPermission.isHasPermission()) &#123;</span><br><span class="line">            hasPermissionFilledForm = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (hasPermissionFilledForm) &#123;</span><br><span class="line">        titleShouldKeep[r.getStart()] = <span class="literal">true</span>; <span class="comment">// 标记标题保留</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键点</strong>：</p>
+<ul>
+<li><strong>子段落遍历</strong>：检查标题的子段落（<code>start+1</code>到<code>end</code>）中是否存在有权限的填报项。</li>
+<li><strong>权限双重验证</strong>：仅当<code>retained[j]</code>为<code>true</code>（被基础保留）且<code>hasPermission</code>为<code>true</code>（有权限）时，才视为有效。</li>
+</ul>
+<hr>
+<h3 id="4-结果生成"><a href="#4-结果生成" class="headerlink" title="4. 结果生成"></a>4. 结果生成</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成最终的删除/保留指令</span></span><br><span class="line">List&lt;ResultItem&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; size) &#123;</span><br><span class="line">    <span class="type">Para</span> <span class="variable">p</span> <span class="operator">=</span> paras.get(i);</span><br><span class="line">    <span class="type">int</span> <span class="variable">paraOutLevel</span> <span class="operator">=</span> XxxUtil.getParaOutLevel(p, styles);</span><br><span class="line">    <span class="keyword">if</span> (paraOutLevel &gt; <span class="number">0</span> &amp;&amp; levelsToKeep.contains(paraOutLevel)) &#123;</span><br><span class="line">        <span class="comment">// 标题的保留状态由titleShouldKeep决定</span></span><br><span class="line">        retained[i] = titleShouldKeep[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 处理表格或普通段落</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="comment">/* 是表格 */</span>) &#123;</span><br><span class="line">        <span class="comment">// 删除表格并跳过所有表格段落</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!retained[i]) &#123;</span><br><span class="line">            <span class="comment">// 记录删除指令</span></span><br><span class="line">            result.add(<span class="keyword">new</span> <span class="title class_">ResultItem</span>(p.getPos(), p.getLen(), <span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键点</strong>：</p>
+<ul>
+<li><strong>标题保留状态更新</strong>：根据<code>titleShouldKeep</code>覆盖标题的<code>retained</code>标记。</li>
+<li><strong>统一处理</strong>：通过<code>retained</code>数组统一判断段落的保留或删除。</li>
+</ul>
+<hr>
+<h2 id="四、验证与测试"><a href="#四、验证与测试" class="headerlink" title="四、验证与测试"></a>四、验证与测试</h2><h3 id="1-测试案例"><a href="#1-测试案例" class="headerlink" title="1. 测试案例"></a>1. 测试案例</h3><p>以用户提供的案例为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">段落索引 | 内容              | 层级 | 是否保留</span><br><span class="line">-----------------------------------------------</span><br><span class="line">0       | 一级1            | 1    | false（无子段落有权限填报项）</span><br><span class="line">1       | 二级1            | 2    | false</span><br><span class="line">...     | ... 						| ...  | ...</span><br><span class="line">18      | 一级2            | 1    | true（子段落包含有权限填报项）</span><br><span class="line">21      | 二级10           | 2    | true（子段落包含有权限填报项）</span><br><span class="line">25      | 有权限填报项      | 0    | true</span><br></pre></td></tr></table></figure>
+
+<p><strong>验证逻辑</strong>：</p>
+<ul>
+<li><strong>一级2的保留</strong>：子段落（索引19-25）包含索引25的有权限填报项 → 保留。</li>
+<li><strong>二级10的保留</strong>：子段落包含索引25的有权限填报项 → 保留。</li>
+<li><strong>一级1的不保留</strong>：子段落中无有权限的填报项 → 不保留。</li>
+</ul>
+<h3 id="2-边界条件测试"><a href="#2-边界条件测试" class="headerlink" title="2. 边界条件测试"></a>2. 边界条件测试</h3><ul>
+<li><strong>无子段落的标题</strong>：若标题无子段落，不保留。</li>
+<li><strong>层级嵌套交叉</strong>：如<code>一级→二级→三级</code>的复杂结构，确保范围计算正确。</li>
+</ul>
+<hr>
+<h2 id="五、总结与扩展"><a href="#五、总结与扩展" class="headerlink" title="五、总结与扩展"></a>五、总结与扩展</h2><h3 id="1-解决方案优势"><a href="#1-解决方案优势" class="headerlink" title="1. 解决方案优势"></a>1. 解决方案优势</h3><ul>
+<li><strong>精准控制</strong>：通过层级栈和权限双重判断，确保标题保留的条件严格符合需求。</li>
+<li><strong>可扩展性</strong>：通过<code>levelsToKeep</code>和权限接口，可灵活适配不同业务场景。</li>
+</ul>
+<h3 id="2-可优化方向"><a href="#2-可优化方向" class="headerlink" title="2. 可优化方向"></a>2. 可优化方向</h3><ul>
+<li><strong>性能优化</strong>：对大规模文档，可优化子段落遍历逻辑（如预处理子段落列表）。</li>
+<li><strong>异常处理</strong>：增加对层级不合法或权限信息缺失的容错机制。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%80%E5%8F%91%E7%BA%AA%E5%AE%9E/" rel="tag"># 开发纪实</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/26/openwrt-and-openclash/" rel="prev" title="OpenWRT部署及其使用">
+                  <i class="fa fa-angle-left"></i> OpenWRT部署及其使用
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">BigOrange</span>
+  </div><div>
+  <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral">
+  本网站由
+  <img src="data:image/png;base64,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" width="45px" style="display:inline;padding-top:5px;"/>
+  提供CDN加速/云存储服务
+  </a>
+  <a>&emsp;|&emsp;</a>
+  <a href="https://www.foreverblog.cn/" target="_blank" ><img src="https://img.foreverblog.cn/logo_en_default.png" alt="" style="display:inline;height:16px;"></a>
+</div>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js?id=3HGFkqwJpvEGaeV9&ck=3HGFkqwJpvEGaeV9&autoTrack=true"></script>
+<script defer src="https://total.660066.xyz/script.js" data-website-id="79434618-ab49-48f6-8d25-61792472ef8e"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"BaseOrange","repo":"BaseOrange.github.io","client_id":"8f8eb36a78230e56ee7e","client_secret":"c826afd9bd0b45f07426463094a3ad186de52bd8","admin_user":"BaseOrange","distraction_free_mode":true,"proxy":"https://proxy.660066.xyz/github_access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"a91d947dd6afedd51acb1f39e27d6243"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
