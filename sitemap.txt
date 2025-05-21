@@ -1,5 +1,6 @@
-https://log.660066.xyz/about/index.html
+https://log.660066.xyz/2025/05/21/macos-jdk-version-switch/
 https://log.660066.xyz/2025/04/23/solution-record/
+https://log.660066.xyz/about/index.html
 https://log.660066.xyz/2025/04/09/analysis-of-document-para-reservation-impl/
 https://log.660066.xyz/2025/03/26/openwrt-and-openclash/
 https://log.660066.xyz/2025/03/14/onlyoffice-deploy/
