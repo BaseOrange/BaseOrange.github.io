@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>令牌桶算法可视化模拟</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- 自定义工具类 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .animation-delay-300 {
+                animation-delay: 300ms;
+            }
+            .animation-delay-600 {
+                animation-delay: 600ms;
+            }
+            .token-appear {
+                animation: tokenAppear 0.5s ease-out forwards;
+            }
+            .request-move {
+                animation: requestMove 0.8s ease-in-out forwards;
+            }
+            .request-rejected {
+                animation: requestRejected 0.8s ease-in-out forwards;
+            }
+            .token-flow {
+                animation: tokenFlow 1s linear infinite;
+            }
+        }
+        
+        @keyframes tokenAppear {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes requestMove {
+            0% { transform: translateX(0); }
+            30% { transform: translateX(100%); }
+            70% { transform: translateX(200%); }
+            100% { transform: translateX(300%); }
+        }
+        
+        @keyframes requestRejected {
+            0% { transform: translateX(0); }
+            30% { transform: translateX(100%); }
+            50% { transform: translateX(120%) translateY(20px); opacity: 1; }
+            100% { transform: translateX(120%) translateY(100px); opacity: 0; }
+        }
+        
+        @keyframes tokenFlow {
+            0% { transform: translateY(0); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gradient-to-br from-light to-blue-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- 页面标题 -->
+        <header class="text-center mb-12">
+            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-dark mb-4">
+                令牌桶算法可视化模拟
+            </h1>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                令牌桶是一种常用的流量控制算法，用于限制请求速率。通过设置桶容量和令牌生成速率，您可以模拟不同的流量控制场景。
+            </p>
+        </header>
+        
+        <!-- 参数设置区域 -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-10 transform transition-all hover:shadow-xl">
+            <h2 class="text-xl font-semibold text-dark mb-6 flex items-center">
+                <i class="fa fa-sliders text-primary mr-3"></i>算法参数设置
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label for="bucket-capacity" class="block text-gray-700 font-medium">
+                        令牌桶容量 <span class="text-primary">(个)</span>
+                    </label>
+                    <div class="flex items-center">
+                        <input type="range" id="bucket-capacity" min="5" max="50" step="1" value="15" 
+                               class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary">
+                        <span id="capacity-value" class="ml-3 min-w-[40px] text-center font-medium">15</span>
+                    </div>
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="token-rate" class="block text-gray-700 font-medium">
+                        令牌生成间隔 <span class="text-primary">(秒/个)</span>
+                    </label>
+                    <div class="flex items-center">
+                        <input type="range" id="token-rate" min="1" max="10" step="1" value="3" 
+                               class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary">
+                        <span id="rate-value" class="ml-3 min-w-[40px] text-center font-medium">3</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex flex-wrap gap-4 justify-center">
+                <button id="send-request" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center">
+                    <i class="fa fa-paper-plane mr-2"></i> 发送单个请求
+                </button>
+                <button id="send-burst" class="px-8 py-3 bg-secondary hover:bg-secondary/90 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center">
+                    <i class="fa fa-bolt mr-2"></i> 发送突发请求
+                </button>
+                <button id="reset-simulation" class="px-8 py-3 bg-warning hover:bg-warning/90 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center">
+                    <i class="fa fa-refresh mr-2"></i> 重置模拟
+                </button>
+            </div>
+        </div>
+        
+        <!-- 算法模拟区域 -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-10 transform transition-all hover:shadow-xl">
+            <h2 class="text-xl font-semibold text-dark mb-6 flex items-center">
+                <i class="fa fa-cogs text-primary mr-3"></i>算法模拟
+            </h2>
+            
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <!-- 客户端 -->
+                <div class="flex flex-col items-center w-full md:w-1/4">
+                    <div class="bg-blue-100 p-6 rounded-xl shadow-md w-full max-w-xs h-48 flex flex-col items-center justify-center border-2 border-blue-200">
+                        <div class="text-primary text-5xl mb-2">
+                            <i class="fa fa-laptop"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">客户端</h3>
+                        <div id="client-requests" class="mt-4 flex flex-wrap justify-center gap-1 max-h-16 overflow-y-auto">
+                            <!-- 请求会在这里动态生成 -->
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-500">
+                        <span id="total-requests">总请求: 0</span>
+                    </div>
+                </div>
+                
+                <!-- 令牌桶 -->
+                <div class="flex flex-col items-center w-full md:w-1/4">
+                    <div class="relative bg-yellow-100 p-6 rounded-xl shadow-md w-full max-w-xs h-48 flex flex-col items-center justify-center border-2 border-yellow-200">
+                        <div class="text-warning text-5xl mb-2">
+                            <i class="fa fa-tint"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">令牌桶</h3>
+                        <div class="mt-2 text-sm text-gray-500">
+                            <span id="current-tokens">当前令牌: 15</span>
+                        </div>
+                        
+                        <!-- 令牌桶可视化 -->
+                        <div class="w-full h-20 mt-2 bg-gray-100 rounded-lg overflow-hidden border border-gray-300 relative">
+                            <div id="token-bucket-fill" class="absolute bottom-0 left-0 w-full bg-warning transition-all duration-300" style="height: 100%"></div>
+                            
+                            <!-- 令牌动画效果 -->
+                            <div id="token-generator" class="absolute top-0 left-0 w-full h-full flex justify-center overflow-hidden">
+                                <!-- 令牌会在这里动态生成 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 服务器 -->
+                <div class="flex flex-col items-center w-full md:w-1/4">
+                    <div class="bg-green-100 p-6 rounded-xl shadow-md w-full max-w-xs h-48 flex flex-col items-center justify-center border-2 border-green-200">
+                        <div class="text-secondary text-5xl mb-2">
+                            <i class="fa fa-server"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-dark">服务器</h3>
+                        <div id="server-requests" class="mt-4 flex flex-wrap justify-center gap-1 max-h-16 overflow-y-auto">
+                            <!-- 请求会在这里动态生成 -->
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-500">
+                        <span id="processed-requests">已处理: 0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 拒绝请求区域 -->
+            <div class="mt-8 flex flex-col items-center">
+                <div class="text-sm text-gray-500 mb-2">
+                    <span id="rejected-requests">被拒绝请求: 0</span>
+                </div>
+                <div id="rejected-container" class="w-full max-w-2xl h-20 bg-gray-50 rounded-lg border border-gray-200 overflow-hidden flex items-center justify-center">
+                    <div id="rejected-requests-container" class="flex flex-wrap justify-center gap-2 p-2">
+                        <!-- 被拒绝的请求会在这里动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 令牌桶算法模拟
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const bucketCapacityInput = document.getElementById('bucket-capacity');
+            const tokenRateInput = document.getElementById('token-rate');
+            const capacityValue = document.getElementById('capacity-value');
+            const rateValue = document.getElementById('rate-value');
+            const sendRequestBtn = document.getElementById('send-request');
+            const sendBurstBtn = document.getElementById('send-burst');
+            const resetSimulationBtn = document.getElementById('reset-simulation');
+            const currentTokensEl = document.getElementById('current-tokens');
+            const tokenBucketFill = document.getElementById('token-bucket-fill');
+            const tokenGenerator = document.getElementById('token-generator');
+            const clientRequestsEl = document.getElementById('client-requests');
+            const serverRequestsEl = document.getElementById('server-requests');
+            const rejectedRequestsEl = document.getElementById('rejected-requests');
+            const totalRequestsEl = document.getElementById('total-requests');
+            const processedRequestsEl = document.getElementById('processed-requests');
+            const rejectedRequestsContainer = document.getElementById('rejected-requests-container');
+            
+            // 初始化变量
+            let bucketCapacity = parseInt(bucketCapacityInput.value);
+            let tokenRate = parseInt(tokenRateInput.value); // 现在表示秒/个
+            let currentTokens = bucketCapacity; // 初始化为桶容量，即15个令牌
+            let totalRequests = 0;
+            let processedRequests = 0;
+            let rejectedRequests = 0;
+            let tokenInterval;
+            let processingQueue = []; // 请求处理队列
+            
+            // 更新UI显示
+            function updateUI() {
+                capacityValue.textContent = bucketCapacity;
+                rateValue.textContent = tokenRate;
+                currentTokensEl.textContent = `当前令牌: ${currentTokens}`;
+                totalRequestsEl.textContent = `总请求: ${totalRequests}`;
+                processedRequestsEl.textContent = `已处理: ${processedRequests}`;
+                rejectedRequestsEl.textContent = `被拒绝请求: ${rejectedRequests}`;
+                
+                // 更新令牌桶填充高度
+                const fillPercentage = (currentTokens / bucketCapacity) * 100;
+                tokenBucketFill.style.height = `${fillPercentage}%`;
+            }
+            
+            // 生成令牌
+            function generateToken() {
+                if (currentTokens < bucketCapacity) {
+                    currentTokens++;
+                    
+                    // 创建令牌动画
+                    const token = document.createElement('div');
+                    token.className = 'token-appear absolute top-0 text-warning';
+                    token.innerHTML = '<i class="fa fa-circle"></i>';
+                    tokenGenerator.appendChild(token);
+                    
+                    // 移除动画元素
+                    setTimeout(() => {
+                        token.remove();
+                    }, 300);
+                    
+                    updateUI();
+                    
+                    // 检查队列中是否有请求等待处理
+                    processNextRequest();
+                }
+            }
+            
+            // 处理队列中的下一个请求
+            function processNextRequest() {
+                if (processingQueue.length > 0 && currentTokens > 0) {
+                    const requestId = processingQueue.shift();
+                    const request = document.getElementById(`request-${requestId}`);
+                    
+                    if (request) {
+                        // 有令牌，处理请求
+                        currentTokens--;
+                        processedRequests++;
+                        
+                        // 移动请求到服务器
+                        request.classList.add('request-move');
+                        request.style.position = 'absolute';
+                        
+                        setTimeout(() => {
+                            request.remove();
+                            const serverRequest = document.createElement('div');
+                            serverRequest.className = 'bg-secondary text-white rounded-full w-6 h-6 flex items-center justify-center text-xs m-1';
+                            serverRequest.textContent = requestId;
+                            serverRequestsEl.appendChild(serverRequest);
+                            
+                            // 移除服务器中的请求
+                            setTimeout(() => {
+                                serverRequest.remove();
+                            }, 1000);
+                            
+                            updateUI();
+                        }, 800);
+                    }
+                }
+            }
+            
+            // 发送单个请求
+            function sendRequest() {
+                const requestId = ++totalRequests;
+                
+                // 创建请求元素
+                const request = document.createElement('div');
+                request.id = `request-${requestId}`;
+                request.className = 'request bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-xs m-1 transition-all';
+                request.textContent = requestId;
+                clientRequestsEl.appendChild(request);
+                
+                // 模拟请求从客户端到令牌桶的移动
+                setTimeout(() => {
+                    if (currentTokens > 0) {
+                        // 有令牌，立即处理请求
+                        currentTokens--;
+                        processedRequests++;
+                        
+                        // 移动请求到服务器
+                        request.classList.add('request-move');
+                        request.style.position = 'absolute';
+                        
+                        setTimeout(() => {
+                            request.remove();
+                            const serverRequest = document.createElement('div');
+                            serverRequest.className = 'bg-secondary text-white rounded-full w-6 h-6 flex items-center justify-center text-xs m-1';
+                            serverRequest.textContent = requestId;
+                            serverRequestsEl.appendChild(serverRequest);
+                            
+                            // 移除服务器中的请求
+                            setTimeout(() => {
+                                serverRequest.remove();
+                            }, 1000);
+                            
+                            updateUI();
+                        }, 800);
+                    } else {
+                        // 没有令牌，拒绝请求
+                        rejectedRequests++;
+                        
+                        // 拒绝请求动画
+                        request.classList.add('request-rejected');
+                        request.style.position = 'absolute';
+                        
+                        setTimeout(() => {
+                            request.remove();
+                            const rejectedRequest = document.createElement('div');
+                            rejectedRequest.className = 'bg-danger text-white rounded-full w-6 h-6 flex items-center justify-center text-xs m-1';
+                            rejectedRequest.textContent = requestId;
+                            rejectedRequestsContainer.appendChild(rejectedRequest);
+                            
+                            // 移除被拒绝的请求
+                            setTimeout(() => {
+                                rejectedRequest.remove();
+                            }, 1500);
+                            
+                            updateUI();
+                        }, 800);
+                    }
+                }, 300);
+            }
+            
+            // 发送突发请求
+            function sendBurstRequests() {
+                // 发送10个突发请求
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(sendRequest, i * 100); // 每个请求间隔100ms
+                }
+            }
+            
+            // 重置模拟
+            function resetSimulation() {
+                // 清除令牌生成间隔
+                clearInterval(tokenInterval);
+                
+                // 重置变量
+                currentTokens = bucketCapacity; // 重置为桶容量
+                totalRequests = 0;
+                processedRequests = 0;
+                rejectedRequests = 0;
+                processingQueue = []; // 清空队列
+                
+                // 清空元素
+                clientRequestsEl.innerHTML = '';
+                serverRequestsEl.innerHTML = '';
+                rejectedRequestsContainer.innerHTML = '';
+                
+                updateUI();
+                
+                // 重新启动令牌生成
+                startTokenGeneration();
+            }
+            
+            // 启动令牌生成
+            function startTokenGeneration() {
+                // 将秒/个转换为毫秒间隔
+                const tokenIntervalMs = tokenRate * 1000;
+                tokenInterval = setInterval(generateToken, tokenIntervalMs);
+            }
+            
+            // 事件监听
+            bucketCapacityInput.addEventListener('input', function() {
+                bucketCapacity = parseInt(this.value);
+                // 确保当前令牌数不超过新的桶容量
+                if (currentTokens > bucketCapacity) {
+                    currentTokens = bucketCapacity;
+                }
+                updateUI();
+            });
+            
+            tokenRateInput.addEventListener('input', function() {
+                tokenRate = parseInt(this.value);
+                
+                // 重新设置令牌生成间隔
+                clearInterval(tokenInterval);
+                startTokenGeneration();
+                
+                updateUI();
+            });
+            
+            sendRequestBtn.addEventListener('click', sendRequest);
+            sendBurstBtn.addEventListener('click', sendBurstRequests);
+            resetSimulationBtn.addEventListener('click', resetSimulation);
+            
+            // 初始化UI
+            updateUI();
+            
+            // 页面加载时自动开始生成令牌
+            startTokenGeneration();
+        });
+    </script>
+</body>
+</html>

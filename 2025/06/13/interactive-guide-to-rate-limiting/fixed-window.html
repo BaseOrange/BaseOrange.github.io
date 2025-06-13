@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>固定窗口计数器速率限制器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- 配置Tailwind自定义样式 -->
+    <script>
+      tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#10B981',
+            accent: '#8B5CF6',
+            danger: '#EF4444',
+            dark: '#1E293B',
+            light: '#F8FAFC'
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+            chinese: ['Noto Sans SC', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+
+    <style type="text/tailwindcss">
+      @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .btn-effect {
+        transition: all 0.2s ease;
+      }
+      .btn-effect:active {
+        transform: scale(0.95);
+      }
+      .request-animation {
+        animation: requestAppear 0.5s ease-in-out;
+      }
+      @keyframes requestAppear {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .window-animation {
+        animation: windowProgress 1s linear infinite;
+      }
+      @keyframes windowProgress {
+        0% { background-position: 0 0; }
+        100% { background-position: 20px 0; }
+      }
+      .request-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 10px;
+        z-index: 20;
+        transition: all 0.3s ease;
+      }
+      .window-container {
+        position: relative;
+        height: 100%;
+      }
+      .time-line {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #cbd5e1;
+      }
+      .window-rect {
+        position: absolute;
+        bottom: 0;
+        height: 80%;
+        background-color: rgba(59, 130, 246, 0.1);
+        border: 2px solid #3B82F6;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        z-index: 10;
+      }
+      .window-marker {
+        position: absolute;
+        bottom: 0;
+        height: 100%;
+        width: 2px;
+        background-color: #3B82F6;
+        z-index: 15;
+      }
+      .window-label {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        z-index: 25;
+      }
+    }
+  </style>
+
+    <!-- 引入中文字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="font-chinese bg-gradient-to-br from-light to-blue-50 min-h-screen text-dark">
+
+    <main class="container mx-auto px-4 py-8">
+      <!-- 英雄区域 -->
+      <section class="text-center mb-12">
+        <h2 class="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-dark mb-4 text-shadow">固定窗口计数器速率限制器</h2>
+        <p class="text-lg text-dark/70 max-w-2xl mx-auto mb-8">测试请求如何在定义的时间窗口内被处理。非常适合理解API设计中的速率限制机制。</p>
+
+        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 card-hover max-w-4xl mx-auto">
+          <!-- 控制区域 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-blue-50 p-4 rounded-xl">
+              <label for="windowLimit" class="block text-sm font-medium text-dark/80 mb-2">窗口限制 (请求数)</label>
+              <div class="flex items-center">
+                <input type="number" id="windowLimit" value="5" min="1" max="100"
+                     class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                <span class="ml-3 text-dark/70">
+                  <span id="windowLimitValue">5</span> 个请求/窗口
+                </span>
+              </div>
+            </div>
+
+            <div class="bg-green-50 p-4 rounded-xl">
+              <label for="windowDuration" class="block text-sm font-medium text-dark/80 mb-2">窗口持续时间 (毫秒)</label>
+              <div class="flex items-center">
+                <input type="number" id="windowDuration" value="3000" min="500" max="10000"
+                     class="w-full px-4 py-2 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
+                <span class="ml-3 text-dark/70">
+                  <span id="windowDurationValue">3000</span> 毫秒/窗口
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 操作按钮 -->
+          <div class="flex justify-center mb-8">
+            <button id="sendRequest" class="btn-effect bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-full shadow-lg shadow-primary/20 flex items-center">
+              <i class="fa fa-paper-plane mr-2"></i> 发送请求
+            </button>
+          </div>
+          <div class="relative">
+            <div class="w-full h-64 bg-gray-100 rounded-xl overflow-hidden">
+              <!-- 时间窗口可视化 -->
+              <div id="windowVisualization" class="h-full w-full"></div>
+            </div>
+          </div>
+
+
+          <!-- 请求时间线 -->
+          <div class="mb-8">
+            <h3 class="text-lg font-semibold mb-4 flex items-center">
+              <i class="fa fa-clock-o text-accent mr-2"></i> 请求时间线
+            </h3>
+            <div id="requestTimeline" class="space-y-2 max-h-60 overflow-y-auto pr-2">
+              <!-- 请求记录将在这里动态添加 -->
+            </div>
+          </div>
+
+          <!-- 当前窗口统计 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-purple-50 p-4 rounded-xl">
+              <h4 class="text-sm font-medium text-dark/80 mb-2">当前窗口</h4>
+              <div class="flex items-center">
+                <i class="fa fa-check-circle text-secondary mr-3"></i>
+                <span id="servedCount" class="text-2xl font-bold">0</span>
+                <span class="ml-2 text-dark/70">已处理</span>
+              </div>
+            </div>
+
+            <div class="bg-red-50 p-4 rounded-xl">
+              <h4 class="text-sm font-medium text-dark/80 mb-2">当前窗口</h4>
+              <div class="flex items-center">
+                <i class="fa fa-times-circle text-danger mr-3"></i>
+                <span id="rejectedCount" class="text-2xl font-bold">0</span>
+                <span class="ml-2 text-dark/70">已拒绝</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const sendRequestBtn = document.getElementById('sendRequest');
+            const windowLimitInput = document.getElementById('windowLimit');
+            const windowDurationInput = document.getElementById('windowDuration');
+            const windowLimitValue = document.getElementById('windowLimitValue');
+            const windowDurationValue = document.getElementById('windowDurationValue');
+            const requestTimeline = document.getElementById('requestTimeline');
+            const servedCount = document.getElementById('servedCount');
+            const rejectedCount = document.getElementById('rejectedCount');
+            const windowVisualization = document.getElementById('windowVisualization');
+            
+            // 速率限制器状态
+            let currentWindowStart = 0;
+            let requestCount = 0;
+            let servedRequests = 0;
+            let rejectedRequests = 0;
+            let requestHistory = []; // 存储所有请求的时间戳和状态
+            
+            // 更新UI显示的值
+            function updateDisplayValues() {
+              windowLimitValue.textContent = windowLimitInput.value;
+              windowDurationValue.textContent = windowDurationInput.value;
+            }
+            
+            // 初始化显示值
+            updateDisplayValues();
+            
+            // 输入框变化事件
+            windowLimitInput.addEventListener('input', updateDisplayValues);
+            windowDurationInput.addEventListener('input', updateDisplayValues);
+            
+            // 发送请求处理函数
+            sendRequestBtn.addEventListener('click', handleRequest);
+            
+            // 处理请求
+            function handleRequest() {
+              const now = Date.now();
+              const windowDuration = parseInt(windowDurationInput.value);
+              const windowLimit = parseInt(windowLimitInput.value);
+              
+              // 检查是否需要重置窗口
+              if (currentWindowStart === 0 || now - currentWindowStart > windowDuration) {
+                // 重置窗口
+                currentWindowStart = now;
+                requestCount = 0;
+              }
+              
+              let isServed = false;
+              
+              // 检查请求是否超过限制
+              if (requestCount < windowLimit) {
+                // 处理请求
+                requestCount++;
+                servedRequests++;
+                isServed = true;
+                
+                // 更新统计
+                servedCount.textContent = servedRequests;
+              } else {
+                // 拒绝请求
+                rejectedRequests++;
+                
+                // 更新统计
+                rejectedCount.textContent = rejectedRequests;
+              }
+              
+              // 记录请求
+              requestHistory.push({
+                timestamp: now,
+                isServed: isServed
+              });
+              
+              // 添加请求到时间线
+              addRequestToTimeline(isServed, now);
+              
+              // 更新窗口可视化
+              updateWindowVisualization(now, windowDuration, windowLimit, requestCount);
+            }
+            
+            // 添加请求到时间线
+            function addRequestToTimeline(isServed, timestamp) {
+              const requestItem = document.createElement('div');
+              requestItem.className = `request-animation flex items-center p-3 rounded-lg ${isServed ? 'bg-green-50 border-l-4 border-green-500' : 'bg-red-50 border-l-4 border-red-500'}`;
+              
+              const timeStr = new Date(timestamp).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                millisecond: '3-digit'
+              });
+              
+              requestItem.innerHTML = `
+                <span class="text-sm font-medium mr-3">${timeStr}</span>
+                <i class="fa fa-${isServed ? 'check' : 'times'} text-${isServed ? 'secondary' : 'danger'} mr-2"></i>
+                <span class="text-dark/80">${isServed ? '请求已处理' : '请求已拒绝'}</span>
+              `;
+              
+              requestTimeline.prepend(requestItem);
+              
+              // 限制时间线长度
+              if (requestTimeline.children.length > 20) {
+                requestTimeline.removeChild(requestTimeline.lastChild);
+              }
+            }
+            
+            // 更新窗口可视化
+            function updateWindowVisualization(currentTime, windowDuration, windowLimit, currentRequests) {
+              const visualizationWidth = windowVisualization.offsetWidth;
+              const windowElapsed = currentTime - currentWindowStart;
+              const elapsedPercentage = (windowElapsed / windowDuration) * 100;
+              
+              // 清空并重新绘制可视化
+              windowVisualization.innerHTML = `
+                <div class="window-container">
+                  <!-- 时间线 -->
+                  <div class="time-line"></div>
+                  
+                  <!-- 窗口矩形 -->
+                  <div class="window-rect" style="left: 0; width: 100%"></div>
+                  
+                  <!-- 当前时间标记 -->
+                  <div class="window-marker" style="left: ${elapsedPercentage}%"></div>
+                  
+                  <!-- 窗口标签 -->
+                  <div class="window-label">${currentRequests}/${windowLimit} 请求</div>
+                  
+                  <!-- 请求点 -->
+                  ${requestHistory.map((request, index) => {
+                    // 计算请求在时间线上的位置
+                    const position = ((request.timestamp - currentWindowStart) / windowDuration) * 100;
+                    
+                    // 只显示当前窗口内的请求
+                    if (request.timestamp >= currentWindowStart && request.timestamp <= currentTime) {
+                      return `
+                        <div class="request-dot ${request.isServed ? 'bg-secondary' : 'bg-danger'}" 
+                             style="left: ${position}%; 
+                                    ${request.isServed ? 'box-shadow: 0 0 8px rgba(16, 185, 129, 0.7)' : 'box-shadow: 0 0 8px rgba(239, 68, 68, 0.7)'}"
+                             title="${new Date(request.timestamp).toLocaleTimeString([], {
+                               hour: '2-digit',
+                               minute: '2-digit',
+                               second: '2-digit',
+                               millisecond: '3-digit'
+                             })} - ${request.isServed ? '已处理' : '已拒绝'}">
+                        </div>
+                      `;
+                    }
+                    return '';
+                  }).join('')}
+                </div>
+              `;
+              
+              // 自动刷新可视化，使窗口和请求点保持移动
+              requestAnimationFrame(() => {
+                updateWindowVisualization(Date.now(), windowDuration, windowLimit, currentRequests);
+              });
+            }
+            
+            // 滚动时导航栏效果
+            window.addEventListener('scroll', function() {
+              const header = document.querySelector('header');
+              if (window.scrollY > 10) {
+                header.classList.add('py-2', 'shadow-md');
+                header.classList.remove('py-3', 'shadow-sm');
+              } else {
+                header.classList.add('py-3', 'shadow-sm');
+                header.classList.remove('py-2', 'shadow-md');
+              }
+            });
+          });
+    </script>
+  </body>
+</html>

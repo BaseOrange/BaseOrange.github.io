@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>漏水桶算法速率限制模拟器</title>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @theme {
+      --color-primary: #3b82f6;
+      --color-secondary: #10b981;
+      --color-danger: #ef4444;
+      --color-dark: #1e293b;
+      --color-light: #f8fafc;
+      --font-inter: 'Inter', sans-serif;
+    }
+    
+    @utility pulse-animation {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+    
+    .bucket {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .bucket::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 20px;
+      background-color: #94a3b8;
+      border-radius: 5px;
+      z-index: -1;
+    }
+    
+    .token {
+      width: 20px;
+      height: 20px;
+      background-color: var(--color-primary);
+      border-radius: 50%;
+      position: absolute;
+      animation: fall 0.5s ease forwards;
+    }
+    
+    @keyframes fall {
+      0% {
+        top: -20px;
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        top: calc(100% - 20px);
+        opacity: 1;
+      }
+    }
+    
+    .request-animation {
+      animation: move-right 0.5s ease forwards;
+    }
+    
+    @keyframes move-right {
+      0% {
+        right: 0;
+      }
+      100% {
+        right: 100%;
+      }
+    }
+    
+    .overflow-indicator {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 10px;
+      background-color: var(--color-danger);
+      border-radius: 5px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .bucket.overflow .overflow-indicator {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="font-inter bg-light text-dark min-h-screen">
+  <div class="container mx-auto p-4 max-w-6xl">
+    <!-- 标题部分 -->
+    <header class="text-center mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">漏水桶算法速率限制模拟器</h1>
+      <p class="text-gray-600 max-w-2xl mx-auto">可视化演示漏水桶算法如何控制流量速率，请求增加桶内占用，满桶时新请求被丢弃</p>
+    </header>
+    
+    <!-- 主要内容区域 -->
+    <main class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+      <!-- 客户端部分 -->
+      <section class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-primary">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-client fa-2x text-primary mr-3"></i>
+          <h2 class="text-xl font-bold">客户端</h2>
+        </div>
+        <p class="text-gray-600 mb-4">发送请求到系统，设置请求速率</p>
+        
+        <div class="space-y-4">
+          <div>
+            <label for="requestRate" class="block text-sm font-medium text-gray-700 mb-1">请求速率 (请求/秒)</label>
+            <input type="number" id="requestRate" value="1" min="1" max="20" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+          </div>
+          
+          <button id="sendRequest" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center">
+            <i class="fas fa-paper-plane mr-2"></i> 发送请求
+          </button>
+        </div>
+      </section>
+      
+      <!-- 漏水桶部分 -->
+      <section class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center relative">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-tint fa-2x text-secondary mr-3"></i>
+          <h2 class="text-xl font-bold">漏水桶</h2>
+        </div>
+        <p class="text-gray-600 mb-6 text-center">存储请求并按固定速率处理，桶满时新请求被丢弃</p>
+        
+        <!-- 水桶可视化 -->
+        <div class="bucket w-48 h-60 border-4 border-secondary rounded-t-2xl rounded-b-none relative mb-6">
+          <div class="overflow-indicator"></div>
+          <div id="bucketTokens" class="absolute bottom-0 left-0 w-full h-0 bg-secondary/30 rounded-t-2xl transition-all duration-300"></div>
+          <div class="absolute top-0 left-0 w-full p-2 text-center text-secondary font-bold">
+            <span id="currentTokens">0</span>/<span id="bucketSize">10</span> 请求
+          </div>
+        </div>
+        
+        <div class="space-y-3 w-full">
+          <div>
+            <label for="bucketSizeInput" class="block text-sm font-medium text-gray-700 mb-1">水桶容量</label>
+            <input type="number" id="bucketSizeInput" value="10" min="1" max="100" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent">
+          </div>
+          
+          <div>
+            <label for="processRate" class="block text-sm font-medium text-gray-700 mb-1">处理速率 (请求/秒)</label>
+            <input type="number" id="processRate" value="1" min="0" max="10" step="0.1"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent">
+          </div>
+        </div>
+
+<!--         <div id="requestStatus" class="mt-4 p-3 rounded-md hidden">
+            <p id="statusText" class="text-sm"></p>
+        </div> -->
+      </section>
+      
+      <!-- 服务器部分 -->
+      <section class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-danger">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-server fa-2x text-danger mr-3"></i>
+          <h2 class="text-xl font-bold">服务器</h2>
+        </div>
+        <p class="text-gray-600 mb-4">接收处理后的请求，显示统计信息</p>
+        
+        <div class="space-y-4">
+          <div class="bg-gray-50 p-3 rounded-md">
+            <h3 class="text-sm font-medium text-gray-700 mb-1">请求状态</h3>
+            <p id="serverStatus" class="text-sm text-gray-600">-</p>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-gray-50 p-3 rounded-md">
+              <h3 class="text-xs font-medium text-gray-500 mb-1">已处理</h3>
+              <p id="processedRequests" class="text-lg font-bold text-secondary">0</p>
+            </div>
+            <div class="bg-gray-50 p-3 rounded-md">
+              <h3 class="text-xs font-medium text-gray-500 mb-1">已丢弃</h3>
+              <p id="droppedRequests" class="text-lg font-bold text-danger">0</p>
+            </div>
+          </div>
+          
+          <button id="resetStats" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors duration-200">
+            <i class="fas fa-redo mr-2"></i> 重置统计
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 初始化变量（桶初始为空）
+      let bucketSize = 10;
+      let processRate = 1;
+      let currentRequests = 0;
+      let processedRequests = 0;
+      let droppedRequests = 0;
+      let processInterval;
+      let tokenElements = [];
+      
+      // DOM元素
+      const bucketSizeInput = document.getElementById('bucketSizeInput');
+      const processRateInput = document.getElementById('processRate');
+      const currentRequestsEl = document.getElementById('currentTokens');
+      const bucketSizeEl = document.getElementById('bucketSize');
+      const processedRequestsEl = document.getElementById('processedRequests');
+      const droppedRequestsEl = document.getElementById('droppedRequests');
+      const serverStatusEl = document.getElementById('serverStatus');
+      const sendRequestBtn = document.getElementById('sendRequest');
+      const resetStatsBtn = document.getElementById('resetStats');
+      const statusTextEl = document.getElementById('statusText');
+      const bucketTokensEl = document.getElementById('bucketTokens');
+      const bucketEl = document.querySelector('.bucket');
+      
+      // 更新水桶显示
+      function updateBucketDisplay() {
+        const heightPercent = (currentRequests / bucketSize) * 100;
+        bucketTokensEl.style.height = `${heightPercent}%`;
+        currentRequestsEl.textContent = currentRequests;
+        
+        // 显示溢出状态
+        bucketEl.classList.toggle('overflow', currentRequests >= bucketSize);
+      }
+      
+      // 处理桶中的请求（模拟漏水）
+      function processBucketRequests() {
+        if (currentRequests > 0) {
+          currentRequests--;
+          processedRequests++;
+          processedRequestsEl.textContent = processedRequests;
+          updateBucketDisplay();
+        }
+      }
+      
+      // 发送请求到桶中
+      function sendRequests(quantity) {
+        let accepted = 0;
+        let dropped = 0;
+        
+        // 尝试将请求放入桶中
+        for (let i = 0; i < quantity; i++) {
+          if (currentRequests < bucketSize) {
+            currentRequests++;
+            accepted++;
+          } else {
+            dropped++;
+          }
+        }
+        
+        // 更新显示
+        updateBucketDisplay();
+        droppedRequests += dropped;
+        droppedRequestsEl.textContent = droppedRequests;
+        
+
+        
+        // 显示请求动画
+        for (let i = 0; i < quantity; i++) {
+          setTimeout(() => showRequestAnimation(i < accepted), i * 100);
+        }
+        
+        // 隐藏状态提示
+        setTimeout(() => {
+          requestStatusEl.classList.add('hidden');
+        }, 3000);
+      }
+      
+      // 显示请求动画
+      function showRequestAnimation(accepted) {
+        const clientSection = document.querySelector('.grid-cols-1.md\\:grid-cols-3 > div:first-child');
+        const bucketSection = document.querySelector('.grid-cols-1.md\\:grid-cols-3 > div:nth-child(2)');
+        
+        const clientRect = clientSection.getBoundingClientRect();
+        const bucketRect = bucketSection.getBoundingClientRect();
+        const containerRect = clientSection.parentElement.getBoundingClientRect();
+        
+        const request = document.createElement('div');
+        request.classList.add('request-animation', 'absolute', 'w-4', 'h-4', 'rounded-full', 'z-10');
+        
+        // 已接受请求显示为绿色，丢弃请求显示为红色
+        request.style.backgroundColor = accepted ? '#10b981' : '#ef4444';
+        request.style.top = `${clientRect.top - containerRect.top + clientRect.height / 2 - 2}px`;
+        request.style.right = '0';
+        
+        clientSection.parentElement.appendChild(request);
+        
+        // 动画结束后移除元素
+        setTimeout(() => {
+          request.remove();
+        }, 500);
+      }
+      
+      // 重置统计数据
+      function resetStats() {
+        currentRequests = 0;
+        processedRequests = 0;
+        droppedRequests = 0;
+        currentRequestsEl.textContent = '0';
+        processedRequestsEl.textContent = '0';
+        droppedRequestsEl.textContent = '0';
+        serverStatusEl.textContent = '-';
+        updateBucketDisplay();
+      }
+      
+      // 启动请求处理
+      function startProcessing() {
+        if (processInterval) clearInterval(processInterval);
+        processInterval = setInterval(processBucketRequests, 1000 / processRate);
+      }
+      
+      // 事件监听器
+      bucketSizeInput.addEventListener('change', function() {
+        bucketSize = parseInt(this.value);
+        bucketSize = Math.max(1, Math.min(100, bucketSize));
+        this.value = bucketSize;
+        bucketSizeEl.textContent = bucketSize;
+        
+        // 确保当前请求不超过新容量
+        currentRequests = Math.min(currentRequests, bucketSize);
+        updateBucketDisplay();
+      });
+      
+      processRateInput.addEventListener('change', function() {
+        processRate = parseFloat(this.value);
+        processRate = Math.max(0, Math.min(10, processRate));
+        this.value = processRate.toFixed(1);
+        
+        startProcessing();
+      });
+      
+      sendRequestBtn.addEventListener('click', function() {
+        const rate = parseInt(document.getElementById('requestRate').value);
+        sendRequests(rate);
+      });
+      
+      resetStatsBtn.addEventListener('click', resetStats);
+      
+      // 初始化（桶初始为空）
+      updateBucketDisplay();
+      startProcessing();
+    });
+  </script>
+</body>
+</html>
