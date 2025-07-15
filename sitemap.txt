@@ -1,3 +1,5 @@
+https://log.660066.xyz/2025/07/15/zst-computer-system-notes/
+https://log.660066.xyz/2025/07/15/soft-exam-software-designer-zst-album-notes/
 https://log.660066.xyz/2025/06/13/interactive-guide-to-rate-limiting/
 https://log.660066.xyz/2025/05/06/world-go-to-see-2/
 https://log.660066.xyz/2025/05/21/macos-jdk-version-switch/
@@ -77,3 +79,4 @@ https://log.660066.xyz/tags/%E9%9A%8F%E6%89%8B%E8%AE%B0/
 https://log.660066.xyz/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/
 https://log.660066.xyz/tags/%E9%94%81/
 https://log.660066.xyz/tags/onlyoffice/
+https://log.660066.xyz/tags/%E8%BD%AF%E8%80%83/
