@@ -1,3 +1,4 @@
+https://log.660066.xyz/links/index.html
 https://log.660066.xyz/2025/07/15/soft-exam-software-designer-zst-album-notes/
 https://log.660066.xyz/2025/07/15/zst-computer-system-notes/
 https://log.660066.xyz/2025/06/13/interactive-guide-to-rate-limiting/
@@ -12,7 +13,6 @@ https://log.660066.xyz/2025/03/14/onlyoffice-compile/
 https://log.660066.xyz/PFM/index.html
 https://log.660066.xyz/2025/01/06/2024-summary/
 https://log.660066.xyz/2024/04/20/%E4%B8%96%E7%95%8C%E8%BF%99%E4%B9%88%E5%A4%A7%E6%88%91%E6%83%B3%E5%8E%BB%E7%9C%8B%E7%9C%8B-1/
-https://log.660066.xyz/links/index.html
 https://log.660066.xyz/2024/11/22/mac-env-var/
 https://log.660066.xyz/2023/08/03/2023%E5%B9%B47%E6%9C%88Java%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/
 https://log.660066.xyz/2023/10/16/2FA%E4%B8%8EMFA%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/
