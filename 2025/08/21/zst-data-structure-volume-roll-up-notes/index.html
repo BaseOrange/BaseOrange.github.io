@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/o.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/o.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/o.png">
+  <link rel="mask-icon" href="/images/o.svg" color="#222">
+  <meta name="google-site-verification" content="JyJm6tHJ1q5mhbqwbRl4KEUE_ms1dc_9MJ0G0GIHnq8">
+  <meta name="baidu-site-verification" content="codeva-tXW0RgD5OZ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"log.660066.xyz","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"onmobile":false,"dimmer":true},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="【软考zst2001专辑笔记】003数据结构-上卷">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【软考zst2001专辑笔记】003数据结构-上卷">
+<meta property="og:url" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/index.html">
+<meta property="og:site_name" content="大橙子">
+<meta property="og:description" content="【软考zst2001专辑笔记】003数据结构-上卷">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407027244-e35e7d76-407a-495a-b986-bb60737733f8.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407237453-2fd1fc9d-ab49-4175-9721-c3bb8b5c6133.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407255524-7712c8e1-dac6-4c57-8cd9-8ec311bef9c9.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407272409-768f1f0d-a3bf-417d-9608-0d32649ceb3d.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407287442-6c82abe6-3351-4f18-8525-d200f7af6bf5.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407304859-edb98d84-c4cf-4738-8e1e-c6121cafe5c0.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407320826-78134547-5ea4-4189-b4a2-742bd8ae15e5.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407573375-da4895d9-a10e-4b3c-9465-faab32fccbd1.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754408011939-49169003-b7e5-43ca-9792-0d2c9e673556.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754408464435-b8d50b81-f757-4282-8515-a86d9a5cadc2.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754408445279-b6b85a49-cdf5-433e-a275-80512ea7af34.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754986403014-82d01c6e-66ac-4391-9c9a-429a920cd14d.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754986569650-e2ee665b-c1ef-454b-a16c-96418c5daf7d.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754987160860-793b2d92-4482-4b92-aa7c-1572654efbc1.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754987493922-98346a78-e075-4241-932f-1aa51a387dc0.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754987966760-8c5e0fca-5311-4ea5-9db4-905737ed5e96.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754988025073-1a2f5c14-97a2-405e-b6b6-db51e8b69bd0.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754987987595-22350516-73ed-4927-a777-84191eb17691.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755497915439-c5ef434c-d352-4e62-ab24-39ca78b15b50.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755501050170-6184df72-4c8d-4d9c-9a4a-3d8eca9714e1.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755504250266-ed4f1bd1-40ce-4674-a8a9-dbcfa58d2639.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755504447152-90f38e7d-6432-48b9-bab0-ebca8ef59d04.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755505362893-60f07965-ff56-4a48-b817-16076aefc81c.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755505854018-c7893107-08d3-49e4-b502-1b28040838b4.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755508385541-0591fad8-63d3-4eb0-a656-30e6ffb5d6b9.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755509318055-51303399-8ffe-4f0f-8c68-e795ef26d2f7.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510059838-08e0b68d-7008-47ba-9a62-5272f977117f.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510059838-08e0b68d-7008-47ba-9a62-5272f977117f-20250821085653936.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510059838-08e0b68d-7008-47ba-9a62-5272f977117f-20250821085656564.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510059838-08e0b68d-7008-47ba-9a62-5272f977117f-20250821085658683.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510513643-c6fc5932-1331-4b32-b5ea-ad6bb26ef977.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510520200-f052d738-6828-43c4-bdca-90efaa856b14.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510530829-aeeca3f5-396f-4184-9299-c4b34ee3614e.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510538283-46f9afb4-1eff-4ff1-bb55-86e868e21c91.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510547102-86faef93-f97f-4cde-adbe-431cd782a552.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510568546-5198eb83-3a9c-4442-92a2-efe7695c0c73.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510578175-f71c7f83-f037-4d75-9227-a2322c40e8c9.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510513643-c6fc5932-1331-4b32-b5ea-ad6bb26ef977-20250821085927805.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510649890-76fcaa86-dd61-4b43-9d24-b5602da91202.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510658277-2284e9e8-5b9b-466c-a903-75eabe1a6109.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510675469-10a70e27-b76e-46e5-8b30-7d09a947d32f.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510684434-ed9a3ea7-827d-4bcc-98f7-b60060e340a4.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510691650-7fcb96b4-940f-483b-ac3e-e8cfd4387e02.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510760318-7bf27db6-f88b-4b1e-9bb3-171069ff84c4.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510771398-22d72035-9a0c-4766-9d4f-caeb9d1b6924.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510781348-f7be26e7-c29d-40a7-b5aa-adfa0fb304ee.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510797455-b5b9d84b-6835-4463-bfeb-e202b7026eff.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510810083-ad8990c1-f652-4a9c-a19c-7c7b62e898c8.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510819992-4345c2c9-a591-4c91-84fe-8aa5a7e774fa.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510828320-1bdab794-108c-43ab-b94a-2a8da22491ee.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511339211-a6902725-c190-4e9d-8896-0f23690831a8.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511464058-a511ab6c-49f9-4e74-8faf-13d895aaecdb.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511472091-db70a3b0-29bd-41dc-9d0f-156ddc236600.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511478656-243c0b57-6f87-47f4-89c4-2e14056e7047.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511486008-d9bef579-bb37-431c-9883-0bed24ec13a6.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511498278-5c8b50ef-8af4-4c93-9ce0-35f2e6e260c6.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511508085-4f7c5749-5d4d-4310-abf5-7fc7ee93ecfe.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511519367-99d4c293-a10c-45da-8234-1c08c9637374.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511529570-13665ce7-7d62-4cb1-9b59-5ab70aac96bc.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511541056-fc825ca0-a1bd-4d4a-a21b-e4efa78d6169.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512061342-f4c4027a-9a4b-40c7-8fd0-c1ac3bb6480b.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512797386-cf1220e7-fc09-4a19-82b0-d6359821cad7.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512867611-72a3d06c-323e-4e13-a956-a750cea0e560.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512899194-b2f76c19-53a1-410e-b046-dec6c26821da.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512957705-899c4605-d2f7-4478-8b75-014b7965b069.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512985382-621b6ba0-9ef3-4f8e-b355-78051209808a.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755586218753-23212104-196c-4c07-911a-21de8ad92bbf.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755586562108-8abf4665-2d32-4cac-9a81-ae4908da27c7.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755587188334-eacd9845-d03c-4819-8706-3f6f9a2ab6f2.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755587456653-b4b007da-b73c-417f-942c-146b1c4d3005.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755587539524-2abb70da-1a2e-4f90-9029-f8c565bcc7a0.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755587681964-974f2d48-aef7-466e-bd01-461f953e73ec.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755596915715-5597e6ee-4bbf-4c09-b94d-55698d525011.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755657471426-fa6741fe-9189-47a4-9d7a-93e414a18955.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755658086248-893067fc-c557-47e6-9017-2560028902ce.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755659633619-a3a53d4d-75ec-4c57-a132-8e5abe58d49e.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755674210642-9769d059-aea4-414e-8824-4634750c6433.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755679556062-50345f03-e279-4b99-9847-a6cbbbb3ab9c.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1755736551834-5f091605-c2ee-4569-911f-5b2c01460bdf.png">
+<meta property="article:published_time" content="2025-08-21T00:48:43.000Z">
+<meta property="article:modified_time" content="2025-08-21T01:36:45.825Z">
+<meta property="article:author" content="BigOrange">
+<meta property="article:tag" content="软考">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407027244-e35e7d76-407a-495a-b986-bb60737733f8.png">
+
+
+<link rel="canonical" href="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/","path":"2025/08/21/zst-data-structure-volume-roll-up-notes/","title":"【软考zst2001专辑笔记】003数据结构-上卷"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【软考zst2001专辑笔记】003数据结构-上卷 | 大橙子</title>
+  
+
+
+
+
+
+
+
+  <script defer data-domain="660066.xyz" src="https://plausible.io/js/script.js"></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha512-fHwaWebuwA7NSF5Qg/af4UeDx9XqUpYpOGgubo3yWu+b2IQR4UeQwbb42Ti7gVAjNtVoI/I9TEoYeu9omwcC6g==" crossorigin="anonymous" referrerpolicy="no-referrer" /><!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="大橙子" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="大橙子" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">大橙子</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-工具箱"><a href="/tools/" rel="section"><i class="fa fa-flask fa-fw"></i>工具箱</a></li><li class="menu-item menu-item-友情链接"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友情链接</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E5%A4%A7o%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-text"> 一、大O表示法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text"> 二、时间复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text"> 三、空间复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B-%E6%B8%90%E8%BF%9B%E7%AC%A6%E5%8F%B7"><span class="nav-text"> 四、渐进符号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94-%E9%80%92%E5%BD%92%E5%BC%8F%E6%97%B6%E9%97%B4-%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text"> 五、递归式时间、空间复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD-%E9%80%92%E5%BD%92%E5%BC%8F%E4%B8%BB%E6%96%B9%E6%B3%95"><span class="nav-text"> 六、递归式主方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83-%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E4%B8%8E%E7%BA%BF%E6%80%A7%E8%A1%A8%E5%AE%9A%E4%B9%89"><span class="nav-text"> 七、线性结构与线性表定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#71-%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8"><span class="nav-text"> 7.1 线性表的顺序存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#72-%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5-%E5%88%A0%E9%99%A4-%E6%9F%A5%E6%89%BE%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text"> 7.2 顺序表的插入、删除、查找时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#73-%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8"><span class="nav-text"> 7.3 顺序表的链式存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#74-%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5-%E5%88%A0%E9%99%A4-%E6%9F%A5%E6%89%BE%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text"> 7.4 单链表的插入、删除、查找时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#75-%E5%BE%AA%E7%8E%AF%E5%8D%95%E9%93%BE%E8%A1%A8-%E5%8F%8C%E9%93%BE%E8%A1%A8"><span class="nav-text"> 7.5 循环单链表、双链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AB-%E6%A0%88%E7%9B%B8%E5%85%B3"><span class="nav-text"> 八、栈相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#81-%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8"><span class="nav-text"> 8.1 栈的顺序存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#82-%E6%A0%88%E7%9A%84%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8"><span class="nav-text"> 8.2 栈的链式存储</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%9D-%E9%98%9F%E5%88%97%E7%9B%B8%E5%85%B3"><span class="nav-text"> 九、队列相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#91-%E9%98%9F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E4%B8%8E%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97"><span class="nav-text"> 9.1 队列的顺序存储与循环队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#92-%E9%98%9F%E5%88%97%E7%9A%84%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8%E4%B8%8E%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="nav-text"> 9.2 队列的链式存储与双端队列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81-%E4%B8%B2%E7%9B%B8%E5%85%B3"><span class="nav-text"> 十、串相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#101-%E4%B8%B2%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%9C%B4%E7%B4%A0%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D"><span class="nav-text"> 10.1 串的模式匹配与朴素模式匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#102-%E6%89%8B%E7%AE%97next%E6%95%B0%E7%BB%84%E5%80%BC"><span class="nav-text"> 10.2 手算next数组值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%B8%80-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3"><span class="nav-text"> 十一、数组相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#111-%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-text"> 11.1 一维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#112-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-text"> 11.2 二维数组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C-%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3"><span class="nav-text"> 十二、矩阵相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#121-%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5"><span class="nav-text"> 12.1 对称矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#122-%E4%B8%89%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5"><span class="nav-text"> 12.2 三对角矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#123-%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5"><span class="nav-text"> 12.3 稀疏矩阵</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%B8%89-%E6%A0%91%E7%9B%B8%E5%85%B3"><span class="nav-text"> 十三、树相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#131%E5%B1%9E%E6%80%A7%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text"> 13.1属性结构与树的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#132-%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text"> 13.2 树的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#133-%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-text"> 13.3 树的性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#134-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text"> 13.4 二叉树的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#135-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-text"> 13.5 二叉树的性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#136-%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text"> 13.6 满二叉树与完全二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#137-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8"><span class="nav-text"> 13.7 二叉树顺序存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#138-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8"><span class="nav-text"> 13.8 二叉树链式存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#139-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86"><span class="nav-text"> 13.9 二叉树遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1310-%E6%A0%B9%E6%8D%AE%E9%81%8D%E5%8E%86%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text"> 13.10 根据遍历构造二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1311-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text"> 13.11 平衡二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1312-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text"> 13.12 二叉排序树的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1313-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0"><span class="nav-text"> 13.13 二叉排序树的构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1314-%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%A0%91%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E5%AE%9A%E4%B9%89%E5%92%8C%E6%A6%82%E5%BF%B5"><span class="nav-text"> 13.14 最优二叉树（哈夫曼树）定义和概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1315-%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9E%84%E9%80%A0"><span class="nav-text"> 13.15 最优二叉树构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1316-%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81%E5%AE%9A%E4%B9%89"><span class="nav-text"> 13.16 哈夫曼编码定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1317-%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81%E5%8E%8B%E7%BC%A9%E6%AF%94"><span class="nav-text"> 13.17 哈夫曼编码压缩比.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1318-%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9A%E4%B9%89%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BA%86%E8%A7%A3%E5%8D%B3%E5%8F%AF"><span class="nav-text"> 13.18 线索二叉树定义【应该是了解即可】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1319-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%B1%BB%E5%88%AB"><span class="nav-text"> 13.19 二叉树类别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E5%9B%9B-%E5%9B%BE%E7%9B%B8%E5%85%B3"><span class="nav-text"> 十四、图相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#141-%E5%9B%BE%E5%BD%A2%E7%BB%93%E6%9E%84%E4%B8%8E%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text"> 14.1 图形结构与图的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#142-%E6%9C%89%E5%90%91%E5%9B%BE%E5%92%8C%E6%97%A0%E5%90%91%E5%9B%BE"><span class="nav-text"> 14.2 有向图和无向图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#143-%E5%AE%8C%E5%85%A8%E5%9B%BE"><span class="nav-text"> 14.3 完全图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#144-%E9%A1%B6%E7%82%B9%E7%9A%84%E5%BA%A6"><span class="nav-text"> 14.4 顶点的度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#145-%E8%B7%AF%E5%BE%84"><span class="nav-text"> 14.5 路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#146-%E8%BF%9E%E9%80%9A%E5%9B%BE%E4%B8%8E%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%9B%BE"><span class="nav-text"> 14.6 连通图与强连通图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#147-%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="nav-text"> 14.7 邻接矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#148-%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="nav-text"> 14.8 邻接表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#149-%E7%A8%A0%E5%AF%86%E5%9B%BE%E5%92%8C%E7%A8%80%E7%96%8F%E5%9B%BE"><span class="nav-text"> 14.9 稠密图和稀疏图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1410-%E7%BD%91"><span class="nav-text"> 14.10 网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1411-%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-text"> 14.11 图的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1412-%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86"><span class="nav-text"> 14.12 深度优先遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1413-%E6%B7%B1%E5%BA%A6%E9%81%8D%E5%8E%86-%E5%B9%BF%E5%BA%A6%E9%81%8D%E5%8E%86%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text"> 14.13 深度遍历、广度遍历的时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1414-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="nav-text"> 14.14 拓扑排序</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">BigOrange</p>
+  <div class="site-description" itemprop="description">新的斗争开始了<br/>A new struggle has begun</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://log.660066.xyz/2025/08/21/zst-data-structure-volume-roll-up-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="BigOrange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大橙子">
+      <meta itemprop="description" content="新的斗争开始了<br/>A new struggle has begun">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【软考zst2001专辑笔记】003数据结构-上卷 | 大橙子">
+      <meta itemprop="description" content="【软考zst2001专辑笔记】003数据结构-上卷">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【软考zst2001专辑笔记】003数据结构-上卷
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-08-21 08:48:43 / 修改时间：09:36:45" itemprop="dateCreated datePublished" datetime="2025-08-21T08:48:43+08:00">2025-08-21</time>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">【软考zst2001专辑笔记】003数据结构-上卷</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="一-大o表示法"><a class="markdownIt-Anchor" href="#一-大o表示法"></a> 一、大O表示法</h1>
+<p>算法时间复杂度：以算法中基本操作重复执行的次数（简称频度）作为算法的时间度量。</p>
+<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407027244-e35e7d76-407a-495a-b986-bb60737733f8.png" style="zoom:50%;">
+<p>加法规则：多项相加，保留最高阶项，并将系数化为1</p>
+<p>乘法法则：多项相乘都保留，系数化为1</p>
+<p>加法乘法混合规则：先小括号 再乘法规则 最后加法规则</p>
+<h1 id="二-时间复杂度"><a class="markdownIt-Anchor" href="#二-时间复杂度"></a> 二、时间复杂度</h1>
+<p>例子：</p>
+<ul>
+<li>O(1)：<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407237453-2fd1fc9d-ab49-4175-9721-c3bb8b5c6133.png" style="zoom:50%;"></li>
+<li>O(log<sub>2</sub>n)：<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407255524-7712c8e1-dac6-4c57-8cd9-8ec311bef9c9.png" style="zoom:50%;"></li>
+<li>O(n)：<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407272409-768f1f0d-a3bf-417d-9608-0d32649ceb3d.png" style="zoom:50%;"></li>
+<li>O(nlog<sub>2</sub>n)：<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407287442-6c82abe6-3351-4f18-8525-d200f7af6bf5.png" style="zoom:50%;"></li>
+<li>O(n<sup>2</sup>)：<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407304859-edb98d84-c4cf-4738-8e1e-c6121cafe5c0.png" style="zoom:50%;"></li>
+<li>O(n<sup>3</sup>)：<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407320826-78134547-5ea4-4189-b4a2-742bd8ae15e5.png" style="zoom:50%;"></li>
+</ul>
+<h1 id="三-空间复杂度"><a class="markdownIt-Anchor" href="#三-空间复杂度"></a> 三、空间复杂度</h1>
+<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754407573375-da4895d9-a10e-4b3c-9465-faab32fccbd1.png" style="zoom:50%;">
+<p>T(n) = n<sup>2</sup> = O(n<sup>2</sup>)</p>
+<h1 id="四-渐进符号"><a class="markdownIt-Anchor" href="#四-渐进符号"></a> 四、渐进符号</h1>
+<ol>
+<li><strong>渐进上界</strong>
+<ul>
+<li><strong>符号</strong>: <code>O</code></li>
+<li><strong>含义</strong>: <code>f(n)</code> 的增长速度<strong>至多</strong>与 <code>g(n)</code> 一样快（或更慢）。它给出了函数 <code>f(n)</code> 的一个<strong>上界</strong>。常用于描述算法的<strong>最坏情况</strong>时间复杂度。</li>
+<li><strong>类比</strong>: <code>f(n) ≤ g(n)</code> (在渐进意义上)。</li>
+</ul>
+</li>
+<li><strong>渐进下界</strong>
+<ul>
+<li><strong>符号</strong>: <code>Ω</code></li>
+<li><strong>含义</strong>: <code>f(n)</code> 的增长速度<strong>至少</strong>与 <code>g(n)</code> 一样快（或更快）。它给出了函数 <code>f(n)</code> 的一个<strong>下界</strong>。常用于描述算法的<strong>最好情况</strong>时间复杂度。</li>
+<li><strong>类比</strong>: <code>f(n) ≥ g(n)</code> (在渐进意义上)。</li>
+</ul>
+</li>
+<li>**渐进紧致界 **
+<ul>
+<li><strong>符号</strong>: <code>Θ</code></li>
+<li><strong>含义</strong>: <code>f(n)</code> 的增长速度<strong>精确地</strong>与 <code>g(n)</code> 一样快。它同时是 <code>f(n)</code> 的上界和下界，因此是一个<strong>紧致界</strong>。当算法的最好情况和最坏情况复杂度相同时，常用 <code>Θ</code> 来描述其<strong>平均情况</strong>或<strong>精确</strong>的时间复杂度。</li>
+<li><strong>类比</strong>: <code>f(n) = g(n)</code> (在渐进意义上)。</li>
+</ul>
+</li>
+</ol>
+<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754408011939-49169003-b7e5-43ca-9792-0d2c9e673556.png" style="zoom:50%;">
+<h1 id="五-递归式时间-空间复杂度"><a class="markdownIt-Anchor" href="#五-递归式时间-空间复杂度"></a> 五、递归式时间、空间复杂度</h1>
+<p>时间复杂度 = 递归的次数 x 每次的时间复杂度 <strong>(每次递归时间复杂度不变的情况下)</strong></p>
+<p>空间复杂度 = ？？？？</p>
+<p><strong>这一章讲的不是很清晰，学的也不是很透彻，待定吧</strong></p>
+<h1 id="六-递归式主方法"><a class="markdownIt-Anchor" href="#六-递归式主方法"></a> 六、递归式主方法</h1>
+<p>T(n) = aT(n/b) + f(n)</p>
+<p>例子：</p>
+<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754408464435-b8d50b81-f757-4282-8515-a86d9a5cadc2.png" style="zoom:50%;">
+<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754408445279-b6b85a49-cdf5-433e-a275-80512ea7af34.png" style="zoom:50%;">
+<h1 id="七-线性结构与线性表定义"><a class="markdownIt-Anchor" href="#七-线性结构与线性表定义"></a> 七、线性结构与线性表定义</h1>
+<p>特点：数据元素之间呈现一种线性关系，即元素“一个接一个排列”。</p>
+<p>线性表：顺序存储、链式存储。</p>
+<p>非空线性表特点：</p>
+<ul>
+<li>存在唯一的一个称为“第一个”的元素。</li>
+<li>存在唯一的一个称为“最后一个”的元素。</li>
+<li>除第一个元素外，序列中的每个元素均只有一个直接前驱</li>
+<li>除最后一个元素外，序列中的每个元素均只有一个直接后继。</li>
+</ul>
+<h2 id="71-线性表的顺序存储"><a class="markdownIt-Anchor" href="#71-线性表的顺序存储"></a> 7.1 线性表的顺序存储</h2>
+<p>顺序存储是指，一组地址连续的存储单元依次存储线性表中的数据元素。</p>
+<p>优点：可以随机存取表中元素。</p>
+<p>缺点：插入、删除都需要移动元素。</p>
+<p>插入一个新元素需要移动的元素个数期望值为：n/2</p>
+<p>删除元素时需要移动的元素个数期望值为：(n-1)/2</p>
+<h2 id="72-顺序表的插入-删除-查找时间复杂度"><a class="markdownIt-Anchor" href="#72-顺序表的插入-删除-查找时间复杂度"></a> 7.2 顺序表的插入、删除、查找时间复杂度</h2>
+<table>
+<thead>
+<tr>
+<th><strong>插入</strong>时间复杂度</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最好</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>最坏</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>平均</td>
+<td>O(n)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><strong>删除</strong>时间复杂度</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最好</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>最坏</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>平均</td>
+<td>O(n)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><strong>查找</strong>时间复杂度</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最好</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>最坏</td>
+<td></td>
+</tr>
+<tr>
+<td>平均</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="73-顺序表的链式存储"><a class="markdownIt-Anchor" href="#73-顺序表的链式存储"></a> 7.3 顺序表的链式存储</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754986403014-82d01c6e-66ac-4391-9c9a-429a920cd14d.png" alt></p>
+<p>数据域用于存储元素的值，指针域用于存储元素的直接前驱或直接后继的位置信息。</p>
+<p>各个数据元素的节点的地址并<strong>不要求是连续</strong>，因此存储数据元素的同时，必须存储元素的逻辑关系。</p>
+<p>若元素的结点只有一个指针域，称为线性链表（单链表）</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754986569650-e2ee665b-c1ef-454b-a16c-96418c5daf7d.png" alt></p>
+<h2 id="74-单链表的插入-删除-查找时间复杂度"><a class="markdownIt-Anchor" href="#74-单链表的插入-删除-查找时间复杂度"></a> 7.4 单链表的插入、删除、查找时间复杂度</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>插入</strong>时间复杂度</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">最好</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td style="text-align:center">最坏</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td style="text-align:center">平均</td>
+<td>O(n)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>删除</strong>时间复杂度</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">最好</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td style="text-align:center">最坏</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td style="text-align:center">平均</td>
+<td>O(n)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>查找</strong>时间复杂度</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">最好</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td style="text-align:center">最坏</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td style="text-align:center">平均</td>
+<td>O(n)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="75-循环单链表-双链表"><a class="markdownIt-Anchor" href="#75-循环单链表-双链表"></a> 7.5 循环单链表、双链表</h2>
+<p>循环单链表：尾结点的指针域指向头结点。</p>
+<p>双链表：两个指针域，分别指向前驱和后继。</p>
+<h1 id="八-栈相关"><a class="markdownIt-Anchor" href="#八-栈相关"></a> 八、栈相关</h1>
+<h2 id="81-栈的顺序存储"><a class="markdownIt-Anchor" href="#81-栈的顺序存储"></a> 8.1 栈的顺序存储</h2>
+<p>先进后出</p>
+<p>基本运算：</p>
+<ol>
+<li>初始化栈：创建一个空栈</li>
+<li>判栈空：当栈为空时返回真，否则返回假</li>
+<li>入栈：将元素x加入栈顶，并更新栈顶指针</li>
+<li>出栈：将元素从栈中删除，并更新栈顶指针。</li>
+<li>读站定元素：返回栈顶元素的值，但不修改栈顶指针</li>
+</ol>
+<h2 id="82-栈的链式存储"><a class="markdownIt-Anchor" href="#82-栈的链式存储"></a> 8.2 栈的链式存储</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754987160860-793b2d92-4482-4b92-aa7c-1572654efbc1.png" alt></p>
+<h1 id="九-队列相关"><a class="markdownIt-Anchor" href="#九-队列相关"></a> 九、队列相关</h1>
+<h2 id="91-队列的顺序存储与循环队列"><a class="markdownIt-Anchor" href="#91-队列的顺序存储与循环队列"></a> 9.1 队列的顺序存储与循环队列</h2>
+<p>先进先出。允许插入元素的一端为队尾，允许删除元素的一段为队头。</p>
+<p>由于队列的元素插入和删除分别再两端进行，因此设置队头指针和队尾指针。</p>
+<p>运算：</p>
+<ol>
+<li>初始化队列：创建一个空的队列。</li>
+<li>判队空：当队列为空时返回真，否则返回假。</li>
+<li>入队：将元素加入到队列的队尾，并更新队尾指针。</li>
+<li>出队：将队头元素从队列中删除，并更新队头指针。</li>
+<li>读队头元素：返回队头元素的值，但不修改队头指针。</li>
+</ol>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754987493922-98346a78-e075-4241-932f-1aa51a387dc0.png" alt>循环队列</p>
+<h2 id="92-队列的链式存储与双端队列"><a class="markdownIt-Anchor" href="#92-队列的链式存储与双端队列"></a> 9.2 队列的链式存储与双端队列</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754987966760-8c5e0fca-5311-4ea5-9db4-905737ed5e96.png" alt>队列的链式存储</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754988025073-1a2f5c14-97a2-405e-b6b6-db51e8b69bd0.png" alt><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1754987987595-22350516-73ed-4927-a777-84191eb17691.png" alt></p>
+<h1 id="十-串相关"><a class="markdownIt-Anchor" href="#十-串相关"></a> 十、串相关</h1>
+<p>特殊的线性表，元素为字符。</p>
+<p>基本概念：</p>
+<ol>
+<li><strong>空串</strong>：长度为零称为空串，空串不包含任何字符。</li>
+<li><strong>空格串</strong>：由一个或多个空格组成的串。空格在计算长度是也要将其计算在内。</li>
+<li><strong>子串</strong>：串中任意长度的连续字符构成的序列称为子串。空串是任意串的子串。</li>
+<li>串相等：两个串长度相等，且对应序号的字符相同。</li>
+<li>串比较：比较两个串大小时，以字符的ASCII码作为依据。</li>
+</ol>
+<h2 id="101-串的模式匹配与朴素模式匹配"><a class="markdownIt-Anchor" href="#101-串的模式匹配与朴素模式匹配"></a> 10.1 串的模式匹配与朴素模式匹配</h2>
+<p>最好：O(m)</p>
+<p>最坏：O(nm)</p>
+<p>平均：O(n+m)</p>
+<h2 id="102-手算next数组值"><a class="markdownIt-Anchor" href="#102-手算next数组值"></a> 10.2 手算next数组值</h2>
+<p>串的前缀：包含第一个字符并且不包含最后一个字符的子串</p>
+<p>串的后缀：包含最后一个字符并且不包含第一个字符的子串</p>
+<p>第i个字符的next值 = 从1 ~ i-1 串中最长相等前后缀长度 + 1</p>
+<p>特殊情况：next[1] = 0</p>
+<p>**手算步骤（以模式串 **<code>ABABC</code> <strong>为例）</strong></p>
+<p>模式串：<code>P = &quot;ABABC&quot;</code></p>
+<p>我们逐位计算 <code>next[i]</code>：</p>
+<hr>
+<ol>
+<li><strong>i = 0: 子串<code>A</code></strong></li>
+</ol>
+<ul>
+<li>没有真前后缀 → <code>next[0] = 0</code></li>
+</ul>
+<ol start="2">
+<li><strong>i = 1: 子串<code>AB</code></strong></li>
+</ol>
+<ul>
+<li>前缀：<code>A</code></li>
+<li>后缀：<code>&quot;B&quot;</code></li>
+<li>无相等前后缀 → <code>next[1] = 0</code></li>
+</ul>
+<ol start="3">
+<li><strong>i = 2: 子串 <code>ABA</code></strong></li>
+</ol>
+<ul>
+<li>前缀：<code>&quot;A&quot;</code>, <code>&quot;AB&quot;</code></li>
+<li>后缀：<code>&quot;A&quot;</code>, <code>&quot;BA&quot;</code></li>
+<li>相等的有：<code>&quot;A&quot;</code>（长度1）</li>
+<li>最长相等真前后缀长度 = 1 → <code>next[2] = 1</code></li>
+</ul>
+<ol start="4">
+<li><strong>i = 3: 子串 <code>ABAB</code></strong></li>
+</ol>
+<ul>
+<li>前缀：<code>&quot;A&quot;</code>, <code>&quot;AB&quot;</code>, <code>&quot;ABA&quot;</code></li>
+<li>后缀：<code>&quot;B&quot;</code>, <code>&quot;AB&quot;</code>, <code>&quot;BAB&quot;</code></li>
+<li>相等的有：<code>&quot;AB&quot;</code>（长度2）</li>
+<li>最长 = 2 → <code>next[3] = 2</code></li>
+</ul>
+<ol start="5">
+<li><strong>i = 4: 子串 <code>ABABC</code></strong></li>
+</ol>
+<ul>
+<li>前缀：<code>&quot;A&quot;</code>, <code>&quot;AB&quot;</code>, <code>&quot;ABA&quot;</code>, <code>&quot;ABAB&quot;</code></li>
+<li>后缀：<code>&quot;C&quot;</code>, <code>&quot;BC&quot;</code>, <code>&quot;ABC&quot;</code>, <code>&quot;BABC&quot;</code></li>
+<li>没有相等的前后缀 → <code>next[4] = 0</code></li>
+</ul>
+<hr>
+<p>✅ 最终next数组：</p>
+<table>
+<thead>
+<tr>
+<th><strong>i</strong></th>
+<th><strong>P[i]</strong></th>
+<th><strong>子串</strong></th>
+<th><strong>next[i]</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>A</td>
+<td>A</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>B</td>
+<td>AB</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>A</td>
+<td>ABA</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>B</td>
+<td>ABAB</td>
+<td>2</td>
+</tr>
+<tr>
+<td>4</td>
+<td>C</td>
+<td>ABABC</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>👉 所以：<code>next = [0, 0, 1, 2, 0]</code></p>
+<p>✅总结：手算next数组口诀</p>
+<p>逐位看子串，拆分前和后，</p>
+<p>找最长相等，记长度为next。</p>
+<p>单字符为0，无匹配也为0，</p>
+<p>前后缀不重叠，才是“真”前后。</p>
+<h1 id="十一-数组相关"><a class="markdownIt-Anchor" href="#十一-数组相关"></a> 十一、数组相关</h1>
+<h2 id="111-一维数组"><a class="markdownIt-Anchor" href="#111-一维数组"></a> 11.1 一维数组</h2>
+<p>L：元素大小</p>
+<p>LOC：数组首地址</p>
+<p>内存中：a[0] a[1] a[2] a[3] a[4] a[5]</p>
+<p><strong>某个元素在内存中实际地址的公式：</strong></p>
+<p>下标从<strong>0</strong>开始： a<sub>i</sub> = LOC + i x L</p>
+<p>下标从<strong>1</strong>开始： a<sub>i</sub> = LOC + (i-1) x L</p>
+<h2 id="112-二维数组"><a class="markdownIt-Anchor" href="#112-二维数组"></a> 11.2 二维数组</h2>
+<p>N：行 M：列</p>
+<p>L：元素大小</p>
+<p>LOC：数组首地址</p>
+<p>a[0][0] a[0][1] a[0][2]</p>
+<p>a[1][0] a[1][1] a[1][2]</p>
+<p>按行优先：a[0][0] a[0][1] a[0][2] a[1][0] a[1][1] a[1][2]</p>
+<p>按列优先：a[0][0] a[1][0] a[0][1] a[1][1] a[0][2] a[1][2]</p>
+<p><strong>某个元素在内存中实际地址的公式：</strong></p>
+<p>按<strong>行</strong>优先存储，下标从<strong>0</strong>开始：a<sub>i,j</sub> =LOC + (i x M + j) x L</p>
+<p>按<strong>行</strong>优先存储，下标从<strong>1</strong>开始：a<sub>i,j</sub> =LOC + [(i - 1) x M + (j - 1)] x L</p>
+<p>按<strong>列</strong>优先存储，下标从<strong>0</strong>开始：a<sub>i,j</sub> =LOC + (j x N + i) x L</p>
+<p>按<strong>列</strong>优先存储，下标从<strong>1</strong>开始：a<sub>i,j</sub> =LOC + [(j - 1) x M + (i - 1)] x L</p>
+<h1 id="十二-矩阵相关"><a class="markdownIt-Anchor" href="#十二-矩阵相关"></a> 十二、矩阵相关</h1>
+<h2 id="121-对称矩阵"><a class="markdownIt-Anchor" href="#121-对称矩阵"></a> 12.1 对称矩阵</h2>
+<p>1	2	3	A<sub>0,0</sub>	A<sub>0,1</sub>	A<sub>0,3</sub></p>
+<p>2	3	4	A<sub>1,0</sub>	A<sub>1,1</sub>	A<sub>1,3</sub></p>
+<p>3	4	5	A<sub>2,0</sub>	A<sub>2,1</sub>	A<sub>2,3</sub></p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755497915439-c5ef434c-d352-4e62-ab24-39ca78b15b50.png" alt>A<sub>i,j</sub> = A<sub>j,i</sub></p>
+<p>左下三角区 + 主对角线</p>
+<p>对称矩阵按<strong>行</strong>存储<strong>下三角</strong>区和<strong>主对角</strong>线并且下标从<strong>0</strong>(A0.0)开始</p>
+<p>当(i ≥ j)时：A<sub>i,j</sub> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>i</mi><mo stretchy="false">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mo>+</mo><mi>j</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex"> \frac{i(i+1)}{2}+j+1 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></p>
+<p>当(i ≤ j)时：A<sub>i,j</sub> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>i</mi><mo stretchy="false">(</mo><mi>j</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mo>+</mo><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex"> \frac{i(j+1)}{2}+i+1 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7429em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></p>
+<p>对称矩阵按<strong>行</strong>存储<strong>下三角区</strong>和<strong>主对角</strong>线并且下标从<strong>1</strong>(A1.1)开始</p>
+<p>当(i ≥ j)时：A<sub>i,j</sub> =  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>i</mi><mo stretchy="false">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mo>+</mo><mi>j</mi></mrow><annotation encoding="application/x-tex"> \frac{i(i-1)}{2}+j </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span></p>
+<p>当(i ≤ j)时：A<sub>i,j</sub> =  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>j</mi><mo stretchy="false">(</mo><mi>j</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mo>+</mo><mi>i</mi></mrow><annotation encoding="application/x-tex"> \frac{j(j-1)}{2}+i </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mbin mtight">−</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span></p>
+<h2 id="122-三对角矩阵"><a class="markdownIt-Anchor" href="#122-三对角矩阵"></a> 12.2 三对角矩阵</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755501050170-6184df72-4c8d-4d9c-9a4a-3d8eca9714e1.png" alt></p>
+<p>三对角矩阵按<strong>行</strong>存储并且下标从<strong>0</strong>(A<sub>0,0</sub>)开始：A<sub>i,j</sub> = 2i + j + 1</p>
+<p>三对角矩阵按<strong>列</strong>存储并且下标从<strong>1</strong>(A<sub>1,1</sub>)开始：A<sub>i,j</sub> = 2i + j - 2</p>
+<h2 id="123-稀疏矩阵"><a class="markdownIt-Anchor" href="#123-稀疏矩阵"></a> 12.3 稀疏矩阵</h2>
+<p>顺序存储：三元组顺序表</p>
+<p>链式存储：十字链表</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755504250266-ed4f1bd1-40ce-4674-a8a9-dbcfa58d2639.png" alt></p>
+<table>
+<thead>
+<tr>
+<th>行</th>
+<th>列</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同行的下一个元素</td>
+<td></td>
+<td>同列的下一个元素</td>
+</tr>
+</tbody>
+</table>
+<h1 id="十三-树相关"><a class="markdownIt-Anchor" href="#十三-树相关"></a> 十三、树相关</h1>
+<h2 id="131属性结构与树的定义"><a class="markdownIt-Anchor" href="#131属性结构与树的定义"></a> 13.1属性结构与树的定义</h2>
+<p>非线性结构</p>
+<p>树是n(n≥0)个结点的有限集合，n=0时称为空树。</p>
+<p>有且仅有一个结点称为根。</p>
+<p>树的定义是递归的，由若干颗子树构成，子树又由更小的子树构成。</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755504447152-90f38e7d-6432-48b9-bab0-ebca8ef59d04.png" alt></p>
+<h2 id="132-树的基本概念"><a class="markdownIt-Anchor" href="#132-树的基本概念"></a> 13.2 树的基本概念</h2>
+<ul>
+<li>双亲、孩子：结点的子树称为该节点的孩子，该节点是子结点的双亲。</li>
+<li>兄弟：具有相同双亲的结点互为兄弟。</li>
+<li><strong>结点的度</strong>：<strong>结点的子树的个数。</strong></li>
+<li>叶子结点：终端结点，度为0的结点。</li>
+<li>内部结点：也称为分支节点或非终端结点。度不为0，除了根节点外，分支结点也称为内部结点。</li>
+<li>结点的层次：根为第一层，根的孩子为第二层，以此类推。</li>
+<li><strong>树的高度（深度）</strong>：<strong>树的最大层次。</strong></li>
+</ul>
+<h2 id="133-树的性质"><a class="markdownIt-Anchor" href="#133-树的性质"></a> 13.3 树的性质</h2>
+<hr>
+<ol>
+<li>树的结点总数 = 树所有结点的度数之和 + 1</li>
+<li>度为m的树中第i层，最多有m<sup>i-1</sup>个结点（i ≥ 1）</li>
+<li>高度为h的m次树，最多有<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><msup><mi>m</mi><mi>h</mi></msup><mo>−</mo><mn>1</mn></mrow><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex"> \frac{m^h - 1}{m - 1} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.4463em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0429em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.927em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">h</span></span></span></span></span></span></span></span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>具有n个结点、度为m的树，最小高度为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">⌈</mo><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mi>m</mi></msub><mrow><mo fence="true">(</mo><mi>n</mi><mo stretchy="false">(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mn>1</mn><mo fence="true">)</mo></mrow><mo fence="true">⌉</mo></mrow><annotation encoding="application/x-tex"> \left\lceil \log_m \left( n(m-1) + 1 \right) \right\rceil </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">⌈</span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.0573em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mclose delimcenter" style="top:0em;">⌉</span></span></span></span></span>（上取整）</li>
+</ol>
+<h2 id="134-二叉树的定义"><a class="markdownIt-Anchor" href="#134-二叉树的定义"></a> 13.4 二叉树的定义</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755505362893-60f07965-ff56-4a48-b817-16076aefc81c.png" alt></p>
+<p>二叉树结点的子树，要<strong>区分左子树和右子树</strong>。（即使结点只有一棵树的时候也要明确指出）</p>
+<p>二叉树的结点<strong>最大的度为2</strong></p>
+<h2 id="135-二叉树的性质"><a class="markdownIt-Anchor" href="#135-二叉树的性质"></a> 13.5 二叉树的性质</h2>
+<ol>
+<li>二叉树<strong>第i层(i ≥ 1)<strong>上</strong>最多有2</strong><sup><strong>i-1</strong></sup><strong>个结点</strong></li>
+<li><strong>高度为h</strong>的二叉树<strong>最多有2</strong><sup><strong>h</strong></sup><strong>-1个结点</strong></li>
+<li>对于任何一棵二叉树，<strong>度为0</strong>的结点数等于<strong>度为2的结点数+1</strong></li>
+<li>具有<strong>n个结点</strong>的<strong>完全二叉树</strong>的高度为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo fence="true">⌊</mo><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>n</mi><mo fence="true">⌋</mo></mrow><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex"> \left\lfloor \log_2 n \right\rfloor + 1 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">⌊</span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mclose delimcenter" style="top:0em;">⌋</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>或<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">⌈</mo><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo fence="true">⌉</mo></mrow><annotation encoding="application/x-tex"> \left\lceil \log_2 (n+1) \right\rceil </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">⌈</span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">⌉</span></span></span></span></span></li>
+</ol>
+<h2 id="136-满二叉树与完全二叉树"><a class="markdownIt-Anchor" href="#136-满二叉树与完全二叉树"></a> 13.6 满二叉树与完全二叉树</h2>
+<p>满二叉树：深度为k的二叉树，有2<sup>k</sup>-1个结点。叶结点只能出现在最底层，且非叶结点的度都为2</p>
+<p>完全二叉树：<strong>从根到最后一层从左到右依次填满</strong>的结构。</p>
+<p><strong>满二叉树是完全二叉树的一个特例</strong>。</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755505854018-c7893107-08d3-49e4-b502-1b28040838b4.png" alt></p>
+<h2 id="137-二叉树顺序存储"><a class="markdownIt-Anchor" href="#137-二叉树顺序存储"></a> 13.7 二叉树顺序存储</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755508385541-0591fad8-63d3-4eb0-a656-30e6ffb5d6b9.png" alt></p>
+<p>编号为i的结点：i=1，该节点为根节点，无双亲；i&gt;1，则该结点的双亲结点为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">⌊</mo><mfrac><mi>i</mi><mn>2</mn></mfrac><mo fence="true">⌋</mo></mrow><annotation encoding="application/x-tex"> \left\lfloor \frac{i}{2} \right\rfloor </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2057em;vertical-align:-0.35em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">⌊</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8557em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">⌋</span></span></span></span></span></span></p>
+<p>完全二叉树适合使用顺序存储，一般二叉树不宜采用顺序存储。</p>
+<p><strong>最坏</strong>的情况下，一个深<strong>度为k且只有k个结点的二叉树</strong>（单支树）<strong>需要2</strong><sup><strong>k</strong></sup><strong>-1个存储单元</strong></p>
+<h2 id="138-二叉树链式存储"><a class="markdownIt-Anchor" href="#138-二叉树链式存储"></a> 13.8 二叉树链式存储</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755509318055-51303399-8ffe-4f0f-8c68-e795ef26d2f7.png" alt></p>
+<p>二叉链表：n个节点，有n+1个空指针域</p>
+<p>三叉链表：n个节点，有n+2个空指针域</p>
+<h2 id="139-二叉树遍历"><a class="markdownIt-Anchor" href="#139-二叉树遍历"></a> 13.9 二叉树遍历</h2>
+<ol>
+<li>先序遍历：<strong>根左右</strong></li>
+</ol>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510059838-08e0b68d-7008-47ba-9a62-5272f977117f.png" style="zoom:67%;"> ===&gt;  遍历结果：ABDGCEF</p>
+<ol start="2">
+<li>中序遍历：左根右</li>
+</ol>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510059838-08e0b68d-7008-47ba-9a62-5272f977117f-20250821085653936.png" style="zoom:67%;"> ===&gt;  遍历结果：BDGAECF</p>
+<ol start="3">
+<li>后续遍历：左右根</li>
+</ol>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510059838-08e0b68d-7008-47ba-9a62-5272f977117f-20250821085656564.png" style="zoom:67%;"> ===&gt;  遍历结果：GDBEFCA</p>
+<ol start="4">
+<li>层序遍历：一层一层，从左到右</li>
+</ol>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510059838-08e0b68d-7008-47ba-9a62-5272f977117f-20250821085658683.png" style="zoom:67%;"> ===&gt;  遍历结果：ABCDEFG</p>
+<h2 id="1310-根据遍历构造二叉树"><a class="markdownIt-Anchor" href="#1310-根据遍历构造二叉树"></a> 13.10 根据遍历构造二叉树</h2>
+<p>先序遍历：<strong>A</strong>BDGCEF</p>
+<p>中序遍历：BDGAECF</p>
+<p>后续遍历：GDBEFC<strong>A</strong></p>
+<p>层次遍历：<strong>A</strong>BCDEFG</p>
+<p>以上加粗的为根节点，可以从<strong>先序、后序、层次</strong>中找到。</p>
+<p><strong>先序、后序是确定根的位置，中序确定根的子结点。</strong></p>
+<p><strong>🌰****例子1：</strong></p>
+<ul>
+<li><strong>先序</strong>：<strong>A</strong>BDGCEF</li>
+<li><strong>中序</strong>：BDGAECF</li>
+<li><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510513643-c6fc5932-1331-4b32-b5ea-ad6bb26ef977.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510520200-f052d738-6828-43c4-bdca-90efaa856b14.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510530829-aeeca3f5-396f-4184-9299-c4b34ee3614e.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510538283-46f9afb4-1eff-4ff1-bb55-86e868e21c91.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510547102-86faef93-f97f-4cde-adbe-431cd782a552.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510568546-5198eb83-3a9c-4442-92a2-efe7695c0c73.png" style="zoom: 67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510578175-f71c7f83-f037-4d75-9227-a2322c40e8c9.png" style="zoom: 67%;"></li>
+</ul>
+<p><strong>🌰****例子2：</strong></p>
+<ul>
+<li><strong>后序</strong>：GDBEFC<strong>A</strong></li>
+<li><strong>中序</strong>：BDGAECF</li>
+<li><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510513643-c6fc5932-1331-4b32-b5ea-ad6bb26ef977-20250821085927805.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510649890-76fcaa86-dd61-4b43-9d24-b5602da91202.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510658277-2284e9e8-5b9b-466c-a903-75eabe1a6109.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510675469-10a70e27-b76e-46e5-8b30-7d09a947d32f.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510684434-ed9a3ea7-827d-4bcc-98f7-b60060e340a4.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510691650-7fcb96b4-940f-483b-ac3e-e8cfd4387e02.png" style="zoom:67%;"></li>
+</ul>
+<p>🌰<strong>例子3：</strong></p>
+<ul>
+<li><strong>层次遍历：A</strong>BCDEFG</li>
+<li>**中序：**BDGAECF</li>
+<li><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510760318-7bf27db6-f88b-4b1e-9bb3-171069ff84c4.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510771398-22d72035-9a0c-4766-9d4f-caeb9d1b6924.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510781348-f7be26e7-c29d-40a7-b5aa-adfa0fb304ee.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510797455-b5b9d84b-6835-4463-bfeb-e202b7026eff.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510810083-ad8990c1-f652-4a9c-a19c-7c7b62e898c8.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510819992-4345c2c9-a591-4c91-84fe-8aa5a7e774fa.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755510828320-1bdab794-108c-43ab-b94a-2a8da22491ee.png" style="zoom:67%;"></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>组合</th>
+<th>是否可构造</th>
+<th>关键技巧</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先序 + 中序</td>
+<td>✅</td>
+<td>先序定根，中序分左右，递归</td>
+</tr>
+<tr>
+<td>后序 + 中序</td>
+<td>✅</td>
+<td>后序定根，中序分左右，递归</td>
+</tr>
+<tr>
+<td>层序 + 中序</td>
+<td>✅（较难）</td>
+<td>层序取根，中序分左右，筛选子序列</td>
+</tr>
+<tr>
+<td>其他组合</td>
+<td>❌ 或不唯一</td>
+<td>缺少左右子树划分依据</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1311-平衡二叉树"><a class="markdownIt-Anchor" href="#1311-平衡二叉树"></a> 13.11 平衡二叉树</h2>
+<p>二叉树中的<strong>任意一个结点的左右子树高度之差的绝对值不超过1</strong></p>
+<p><strong>叶子结点满足平衡二叉树的条件要求</strong></p>
+<p><strong>完全二叉树是平衡二叉树</strong></p>
+<h2 id="1312-二叉排序树的定义"><a class="markdownIt-Anchor" href="#1312-二叉排序树的定义"></a> 13.12 二叉排序树的定义</h2>
+<p>根节点的关键字 <strong>&gt;</strong> 左子树所有结点的关键字，</p>
+<p>根节点的关键字 **&lt; **右子树所有结点的关键字，</p>
+<p>左右子树也是一颗二叉排序树</p>
+<p>中序遍历得到的序列是有序序列。</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511339211-a6902725-c190-4e9d-8896-0f23690831a8.png" alt></p>
+<h2 id="1313-二叉排序树的构造"><a class="markdownIt-Anchor" href="#1313-二叉排序树的构造"></a> 13.13 二叉排序树的构造</h2>
+<p>例子：</p>
+<p>23 31 17 19 11 27 13 90 61</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511464058-a511ab6c-49f9-4e74-8faf-13d895aaecdb.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511472091-db70a3b0-29bd-41dc-9d0f-156ddc236600.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511478656-243c0b57-6f87-47f4-89c4-2e14056e7047.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511486008-d9bef579-bb37-431c-9883-0bed24ec13a6.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511498278-5c8b50ef-8af4-4c93-9ce0-35f2e6e260c6.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511508085-4f7c5749-5d4d-4310-abf5-7fc7ee93ecfe.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511519367-99d4c293-a10c-45da-8234-1c08c9637374.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511529570-13665ce7-7d62-4cb1-9b59-5ab70aac96bc.png" style="zoom:67%;"><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755511541056-fc825ca0-a1bd-4d4a-a21b-e4efa78d6169.png" style="zoom:67%;"></p>
+<h2 id="1314-最优二叉树哈夫曼树定义和概念"><a class="markdownIt-Anchor" href="#1314-最优二叉树哈夫曼树定义和概念"></a> 13.14 最优二叉树（哈夫曼树）定义和概念</h2>
+<p>带权路径长度最短的树。</p>
+<p>路径：一个结点到另一个结点之间的通路。</p>
+<p>路径上的分支数目称为路径长度。</p>
+<p><strong>树的带权路径长度</strong>：所有叶子结点的带权路径长度之和，计为<strong>WPL</strong></p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512061342-f4c4027a-9a4b-40c7-8fd0-c1ac3bb6480b.png" alt>WPL = 2x2 + 4x2 + 5x2 + 7x2 = 36</p>
+<p>被乘数：是叶子结点的关键字</p>
+<p>乘数：是根结点到该叶子结点的路径长度。<strong>这里从图中可以看出全是2</strong></p>
+<p><strong>最优二叉树（哈夫曼树）的三个核心性质：</strong></p>
+<ol>
+<li>给定一组具有确定权值的叶子结点，构造出的二叉树中带权路径长度（WPL）最小。</li>
+<li>只有度为0或2，没有度为1</li>
+<li>总结点数为：2n-1</li>
+</ol>
+<h2 id="1315-最优二叉树构造"><a class="markdownIt-Anchor" href="#1315-最优二叉树构造"></a> 13.15 最优二叉树构造</h2>
+<p><strong>最优二叉树不唯一，但是WPL是唯一的。</strong></p>
+<p><strong>构造规则：</strong></p>
+<ol>
+<li>从前往后找2个权值最小</li>
+<li>小的在左边，大的在右边</li>
+<li>计算出权值，放入数组末尾</li>
+<li>权值相同时从前往后</li>
+<li>回调第一步。</li>
+</ol>
+<p>🌰例子：{18、32、4、8、12、26}</p>
+<ol>
+<li>选4和8。<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512797386-cf1220e7-fc09-4a19-82b0-d6359821cad7.png" style="zoom:67%;"></li>
+<li>选12和12。<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512867611-72a3d06c-323e-4e13-a956-a750cea0e560.png" style="zoom:67%;"></li>
+<li>选18和24。<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512899194-b2f76c19-53a1-410e-b046-dec6c26821da.png" style="zoom:67%;"></li>
+<li>选32和26。<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512957705-899c4605-d2f7-4478-8b75-014b7965b069.png" style="zoom:67%;"></li>
+<li>合并<img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755512985382-621b6ba0-9ef3-4f8e-b355-78051209808a.png" style="zoom: 67%;"></li>
+</ol>
+<h2 id="1316-哈夫曼编码定义"><a class="markdownIt-Anchor" href="#1316-哈夫曼编码定义"></a> 13.16 哈夫曼编码定义</h2>
+<p>等长编码：对每个字符编值相同长度的二进制编码。</p>
+<p>哈夫曼编码：一种根据字符出现频率构建最优前缀码的变长编码技术，用于数据压缩。</p>
+<table>
+<thead>
+<tr>
+<th>a：45<br>b：13<br>c：12<br>d：16<br>e：9<br>f：5</th>
+<th><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755586218753-23212104-196c-4c07-911a-21de8ad92bbf.png" style="zoom:67%;"></th>
+<th>a：0<br>b：101<br>c：100<br>d：111<br>e：1101<br>f：1100</th>
+</tr>
+</thead>
+</table>
+<h2 id="1317-哈夫曼编码压缩比"><a class="markdownIt-Anchor" href="#1317-哈夫曼编码压缩比"></a> 13.17 哈夫曼编码压缩比.</h2>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+<th>e</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>频率(%)</td>
+<td>40</td>
+<td>10</td>
+<td>20</td>
+<td>16</td>
+<td>14</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755586562108-8abf4665-2d32-4cac-9a81-ae4908da27c7.png" alt></p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+<th>e</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>100</td>
+<td>111</td>
+<td>110</td>
+<td>101</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>哈夫曼编码所需长度：1x40 + 3x10 + 3x20 + 3x16 + 3x14 = 220</li>
+<li>等长编码所需长度：3x(40+10+20+16+14) = 300 （<strong>五个字符，等长编码，就需要3个二进制位代表一个值。</strong>）</li>
+</ul>
+<p>压缩比：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><mfrac><mtext>哈夫曼编码所需长度</mtext><mtext>等长编码所需长度</mtext></mfrac></mrow><annotation encoding="application/x-tex"> 1 - \frac{\text{哈夫曼编码所需长度}}{\text{等长编码所需长度}} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2173em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord cjk_fallback mtight">等长编码所需长度</span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord cjk_fallback mtight">哈夫曼编码所需长度</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> =<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><mfrac><mn>220</mn><mn>300</mn></mfrac></mrow><annotation encoding="application/x-tex"> 1 - \frac{220}{300} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">300</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">220</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> ≈ 0.27</p>
+<h2 id="1318-线索二叉树定义应该是了解即可"><a class="markdownIt-Anchor" href="#1318-线索二叉树定义应该是了解即可"></a> 13.18 线索二叉树定义【应该是了解即可】</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755587188334-eacd9845-d03c-4819-8706-3f6f9a2ab6f2.png" alt></p>
+<h2 id="1319-二叉树类别"><a class="markdownIt-Anchor" href="#1319-二叉树类别"></a> 13.19 二叉树类别</h2>
+<ol>
+<li>满二叉树</li>
+<li>完全二叉树</li>
+<li>平衡二叉树</li>
+<li>排序二叉树</li>
+<li>最优二叉树</li>
+</ol>
+<h1 id="十四-图相关"><a class="markdownIt-Anchor" href="#十四-图相关"></a> 十四、图相关</h1>
+<h2 id="141-图形结构与图的定义"><a class="markdownIt-Anchor" href="#141-图形结构与图的定义"></a> 14.1 图形结构与图的定义</h2>
+<p>图中，任意两个结点之间都可能存在直接关系。所以，图中一个结点的前驱结点和后继结点的数目是没有限制的。</p>
+<p>图G是有集合V和E狗策划给你的二元组，记作G=(V，E)。</p>
+<p>V是图中顶点的非空有限集合，E是图中边的有限集合。</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755587456653-b4b007da-b73c-417f-942c-146b1c4d3005.png" alt></p>
+<h2 id="142-有向图和无向图"><a class="markdownIt-Anchor" href="#142-有向图和无向图"></a> 14.2 有向图和无向图</h2>
+<p>有向图：图中每条边都是有方向的，顶点的关系用&lt;V<sub>i</sub>，V<sub>j</sub>&gt;表示，V<sub>i</sub>到V<sub>j</sub>有一条有向边，V<sub>i</sub>是起点称为弧尾，V<sub>j</sub>是终点称为弧头</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755587539524-2abb70da-1a2e-4f90-9029-f8c565bcc7a0.png" alt></p>
+<p>无向图：每条边都是没方向的。顶点的关系用&lt;V<sub>i</sub>，V<sub>j</sub>&gt;表示，但是没有方向上的区别。</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755587681964-974f2d48-aef7-466e-bd01-461f953e73ec.png" alt></p>
+<h2 id="143-完全图"><a class="markdownIt-Anchor" href="#143-完全图"></a> 14.3 完全图</h2>
+<p><strong>无向</strong>完全图：无向图若有n个顶点，每个顶点与其他n-1个顶点之间都有边。<strong>共有</strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex"> \frac{n(n-1)}{2} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><strong>条边</strong>。</p>
+<p><strong>有向</strong>完全图：有向图中，任意来个那个不同的顶点，都有方向相反的两条弧存在。<strong>共有n(n-1)条边。</strong></p>
+<h2 id="144-顶点的度"><a class="markdownIt-Anchor" href="#144-顶点的度"></a> 14.4 顶点的度</h2>
+<p>度：<strong>仅无向图存在</strong>。当前结点存在的弧的个数。</p>
+<p>出度：<strong>仅有向图存在</strong>。从当前结点指向其他结点的弧的个数</p>
+<p>入度：<strong>仅有向图存在</strong>。从其他结点指向当前结点的弧的个数</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755596915715-5597e6ee-4bbf-4c09-b94d-55698d525011.png" alt></p>
+<h2 id="145-路径"><a class="markdownIt-Anchor" href="#145-路径"></a> 14.5 路径</h2>
+<p>回路（环）：第一个顶点和最后一个顶点相同的路径</p>
+<p>简单路径：路径中不包含重复的顶点。若一条路径上除了Vp和Vq可以相同外，其余顶点均不相同。</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>简单路径</th>
+<th>回路（特别是简单回路）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>起点与终点</td>
+<td>可以不同</td>
+<td>必须相同</td>
+</tr>
+<tr>
+<td>顶点是否重复</td>
+<td>所有顶点都不重复</td>
+<td>仅起点和终点相同，其余不重复</td>
+</tr>
+<tr>
+<td>是否闭合</td>
+<td>不闭合</td>
+<td>闭合</td>
+</tr>
+</tbody>
+</table>
+<p><strong>🌰****例子：</strong></p>
+<ul>
+<li>简单路径：A → B → C → D（无重复顶点，起点 ≠ 终点）</li>
+<li>简单回路：A → B → C → A（起点 = 终点，其余顶点不重复）</li>
+</ul>
+<h2 id="146-连通图与强连通图"><a class="markdownIt-Anchor" href="#146-连通图与强连通图"></a> 14.6 连通图与强连通图</h2>
+<p>连通图：无向图中任意两个顶点都是联通的。</p>
+<p>最少：n-1</p>
+<p>最多：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex"> \frac{n(n-1)}{2} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>强连通图：有向图中任意两个顶点都有互相联通的路径。</p>
+<p>最少：n</p>
+<p>最多：n(n-1)</p>
+<h2 id="147-邻接矩阵"><a class="markdownIt-Anchor" href="#147-邻接矩阵"></a> 14.7 邻接矩阵</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755657471426-fa6741fe-9189-47a4-9d7a-93e414a18955.png" alt></p>
+<p>无向图的邻接矩阵是对称的。</p>
+<p>无向图：</p>
+<ul>
+<li>非零元素个数 = e 个</li>
+<li>顶点V<sub>i</sub>的度是邻接矩阵第i行（或列）中值不为0的元素个数</li>
+</ul>
+<p>有向图：</p>
+<ul>
+<li>非零元素个数 = 2e 个</li>
+<li>第i行（或列）中值不为0的元素个数是顶点V<sub>i</sub>的出度</li>
+<li>第j列中值不为0的元素个数是顶点V<sub>j</sub>的入度</li>
+</ul>
+<h2 id="148-邻接表"><a class="markdownIt-Anchor" href="#148-邻接表"></a> 14.8 邻接表</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755658086248-893067fc-c557-47e6-9017-2560028902ce.png" alt></p>
+<p>无向图：表节点个数 = e = 邻接矩阵非零元素个数</p>
+<h2 id="149-稠密图和稀疏图"><a class="markdownIt-Anchor" href="#149-稠密图和稀疏图"></a> 14.9 稠密图和稀疏图</h2>
+<p>稀疏图：边的数量 <strong>远少于</strong> 顶点可能连接的最大边数。（可能图中大部分顶点之间没有直接连接。）</p>
+<p>稠密图：边的数量 <strong>接近</strong> 顶点可能连接的最大边数。（可能图中大部分顶点之间都有边相连。）</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>稀疏图</th>
+<th>稠密图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>边的数量</td>
+<td>少</td>
+<td>多</td>
+</tr>
+<tr>
+<td>连接程度</td>
+<td>连接稀疏，很多点不相连</td>
+<td>大部分点都有边相连</td>
+</tr>
+<tr>
+<td>存储方式建议</td>
+<td>常用<strong>邻接表</strong></td>
+<td>常用<strong>邻接矩阵</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="1410-网"><a class="markdownIt-Anchor" href="#1410-网"></a> 14.10 网</h2>
+<p>边（或弧）带权值的图称为网。</p>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755659633619-a3a53d4d-75ec-4c57-a132-8e5abe58d49e.png" alt></p>
+<h2 id="1411-图的遍历"><a class="markdownIt-Anchor" href="#1411-图的遍历"></a> 14.11 图的遍历</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    A</span><br><span class="line">   / \</span><br><span class="line">  B   C</span><br><span class="line"> /   / \</span><br><span class="line">D   E   F</span><br></pre></td></tr></table></figure>
+<p>深度优先算法：</p>
+<ul>
+<li>定义：从一个起点出发，<strong>沿着一条路径尽可能深入地走到底</strong>，直到无法继续为止，然后<strong>回溯</strong>，再尝试其他分支。</li>
+<li>遍历顺序可能是：<strong>A → B → D → C → E → F</strong></li>
+</ul>
+<p>广度优先算法：</p>
+<ul>
+<li>定义：从起点开始，<strong>先访问所有距离为1的邻居</strong>，再访问距离为2的邻居，<strong>逐层向外扩散</strong>。</li>
+<li>遍历顺序可能是：<strong>A → B → C → D → E → F</strong></li>
+</ul>
+<h2 id="1412-深度优先遍历"><a class="markdownIt-Anchor" href="#1412-深度优先遍历"></a> 14.12 深度优先遍历</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755674210642-9769d059-aea4-414e-8824-4634750c6433.png" alt></p>
+<p>遍历顺序： V1、V2、V5、V4、V3 或 V1、V3、V2、V4、V5</p>
+<h2 id="1413-深度遍历-广度遍历的时间复杂度"><a class="markdownIt-Anchor" href="#1413-深度遍历-广度遍历的时间复杂度"></a> 14.13 深度遍历、广度遍历的时间复杂度</h2>
+<p>深度优先搜索DFS：</p>
+<ul>
+<li>使用<strong>递归</strong>的思想进行遍历</li>
+<li><strong>邻接矩阵</strong>时间复杂度：<strong>O(n</strong><sup><strong>2</strong></sup><strong>)</strong></li>
+<li><strong>邻接表</strong>时间复杂度：<strong>O(n+e)</strong></li>
+</ul>
+<p>广度优先搜索BFS：</p>
+<ul>
+<li>使用<strong>队列</strong>的思想进行遍历</li>
+<li><strong>邻接矩阵</strong>时间复杂度：<strong>O(n</strong><sup><strong>2</strong></sup><strong>)</strong></li>
+<li><strong>邻接表</strong>时间复杂度：<strong>O(n+e)</strong></li>
+</ul>
+<h2 id="1414-拓扑排序"><a class="markdownIt-Anchor" href="#1414-拓扑排序"></a> 14.14 拓扑排序</h2>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755679556062-50345f03-e279-4b99-9847-a6cbbbb3ab9c.png" alt></p>
+<p><strong>AOV网的特点：</strong></p>
+<ul>
+<li><strong>顶点</strong>：每个顶点代表一个活动。</li>
+<li><strong>有向边</strong>：有向边(A,B)(<em>A</em>,<em>B</em>)表示活动A需要在活动B开始前完成，即A是B的前提条件。</li>
+<li><strong>无环</strong>：为了确保所有活动可以被合理排序并最终完成，AOV网不能包含有向环。如果AOV网中存在环，则意味着某些活动之间存在循环依赖，导致无法进行有效的调度和执行。</li>
+</ul>
+<p><strong>AOV网进行拓扑排序：</strong></p>
+<ol>
+<li>在AOV网选择一个入度为0的顶点，输出它。</li>
+<li>在网中删除该顶点，以及该顶点有关的所有弧。</li>
+<li>重复上述步骤，知道网中不存在入度为0的顶点为止。</li>
+</ol>
+<p><img src="/2025/08/21/zst-data-structure-volume-roll-up-notes/1755736551834-5f091605-c2ee-4569-911f-5b2c01460bdf.png" alt></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%BD%AF%E8%80%83/" rel="tag"># 软考</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/08/05/zst-programming-language-notes/" rel="prev" title="【软考zst2001专辑笔记】002程序设计语言">
+                  <i class="fa fa-angle-left"></i> 【软考zst2001专辑笔记】002程序设计语言
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">BigOrange</span>
+  </div><div>
+  <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral">
+  本网站由
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlIAAAEuCAMAAAByCQxmAAAABlBMVEUAoP8AoP+IQHPMAAAAAnRSTlML9sG5Q9oAAAfGSURBVHja7d3RbuM4EETR7v//6cUA+7DAJGuLrOpuUve+zsSU6GNKlhwngoiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIhmlv/GTJBG0t8xNyTDBCwycYIVGTjBihyeMEVqT5gitSdIkRoUpEgMClIkBgUpEoNCFGlB5Q+PyuwCSkSKhQtQ4kWKoyGibKJABSi5KEwhSnYiBSpAeRYpTCFKLwpTiFKLAhWghCdSmEKUZZHCFKLkojCFKLUoUCFKeCKFKURZFilMIUouClOIUovCFKKEJ1KYQpRjkcIUouSiMIUotShMIUp4IgUpRDkWKUwhSi0KU5BSi8IUooQnUphClGORghSi1KIwBSm1qENNPdn4S19Vc0UdOaNPNv7SV5VZFKQgJf4Sqdd9JRWkzN9G9r6vOWsm1T/bRk2ah5+w9J5DKge8hM1bkE37mH2mOknlAFLm4bNpHxNSXaTMgzccdiB1LqnCJ/ZeUupLnf2kvAMnpA58+960BdXPKqROIXXAMQ9SbyBVeWdniqlTSHVflxIOmeZOutbZe+H/wEWqntOEF/w5pI67udcEqv0FDykXqS5Q7csUpEyk+kBB6hWiMl9DqkLiG0m1iuq9yFNxVv96UZnXk1ob+/NWH/c2pYZU5v2mvh364Q4c+NbXRKpdFKSGkzpP1FRST/cAUmNElc+mepGC1K87kqeR2r7xrJrKq0mdKGrz9xogNYmUS1QUfCfs8k8nB74aUoYlxzqdKSAVrFJniQrvX21Y/enUkwpIGUmtbc9MUrFO6qJ7PMNEOU2t/rTg5z7ejyk4fE8nZXzrNpjUxtyqHng+qeZFKg4gtTHoh5+EVM0i9eWD151MQcpHKiaRqlumIFVBynsRfBapnSEhBSlIHS6qmlRAClI2UlnyFEIKUpCqJGUQtfetCiVHvoQUpLRPiOr9AKQ6SSWk3kbK/fHMmk92Pv/+PkidQWrj6zqKScV4UmnuiOPe1rwUkMqDSKW/Q0itz0z4TekAX0EqTyGVY0klpEpIeTc13aQWP/YbkEr1H+HwbnrdKrX4ywmQghSkIDXuyCcdClKQghSk1Ka0I73luhSkLiI14+r5S0l9ZUo80IR7fLoJhBSkfprb7pvG6V1fCy8ifPe8aAb68CArY8hIDfogwmWk0jj5nx5lYZBUkYpJpMJJKktIxRNShgnVTOTERWr5CbyJVNaLavp+qQpR60eZ00lFM6mOb8HL2aTiIlLZIKqbVES7qb13i8OuIXya4PVRJpPK8aTiWlKqp20wqegnFVWksoxUfPXew/tup5JUlait38I8nFR8c4nkGlI5jFSYScUgUrorP2NJBaQ8on6ZZtnl6VHXpfJlpHoWqZ/n2fQG4It3zVYadaK2vmr1eFLxYd3wLIMdt40TUkWk/nrOjWb//5+jjlS8gNTiI9r3Xvr40UmqVNTOydQFpKKMLKQKL3UuPqR7/+MeUrWiNkzdsEj9PmjcQypPIdW8SEFq7t9ba/5wy/JDeicg7iGVU0m5fg+xe5H6edy4lFTEWFN5zyIVzt9vG0CqQdTCJzuzX5SVVECqipS8GLFIXU2qQ1ScKMpLKt9NKg82NYRUXkzq+V7JP4qGqKsuIjzeJ9H+94OKbCPlHWESqUcPfuIytbcBBSeSN5DK9ROv80jFjEWq7sMzLyMVh4nKClEXfF5q62PIZ5HaHr3q8snbSB175Bsi6qeHVY/USmrlktSRpgRDGy+Zi4c6jdSJy1TMFqU21UlqaS+OW6Y043pvwUiHayS1uA9HkVKN6r6ppxxwCKnFqRltSjmm/56ebkgrKQ+NwaRcQxquHDxbxd5DapIp53juJerB/+ogtXDcW5+hMaRirqidY/LecMWkUkJqiinvWOo93NdXSiqfk5JvdTkp70hVoDSm5KTSf9ybt0yZh9HunNbg8+d14xbc16QMx+taUuYxCkHto0o1qaWXw+Zs9ZsyD6DcrfUflS0pOxvjXGgmfW6qeQ18MOzez4uWlI0z0Cgi1b1MmS9PCPfHbjKfkXp8xmBFkWOWKfctHtmuuBe6b//n+gJvVWG+trz6lGejKPnhc/dWuHy6S2+GNJo6Q5R4WrbOvGZe+yu4qzpDlIiUel62LlZMvONV8tGPw0S5fjfvi4eseRc886atl1SvqCh9tanv+ehmYs4qFSMXKfFyopubrbdmXat1Nak4+7Bn/aLED++w9y5elV5HqSUVZ4syfgPZp0s+7jueQz8IYNmUSaIqvkL3K1LqeR5529a1IYNOpP67CWHs5xG2bi17ntgZonZePgNE/dmIKOjX30uMYQ0AFet/zWWEKBrZmBMpnor3mfIuUjwR7zOFKNKaQhSJTSGKtKasixRPwAtNIYq0qBBFYlOIIq0p5yLFvL/RlFEUk/5KVIgisSlEkdaUbZFisl+KClGkNeUSxTS/FpVHFFP8XlSeRYr5fS2qsIhibkkqipkkKSnmkaSimEaSkmISSUmKGSSpKaaPlKaYOhKiYtJIyIrJIp0rpohUspgUIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiOqZ/AMg6kmnDoZrIAAAAAElFTkSuQmCC" width="45px" style="display:inline;padding-top:5px;"/>
+  提供CDN加速/云存储服务
+  </a>
+  <a>&emsp;|&emsp;</a>
+  <a href="https://www.foreverblog.cn/" target="_blank" ><img src="https://img.foreverblog.cn/logo_en_default.png" alt="" style="display:inline;height:16px;"></a>
+</div>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js?id=3HGFkqwJpvEGaeV9&ck=3HGFkqwJpvEGaeV9&autoTrack=true"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="4d271e0d-e852-48ab-9777-6a09832bf70e"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha256-UF1fgpAiu3tPJN/uCqEUHNe7pnr+QR0SQDNfgglgtcM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"BaseOrange","repo":"BaseOrange.github.io","client_id":"8f8eb36a78230e56ee7e","client_secret":"c826afd9bd0b45f07426463094a3ad186de52bd8","admin_user":"BaseOrange","distraction_free_mode":true,"proxy":"https://proxy.660066.xyz/github_access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"497e16be2b6866ee1ec0256afd501775"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
