@@ -9,8 +9,29 @@
     <atom:link href="https://log.660066.xyz/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>新的斗争开始了&lt;br/&gt;A new struggle has begun</description>
-    <pubDate>Wed, 27 Aug 2025 08:37:27 GMT</pubDate>
+    <pubDate>Tue, 02 Sep 2025 03:10:24 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>【薛定谔的字段】XXL-JOB执行器不受事务管理</title>
+      <link>https://log.660066.xyz/2025/09/02/schrodinger-of-field-transaction-management-issues/</link>
+      <guid>https://log.660066.xyz/2025/09/02/schrodinger-of-field-transaction-management-issues/</guid>
+      <pubDate>Tue, 02 Sep 2025 03:00:22 GMT</pubDate>
+      
+      <description>【薛定谔的字段】XXL-JOB执行器不受事务管理</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="一-问题"><a class="markdownIt-Anchor" href="#一-问题"></a> 一、问题</h1><p>近期在开发过程中发现，设备相关数据的某个字段偶尔出现 <code>null</code> 值，并非每次必现。该问题主要发生在任务刚执行完成，设备立即调用接口获取数据时。初步判断与数据写入和读取的时序有关，存在一定的竞争条件。</p><h1 id="二-排查"><a class="markdownIt-Anchor" href="#二-排查"></a> 二、排查</h1><h2 id="21-初步怀疑异常回滚"><a class="markdownIt-Anchor" href="#21-初步怀疑异常回滚"></a> 2.1 初步怀疑异常回滚</h2><p>最初怀疑是任务执行过程中发生异常并触发事务回滚，导致字段未能正确写入而为 <code>null</code>。但通过查阅近期 ELK 日志，未发现相关异常记录，排除了因异常回滚导致数据缺失的可能性。</p><h2 id="22-字段填充"><a class="markdownIt-Anchor" href="#22-字段填充"></a> 2.2 字段填充</h2><p>随后将排查重点转向该字段的填充方法。考虑到数据写入时机问题，怀疑是否存在事务传播机制不当，导致部分数据在事务未完成前就被提前写入数据库，后续流程继续执行，从而引发字段为null的异常。</p><h2 id="23-检查事务注解与调用方式"><a class="markdownIt-Anchor" href="#23-检查事务注解与调用方式"></a> 2.3 检查事务注解与调用方式</h2><p>在相关方法中发现其使用了 <code>@Transactional(rollbackFor = Exception.class)</code> 注解，该注解仅用于异常时回滚，并未强制开启新事务（即 <code>propagation = REQUIRES_NEW</code>），因此不会导致数据提前提交。</p><p>进一步检查发现，该方法内部存在 <code>this.</code> 方式的自调用，可能因为 Spring AOP 代理机制导致事务失效？尝试改为通过 <code>service</code> Bean 引用进行外部调用后，问题依然存在。</p><h2 id="24-xxl-job-反射调用与事务管理"><a class="markdownIt-Anchor" href="#24-xxl-job-反射调用与事务管理"></a> 2.4 XXL-JOB 反射调用与事务管理</h2><p>这里就猛的想起，XXL-JOB好像是通过反射进行定时调用的。立马Google确认， 确定是通过反射进行调用的。那么就基本确定，很有可能是XXL-JOB执行器反射，导致方法不受Springboot的事务管理。</p><p><img src="/2025/09/02/schrodinger-of-field-transaction-management-issues/1756776777447-f0a032e4-d164-4cc9-8961-f36e20757cf8.png" alt></p><p>上图原文链接：<a href="https://www.cnblogs.com/yejg1212/p/14794098.html">https://www.cnblogs.com/yejg1212/p/14794098.html</a></p><h1 id="三-解决"><a class="markdownIt-Anchor" href="#三-解决"></a> 三、解决：</h1><p>在定时任务类和方法上加上@Transactional注解，经过多轮测试，null值不再出现。</p><h1 id="四-问题点"><a class="markdownIt-Anchor" href="#四-问题点"></a> 四、问题点：</h1><h2 id="41-为啥事务失效"><a class="markdownIt-Anchor" href="#41-为啥事务失效"></a> 4.1 为啥事务失效？</h2><p><code>@Transactional</code> 是通过 <strong>Spring AOP</strong> 来实现的。只有方法是通过 <strong>Spring 容器生成的代理对象</strong> 调用时，事务切面才会生效。如果方法不是通过代理调用（比如直接 new 出来的对象，或者直接在同一个类里this自调用），事务就不会生效。</p><p>XXL-JOB 调度任务时，是通过 <strong>反射调用你标注的方法</strong>。  所以说，它并不是通过 Spring AOP 代理对象去调用的，而是直接调用你 <code>@Component</code> 类里的那个方法。</p><h2 id="42-为啥加了-transactional-就生效了"><a class="markdownIt-Anchor" href="#42-为啥加了-transactional-就生效了"></a> 4.2 为啥加了 <code>@Transactional</code> 就生效了？</h2><p>当给方法加上 <code>@Transactional</code>，Spring 在启动时会发现这个方法需要事务切面，会为整个类生成一个<strong>代理对象</strong>。</p><p>XXL-JOB 在执行任务时，仍然是通过 Spring 容器中的 bean 去拿这个类，但此时拿到的已经是代理对象。当 XXL-JOB 通过反射调用这个代理对象的方法时，Spring AOP 的事务切面就会拦截到，事务开始生效。</p><h2 id="43-正确的解决方式"><a class="markdownIt-Anchor" href="#43-正确的解决方式"></a> 4.3 正确的解决方式</h2><p>因为项目上存在重构分支和开发分支，后期打算将重构分支切为生产，所以目前临时添加<code>@Transactional</code>解决掉问题。</p><p>实际上， 执行器方法应该只做参数校验、任务调度、开始结束日志等。实际的业务逻辑，应当放入service中，使用@Transactional管理事务。</p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://log.660066.xyz/tags/%E5%BC%80%E5%8F%91%E7%BA%AA%E5%AE%9E/">开发纪实</category>
+      
+      
+      <comments>https://log.660066.xyz/2025/09/02/schrodinger-of-field-transaction-management-issues/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>【软考zst2001专辑笔记】004数据结构-下卷</title>
@@ -412,31 +433,6 @@
       
       
       <comments>https://log.660066.xyz/2024/08/06/noUnzipModifyContent/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>【Datawhale AI 夏令营】Task4-上分加油站</title>
-      <link>https://log.660066.xyz/2024/08/02/datawhale-task4-appendix/</link>
-      <guid>https://log.660066.xyz/2024/08/02/datawhale-task4-appendix/</guid>
-      <pubDate>Fri, 02 Aug 2024 15:35:08 GMT</pubDate>
-      
-      <description>【Datawhale AI 夏令营】Task4-上分加油站</description>
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="一、优化思路"><a href="#一、优化思路" class="headerlink" title="一、优化思路"></a>一、优化思路</h1><ol><li><p>训练＆微调模型提升解决逻辑推理问题的能力。</p></li><li><p>使用各种prompt工程、agent系统方案，达到模型解决逻辑推理问题的能力边界。</p></li></ol><h1 id="二、prompt（提示词工程）"><a href="#二、prompt（提示词工程）" class="headerlink" title="二、prompt（提示词工程）"></a>二、prompt（提示词工程）</h1><h2 id="2-1-什么是prompt"><a href="#2-1-什么是prompt" class="headerlink" title="2.1 什么是prompt"></a>2.1 什么是prompt</h2><p>在交互式任务中给定的初始文本或输入，用来引导模型生成特定类型的输出。</p><p>例如，在一个对话系统中，用户提出的问题就是prompt，模型根据这个prompt生成回答。prompt可以是一个句子、一个段落或任何文本序列，模型基于这个prompt继续生成后续的文本。优化prompt通常意味着调整或设计更有效的输入，以引导模型产生更准确、更相关或更高质量的输出。</p><h2 id="2-2-优化prompt"><a href="#2-2-优化prompt" class="headerlink" title="2.2 优化prompt"></a>2.2 优化prompt</h2><blockquote><p>[!NOTE]</p><ul><li><strong>增加上下文信息</strong>：提供更多的背景信息可以帮助模型理解prompt的意图。</li><li><strong>明确性</strong>：确保prompt清晰无歧义，减少模型理解错误的可能性。</li><li><strong>引导性</strong>：使用特定的关键词或短语来引导模型朝向预期的方向生成文本。</li></ul></blockquote><ol><li><p>明确和具体化</p><ul><li><p><strong>清晰表述</strong>：确保prompt清晰、直接，避免模糊不清的表述，这样可以减少模型误解的可能性。</p></li><li><p><strong>具体实例</strong>：提供具体的示例或上下文，帮助模型更好地理解任务要求。例如，在生成文章摘要时，可以先给出一两句话的摘要示例，然后让模型继续生成。</p></li></ul></li><li><p>提供指导性的指令</p><ul><li><p><strong>指令明确</strong>：在prompt中明确指出你希望模型执行的操作。例如，“请总结下面的文章”，而不是“做点什么”。</p></li><li><p><strong>格式指引</strong>：指定输出格式，比如“以项目符号列表的形式列出”或“使用正式的语言回答”。</p></li></ul></li><li><p>使用示例</p><ul><li><p><strong>包含样本</strong>：在prompt中加入一些样例输入和对应的期望输出，帮助模型理解模式或格式。</p></li><li><p><strong>逐步引导</strong>：通过一系列由简到繁的示例，逐步引导模型学习更复杂的任务。</p></li></ul></li><li><p>调整长度和复杂度</p><ul><li><p><strong>适当长度</strong>：根据任务需求调整prompt的长度，太长可能导致模型无法抓住重点，太短可能缺乏必要的信息。</p></li><li><p><strong>控制复杂度</strong>：避免过于复杂或冗余的信息，这可能会混淆模型。</p></li></ul></li><li><p>引导模型的思维方式</p><ul><li><p><strong>逻辑推理</strong>：如果需要模型进行逻辑推理，可以在prompt中引入假设情景或逻辑问题。</p></li><li><p><strong>情感色彩</strong>：对于需要特定情感色彩的文本生成，如写作或评论，可以在prompt中设定情感基调。</p></li></ul></li><li><p>测试和迭代</p><ul><li><p><strong>A&#x2F;B测试</strong>：对不同版本的prompt进行对比测试，看哪个版本的输出质量更高。</p></li><li><p><strong>持续优化</strong>：根据模型的反馈和输出，不断调整prompt，直到达到满意的输出为止。</p></li></ul></li><li><p>避免偏见和敏感话题</p><ul><li><p><strong>检查偏见</strong>：确保prompt没有隐含的偏见，避免引导模型生成有偏见的回答。</p></li><li><p><strong>敏感话题</strong>：避免提及可能引起争议或不适的话题，确保输出的安全性和适宜性。</p></li></ul></li></ol><h1 id="三、agent（智能体）"><a href="#三、agent（智能体）" class="headerlink" title="三、agent（智能体）"></a>三、agent（智能体）</h1><h2 id="3-1-什么是agent"><a href="#3-1-什么是agent" class="headerlink" title="3.1 什么是agent"></a>3.1 什么是agent</h2><p>能够感知环境并采取行动以影响该环境的实体。</p><p>在大模型技术中，一个agent可能是一个自动化的程序，如聊天机器人，它可以根据用户的输入（即prompt）生成响应。</p><p>在强化学习的背景下，agent的目标是找到一个最优策略，使得在长期的交互中，累积的奖励最大。这就像是你玩游戏时，想要通过不断练习和学习，找到最有效的打法，以便在游戏中获得尽可能高的总分。</p><h2 id="3-2-优化agent"><a href="#3-2-优化agent" class="headerlink" title="3.2 优化agent"></a>3.2 优化agent</h2><blockquote><p>[!NOTE]</p><ul><li><strong>模型架构的改进</strong>：使用更复杂的神经网络结构，比如Transformer，以提高模型的表达能力。</li><li><strong>数据增强</strong>：增加训练数据的多样性和数量，使模型更加鲁棒。</li><li><strong>算法优化</strong>：改进训练算法，如采用不同的损失函数、优化器或正则化技术，以提升模型的泛化能力。</li><li><strong>超参数调优</strong>：调整学习率、批次大小等超参数，找到最佳配置。</li></ul></blockquote><ol><li><p>模型架构调整</p><ul><li><p><strong>神经网络深度与宽度</strong>：增加或减少神经网络层数（深度）和每层神经元数量（宽度），寻找最佳的网络架构。</p></li><li><p><strong>正则化技术</strong>：使用如Dropout、L1&#x2F;L2正则化等技术防止过拟合。</p></li></ul></li><li><p>算法选择与参数调优</p><ul><li><p><strong>强化学习算法</strong>：选择合适的RL算法，如Q-Learning、Deep Q-Networks (DQN)、Policy Gradients、Proximal Policy Optimization (PPO)等，并调整其超参数。</p></li><li><p><strong>探索与利用平衡</strong>：调整探索率（exploration rate），如ε-greedy策略中的ε值，以找到探索未知状态与利用已知最优行为之间的平衡。</p></li></ul></li><li><p>经验回放与数据增强</p><ul><li><p><strong>经验回放（Experience Replay）</strong>：使用历史交互数据训练代理，打破数据的相关性，提高学习效率。</p></li><li><p><strong>数据增强</strong>：通过数据增强技术增加训练集的多样性，帮助代理泛化到未见过的情况。</p></li></ul></li><li><p>多任务学习与迁移学习</p><ul><li><p><strong>多任务学习</strong>：同时解决多个相关任务，共享学习到的知识，提高学习效率和泛化能力。</p></li><li><p><strong>迁移学习</strong>：从一个已经解决的任务中学习到的知识迁移到新的相关任务上，加速新任务的学习。</p></li></ul></li><li><p>分布式与并行计算</p><ul><li><p><strong>分布式训练</strong>：使用多个处理器或机器并行训练代理，加快训练速度。</p></li><li><p><strong>异步更新</strong>：在多个环境中并行收集经验，异步更新代理的参数，如A3C算法。</p></li></ul></li><li><p>模型解释与可解释性</p><ul><li><p><strong>解释性增强</strong>：开发技术使代理的决策过程更加透明，便于理解和调试。</p></li><li><p><strong>基于规则的约束</strong>：结合领域知识，为代理添加硬编码规则或限制，以避免不合理的行为。</p></li></ul></li><li><p>持续学习与在线学习</p><ul><li><p><strong>持续学习</strong>：使代理能够随着时间和新数据的出现持续学习和适应，避免灾难性遗忘。</p></li><li><p><strong>在线学习</strong>：代理在实际环境中实时学习，无需重新训练整个模型。</p></li></ul></li><li><p>评估与监控</p><ul><li><p><strong>性能指标</strong>：定义合适的性能指标来评估代理的表现，如累积奖励、成功完成任务的频率等。</p></li><li><p><strong>实时监控</strong>：实施监控机制，及时发现和纠正代理的异常行为。</p></li></ul></li><li><p>模拟与预训练</p><ul><li><p><strong>模拟环境</strong>：在高保真的模拟环境中预训练代理，降低现实世界中的试错成本。</p></li><li><p><strong>预训练与微调</strong>：使用预训练模型作为起点，针对特定任务进行微调，加速学习过程。</p></li></ul></li></ol><h1 id="四、相关资料"><a href="#四、相关资料" class="headerlink" title="四、相关资料"></a>四、相关资料</h1><p>lora相关微调的方案一览：</p><p><a href="https://blog.csdn.net/deephub/article/details/136735670">https://blog.csdn.net/deephub/article/details/136735670</a></p><p>pfet库，也介绍了很多微调的方法：</p><p><a href="https://huggingface.co/docs/peft/conceptual_guides/adapter">https://huggingface.co/docs/peft/conceptual_guides/adapter</a></p><p>agent学习链接：</p><p><a href="https://github.com/datawhalechina/hugging-multi-agent">https://github.com/datawhalechina/hugging-multi-agent</a></p><p>面向开发者的大模型手册：</p><p><a href="https://github.com/datawhalechina/llm-cookbook/tree/main">https://github.com/datawhalechina/llm-cookbook/tree/main</a></p>]]></content:encoded>
-      
-      
-      
-      <category domain="https://log.660066.xyz/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</category>
-      
-      <category domain="https://log.660066.xyz/tags/AI/">AI</category>
-      
-      <category domain="https://log.660066.xyz/tags/Datawhale/">Datawhale</category>
-      
-      
-      <comments>https://log.660066.xyz/2024/08/02/datawhale-task4-appendix/#disqus_thread</comments>
       
     </item>
     
