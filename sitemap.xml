@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://log.660066.xyz/links/index.html</loc>
+    
+    <lastmod>2025-11-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://log.660066.xyz/2025/11/06/big-factory-think-cache-consistency/</loc>
     
     <lastmod>2025-11-20</lastmod>
@@ -77,15 +86,6 @@
     <loc>https://log.660066.xyz/2025/08/05/zst-programming-language-notes/</loc>
     
     <lastmod>2025-08-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/links/index.html</loc>
-    
-    <lastmod>2025-07-31</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
