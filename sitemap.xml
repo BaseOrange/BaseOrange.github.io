@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://log.660066.xyz/2026/05/06/world-go-to-see-3/</loc>
+    <loc>https://log.660066.xyz/2026/05/06/worldGoToSee4/</loc>
     
     <lastmod>2026-05-06</lastmod>
     
@@ -290,6 +290,15 @@
   </url>
   
   <url>
+    <loc>https://log.660066.xyz/2023/12/06/Docx4j%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C-1-Docx4j%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%90/</loc>
+    
+    <lastmod>2024-11-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://log.660066.xyz/2023/12/06/Docx4j%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C-2-Docx4j%E7%9A%84%E6%AE%B5%E8%90%BD%E7%BA%A7%E5%88%AB%E4%BF%A1%E6%81%AF/</loc>
     
     <lastmod>2024-11-17</lastmod>
@@ -318,6 +327,15 @@
   
   <url>
     <loc>https://log.660066.xyz/2023/12/06/Docx4j%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C-5-Docx4j%E7%9A%84%E5%9B%BE%E7%89%87%E4%BF%A1%E6%81%AF/</loc>
+    
+    <lastmod>2024-11-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/2024/01/03/Docx4j%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C-6-Docx4j%E7%9A%84%E8%A1%A8%E6%A0%BC/</loc>
     
     <lastmod>2024-11-17</lastmod>
     
@@ -371,7 +389,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/2023/12/06/Docx4j%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C-1-Docx4j%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%90/</loc>
+    <loc>https://log.660066.xyz/2023/06/19/Doris%E9%9B%86%E7%BE%A4%E5%8D%87%E7%BA%A7/</loc>
     
     <lastmod>2024-11-17</lastmod>
     
@@ -398,7 +416,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/2023/06/19/Doris%E9%9B%86%E7%BE%A4%E5%8D%87%E7%BA%A7/</loc>
+    <loc>https://log.660066.xyz/2023/10/17/OTP-Java-Redme/</loc>
     
     <lastmod>2024-11-17</lastmod>
     
@@ -416,15 +434,6 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/2023/10/17/OTP-Java-Redme/</loc>
-    
-    <lastmod>2024-11-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://log.660066.xyz/2024/08/21/RunLLM-onCpuEnv-withOllama/</loc>
     
     <lastmod>2024-11-17</lastmod>
@@ -434,7 +443,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/2024/07/25/datawhale-task1-baseline/</loc>
+    <loc>https://log.660066.xyz/2023/03/23/XBRL%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
     
     <lastmod>2024-11-17</lastmod>
     
@@ -443,7 +452,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/2023/03/23/XBRL%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+    <loc>https://log.660066.xyz/2024/07/25/datawhale-task1-baseline/</loc>
     
     <lastmod>2024-11-17</lastmod>
     
@@ -470,33 +479,6 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/2024/09/01/inside-git/</loc>
-    
-    <lastmod>2024-11-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/2024/11/14/google-prompting-guide-101/</loc>
-    
-    <lastmod>2024-11-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/2024/01/03/Docx4j%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C-6-Docx4j%E7%9A%84%E8%A1%A8%E6%A0%BC/</loc>
-    
-    <lastmod>2024-11-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://log.660066.xyz/2023/05/08/kafka%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</loc>
     
     <lastmod>2024-11-17</lastmod>
@@ -506,7 +488,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/2024/08/02/datawhale-task4-appendix/</loc>
+    <loc>https://log.660066.xyz/2024/09/01/inside-git/</loc>
     
     <lastmod>2024-11-17</lastmod>
     
@@ -524,7 +506,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/2023/08/09/%E6%96%B0%E4%B8%80%E4%BB%A3%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9F%A5%E8%AF%86%E5%85%85%E7%94%B5/</loc>
+    <loc>https://log.660066.xyz/2024/08/02/datawhale-task4-appendix/</loc>
     
     <lastmod>2024-11-17</lastmod>
     
@@ -533,43 +515,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/2024/06/17/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E3%80%90%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD%E3%80%91/</loc>
-    
-    <lastmod>2024-11-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/2024/04/24/%E9%80%9A%E8%BF%87%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E6%B6%88%E9%99%A4%E5%86%97%E9%95%BF%E7%9A%84if%E5%9D%97/</loc>
-    
-    <lastmod>2024-11-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/2023/10/31/%E6%9D%A5%E8%87%AA%E8%B0%B7%E6%AD%8C%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E6%96%B9%E5%BC%8F-Protobuf/</loc>
-    
-    <lastmod>2024-11-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/2023/02/20/%E9%9A%8F%E6%89%8B%E8%AE%B020230220/</loc>
-    
-    <lastmod>2024-11-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/2023/03/09/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%A4%A7%E5%85%A8/</loc>
+    <loc>https://log.660066.xyz/2024/11/14/google-prompting-guide-101/</loc>
     
     <lastmod>2024-11-17</lastmod>
     
@@ -587,6 +533,60 @@
   </url>
   
   <url>
+    <loc>https://log.660066.xyz/2024/06/17/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E3%80%90%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD%E3%80%91/</loc>
+    
+    <lastmod>2024-11-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/2023/10/31/%E6%9D%A5%E8%87%AA%E8%B0%B7%E6%AD%8C%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E6%96%B9%E5%BC%8F-Protobuf/</loc>
+    
+    <lastmod>2024-11-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/2023/03/09/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%A4%A7%E5%85%A8/</loc>
+    
+    <lastmod>2024-11-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/2023/08/09/%E6%96%B0%E4%B8%80%E4%BB%A3%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9F%A5%E8%AF%86%E5%85%85%E7%94%B5/</loc>
+    
+    <lastmod>2024-11-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/2023/02/20/%E9%9A%8F%E6%89%8B%E8%AE%B020230220/</loc>
+    
+    <lastmod>2024-11-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/2024/04/24/%E9%80%9A%E8%BF%87%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E6%B6%88%E9%99%A4%E5%86%97%E9%95%BF%E7%9A%84if%E5%9D%97/</loc>
+    
+    <lastmod>2024-11-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://log.660066.xyz/404/index.html</loc>
     
     <lastmod>2024-11-17</lastmod>
@@ -596,7 +596,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/index.html</loc>
+    <loc>https://log.660066.xyz/categories/index.html</loc>
     
     <lastmod>2024-11-17</lastmod>
     
@@ -605,7 +605,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/categories/index.html</loc>
+    <loc>https://log.660066.xyz/tags/index.html</loc>
     
     <lastmod>2024-11-17</lastmod>
     
@@ -707,13 +707,6 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/Datawhale/</loc>
-    <lastmod>2026-05-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://log.660066.xyz/tags/XBRL/</loc>
     <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -721,7 +714,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/MacOS/</loc>
+    <loc>https://log.660066.xyz/tags/Datawhale/</loc>
     <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -735,35 +728,7 @@
   </url>
   
   <url>
-    <loc>https://log.660066.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
-    <lastmod>2026-05-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/%E5%BA%8F%E5%88%97%E5%8C%96/</loc>
-    <lastmod>2026-05-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/%E9%9A%8F%E6%89%8B%E8%AE%B0/</loc>
-    <lastmod>2026-05-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
-    <lastmod>2026-05-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://log.660066.xyz/tags/%E9%94%81/</loc>
+    <loc>https://log.660066.xyz/tags/MacOS/</loc>
     <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -778,6 +743,41 @@
   
   <url>
     <loc>https://log.660066.xyz/tags/%E8%BD%AF%E8%80%83/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/%E9%94%81/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/%E5%BA%8F%E5%88%97%E5%8C%96/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://log.660066.xyz/tags/%E9%9A%8F%E6%89%8B%E8%AE%B0/</loc>
     <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

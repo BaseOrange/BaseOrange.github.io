@@ -117,7 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%89%8D%E7%BD%AE%E5%B7%A5%E4%BD%9C"><span class="nav-text">二、前置工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%B5%8B%E8%AF%95BE%E5%8D%87%E7%BA%A7%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="nav-text">三、测试BE升级正确性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%B5%8B%E8%AF%95-FE-%E5%85%83%E6%95%B0%E6%8D%AE%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="nav-text">四、测试 FE 元数据兼容性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%8D%87%E7%BA%A7%E5%87%86%E5%A4%87"><span class="nav-text">五、升级准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7"><span class="nav-text">六、滚动升级</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E5%89%8D%E8%A8%80"><span class="nav-text"> 一、前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E5%89%8D%E7%BD%AE%E5%B7%A5%E4%BD%9C"><span class="nav-text"> 二、前置工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E6%B5%8B%E8%AF%95be%E5%8D%87%E7%BA%A7%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="nav-text"> 三、测试BE升级正确性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B-%E6%B5%8B%E8%AF%95-fe-%E5%85%83%E6%95%B0%E6%8D%AE%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="nav-text"> 四、测试 FE 元数据兼容性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94-%E5%8D%87%E7%BA%A7%E5%87%86%E5%A4%87"><span class="nav-text"> 五、升级准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD-%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7"><span class="nav-text"> 六、滚动升级</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -212,25 +212,30 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p><strong>文中的出现的BE二进制文件名称 <code>doris_be</code>，在之前的版本中为 <code>palo_be</code>。</strong></p>
+    <div class="post-body" itemprop="articleBody"><h1 id="一-前言"><a class="markdownIt-Anchor" href="#一-前言"></a> 一、前言</h1>
+<p><strong>文中的出现的BE二进制文件名称 <code>doris_be</code>，在之前的版本中为 <code>palo_be</code>。</strong></p>
 <ol>
 <li>Doris不支持跨两位版本号进行升级。此处的版本号指的是二级版本号（加粗字体0.<strong>XXX</strong>.123）</li>
 </ol>
-<h1 id="二、前置工作"><a href="#二、前置工作" class="headerlink" title="二、前置工作"></a>二、前置工作</h1><ol>
-<li><p><strong>关闭</strong>集群<strong>副本修复</strong>和<strong>均衡功能</strong>（升级过程可能会重启，触发不必要的集群均衡和副本修复逻辑）</p>
+<h1 id="二-前置工作"><a class="markdownIt-Anchor" href="#二-前置工作"></a> 二、前置工作</h1>
+<ol>
+<li>
+<p><strong>关闭</strong>集群<strong>副本修复</strong>和<strong>均衡功能</strong>（升级过程可能会重启，触发不必要的集群均衡和副本修复逻辑）</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 关闭副本均衡逻辑。关闭后，不会再触发普通表副本的均衡操作。</span><br><span class="line">admin <span class="keyword">set</span> frontend config(&quot;disable_balance&quot; <span class="operator">=</span> &quot;true&quot;);</span><br><span class="line"></span><br><span class="line"># 关闭 colocation 表的副本均衡逻辑。关闭后，不会再触发 colocation 表的副本重分布操作。</span><br><span class="line"> admin <span class="keyword">set</span> frontend config(&quot;disable_colocate_balance&quot; <span class="operator">=</span> &quot;true&quot;);</span><br><span class="line"></span><br><span class="line"># 关闭副本调度逻辑。关闭后，所有已产生的副本修复和均衡任务不会再被调度。</span><br><span class="line">admin <span class="keyword">set</span> frontend config(&quot;disable_tablet_scheduler&quot; <span class="operator">=</span> &quot;true&quot;);</span><br></pre></td></tr></table></figure>
-
 <p>当集群升级完毕后，在通过以上命令将对应配置设为原值即可。</p>
 </li>
-<li><p><strong>重要！！在升级之前需要备份元数据（整个目录都需要备份）！！</strong></p>
+<li>
+<p><strong>重要！！在升级之前需要备份元数据（整个目录都需要备份）！！</strong></p>
 <p><strong>重要！！在升级之前需要备份元数据（整个目录都需要备份）！！</strong></p>
 <p><strong>重要！！在升级之前需要备份元数据（整个目录都需要备份）！！</strong></p>
 </li>
 </ol>
-<h1 id="三、测试BE升级正确性"><a href="#三、测试BE升级正确性" class="headerlink" title="三、测试BE升级正确性"></a>三、测试BE升级正确性</h1><ol>
+<h1 id="三-测试be升级正确性"><a class="markdownIt-Anchor" href="#三-测试be升级正确性"></a> 三、测试BE升级正确性</h1>
+<ol>
 <li>选择一个BE节点，部署最新的 doris_be 二进制文件。</li>
-<li>启动BE节点，通过be.INFO，查看是否启动成功。</li>
-<li><strong>启动失败解决方案</strong><ul>
+<li>启动BE节点，<a target="_blank" rel="noopener" href="http://xn--be-623g5k.INFO">通过be.INFO</a>，查看是否启动成功。</li>
+<li><strong>启动失败解决方案</strong>
+<ul>
 <li>错误不可恢复，</li>
 <li>可以直接通过 DROP BACKEND 删除该 BE、清理数据后，使用上一个版本的 doris_be 重新启动 BE。</li>
 <li>然后重新 ADD BACKEND。</li>
@@ -238,24 +243,27 @@
 </ul>
 </li>
 </ol>
-<h1 id="四、测试-FE-元数据兼容性"><a href="#四、测试-FE-元数据兼容性" class="headerlink" title="四、测试 FE 元数据兼容性"></a>四、测试 FE 元数据兼容性</h1><p><strong>重要！!元数据兼容性异常很可能导致数据无法恢复！！</strong></p>
+<h1 id="四-测试-fe-元数据兼容性"><a class="markdownIt-Anchor" href="#四-测试-fe-元数据兼容性"></a> 四、测试 FE 元数据兼容性</h1>
+<p><strong>重要！!元数据兼容性异常很可能导致数据无法恢复！！</strong></p>
 <ol>
 <li>单独使用新版本部署一个测试用的 FE 进程（建议在自己本地的开发机，或者BE节点。如果在Follower或者Observer节点上，需要停止启动的进程,但是不建议在Follower或者Observer节点上测试）</li>
 <li>修改测试用的 FE 的配置文件 fe.conf，将所有端口设置为<strong>与线上不同</strong></li>
-<li>在 fe.conf 添加配置：metadata_failure_recovery&#x3D;true</li>
-<li>在 fe.conf 添加配置：metadata_failure_recovery&#x3D;true</li>
+<li>在 fe.conf 添加配置：metadata_failure_recovery=true</li>
+<li>在 fe.conf 添加配置：metadata_failure_recovery=true</li>
 <li>拷贝线上环境 Master FE 的元数据目录 doris-meta 到测试环境</li>
-<li>将拷贝到测试环境中的 doris-meta&#x2F;image&#x2F;VERSION 文件中的 cluster_id 修改为 123456（即与第3步中相同）</li>
-<li>在测试环境中，运行 sh bin&#x2F;start_fe.sh 启动 FE</li>
+<li>将拷贝到测试环境中的 doris-meta/image/VERSION 文件中的 cluster_id 修改为 123456（即与第3步中相同）</li>
+<li>在测试环境中，运行 sh bin/start_fe.sh 启动 FE</li>
 <li>通过 FE 日志 fe.log 观察是否启动成功。</li>
-<li>如果启动成功，运行 sh bin&#x2F;stop_fe.sh 停止测试环境的 FE 进程。</li>
+<li>如果启动成功，运行 sh bin/stop_fe.sh 停止测试环境的 FE 进程。</li>
 <li><strong>以上 2-6 步的目的是防止测试环境的FE启动后，错误连接到线上环境中</strong></li>
 </ol>
 <p><strong>注：</strong> 1.1.x 版本升级 1.2.x 版本时，需要先删除已有的原生 UDF ；否则会导致FE启动失败；并且1.2版本开始不再对原生 UDF提供支持，请使用 <a target="_blank" rel="noopener" href="https://doris.apache.org/zh-CN/docs/1.2/ecosystem/udf/java-user-defined-function">Java UDF</a>。</p>
-<h1 id="五、升级准备"><a href="#五、升级准备" class="headerlink" title="五、升级准备"></a>五、升级准备</h1><ol>
+<h1 id="五-升级准备"><a class="markdownIt-Anchor" href="#五-升级准备"></a> 五、升级准备</h1>
+<ol>
 <li>在完成数据正确性验证后，将 BE 和 FE 新版本的二进制文件分发到各自目录下。</li>
 </ol>
-<h1 id="六、滚动升级"><a href="#六、滚动升级" class="headerlink" title="六、滚动升级"></a>六、滚动升级</h1>
+<h1 id="六-滚动升级"><a class="markdownIt-Anchor" href="#六-滚动升级"></a> 六、滚动升级</h1>
+
     </div>
 
     

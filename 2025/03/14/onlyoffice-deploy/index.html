@@ -28,15 +28,15 @@
 <meta property="og:site_name" content="大橙子">
 <meta property="og:description" content="OnlyOffice部署【基于centos】">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-deploy/image-20250314182832093.png">
-<meta property="og:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-deploy/image-20250314183248722.png">
-<meta property="og:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-deploy/image-20250314182528117.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-deploy/onlyoffice-deploy/image-20250314182832093.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-deploy/onlyoffice-deploy/image-20250314183248722.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-deploy/onlyoffice-deploy/image-20250314182528117.png">
 <meta property="article:published_time" content="2025-03-14T11:12:27.000Z">
 <meta property="article:modified_time" content="2025-03-14T11:22:20.615Z">
 <meta property="article:author" content="BigOrange">
 <meta property="article:tag" content="onlyoffice">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-deploy/image-20250314182832093.png">
+<meta name="twitter:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-deploy/onlyoffice-deploy/image-20250314182832093.png">
 
 
 <link rel="canonical" href="https://log.660066.xyz/2025/03/14/onlyoffice-deploy/">
@@ -121,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#onlyoffice%E9%83%A8%E7%BD%B2%E3%80%90centos%E3%80%91"><span class="nav-text">onlyoffice部署【centos】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%8A%E4%BC%A0out%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-text">一、上传out文件夹</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85rabbitmq%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE"><span class="nav-text">二、安装rabbitmq及其配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85nginx%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE"><span class="nav-text">三、安装nginx及其配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BF%AE%E6%94%B9%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">四、修改项目配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE"><span class="nav-text">五、启动项目</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#onlyoffice%E9%83%A8%E7%BD%B2centos"><span class="nav-text"> onlyoffice部署【centos】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E4%B8%8A%E4%BC%A0out%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-text"> 一、上传out文件夹</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E5%AE%89%E8%A3%85rabbitmq%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE"><span class="nav-text"> 二、安装rabbitmq及其配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E5%AE%89%E8%A3%85nginx%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE"><span class="nav-text"> 三、安装nginx及其配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B-%E4%BF%AE%E6%94%B9%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text"> 四、修改项目配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94-%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE"><span class="nav-text"> 五、启动项目</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -210,76 +210,103 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="onlyoffice部署【centos】"><a href="#onlyoffice部署【centos】" class="headerlink" title="onlyoffice部署【centos】"></a>onlyoffice部署【centos】</h1><h1 id="一、上传out文件夹"><a href="#一、上传out文件夹" class="headerlink" title="一、上传out文件夹"></a>一、上传out文件夹</h1><p>基于上一篇打包文章，需要将out文件夹上传到CentOS。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="onlyoffice部署centos"><a class="markdownIt-Anchor" href="#onlyoffice部署centos"></a> onlyoffice部署【centos】</h1>
+<h1 id="一-上传out文件夹"><a class="markdownIt-Anchor" href="#一-上传out文件夹"></a> 一、上传out文件夹</h1>
+<p>基于上一篇打包文章，需要将out文件夹上传到CentOS。</p>
 <p>此处不在赘述。</p>
-<h1 id="二、安装rabbitmq及其配置"><a href="#二、安装rabbitmq及其配置" class="headerlink" title="二、安装rabbitmq及其配置"></a>二、安装rabbitmq及其配置</h1><ol>
-<li><p>更新yum（基本操作）</p>
+<h1 id="二-安装rabbitmq及其配置"><a class="markdownIt-Anchor" href="#二-安装rabbitmq及其配置"></a> 二、安装rabbitmq及其配置</h1>
+<ol>
+<li>
+<p>更新yum（基本操作）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y update</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>安装EPEL存储库</p>
+<li>
+<p>安装EPEL存储库</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install epel-release</span><br><span class="line">yum -y update</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(无网环境自行下载)https://packagecloud.io/rabbitmq/erlang</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>安装Erlang语言</p>
+<li>
+<p>安装Erlang语言</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install erlang socat </span><br><span class="line"><span class="comment"># 查看是否成功安装</span></span><br><span class="line">erl -version</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>下载并安装RabbitMq（自行选择方式，wget、curl、上传等）</p>
+<li>
+<p>下载并安装RabbitMq（自行选择方式，wget、curl、上传等）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/rabbitmq/rabbitmq-server/releases/download/rabbitmq_v3_6_16/rabbitmq-server-3.6.16-1.el7.noarch.rpm</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装命令</span></span><br><span class="line">rpm -ivh rabbitmq-server-3.6.16-1.el7.noarch.rpm</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动服务</span></span><br><span class="line">systemctl start rabbitmq-server</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看服务状态</span></span><br><span class="line">systemctl status rabbitmq-server</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止服务</span></span><br><span class="line">systemctl stop rabbitmq-server</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">开启开机自启</span></span><br><span class="line">systemctl enable rabbitmq-server</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>添加RabbitMq用户（根据自己需要配置，一般生产无需配置）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建账号和密码</span></span><br><span class="line">rabbitmqctl add_user 用户名 密码</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置用户角色：</span></span><br><span class="line">rabbitmqctl set_user_tags 用户名 administrator</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">为用户添加资源权限，添加配置、写、读权限</span></span><br><span class="line">rabbitmqctl set_permissions -p &quot;/&quot; 用户名 &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">修改用户密码</span></span><br><span class="line">rabbitmqctl change_password 用户名  新密码</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="三、安装nginx及其配置"><a href="#三、安装nginx及其配置" class="headerlink" title="三、安装nginx及其配置"></a>三、安装nginx及其配置</h1><ol>
-<li><p>更新yum、安装EPEL存储库（Mq安装时一描述，不在赘述）</p>
+<li>
+<p>添加RabbitMq用户（根据自己需要配置，一般生产无需配置）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建账号和密码</span></span><br><span class="line">rabbitmqctl add_user 用户名 密码</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置用户角色：</span></span><br><span class="line">rabbitmqctl set_user_tags 用户名 administrator</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">为用户添加资源权限，添加配置、写、读权限</span></span><br><span class="line">rabbitmqctl set_permissions -p &quot;/&quot; 用户名 &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">修改用户密码</span></span><br><span class="line">rabbitmqctl change_password 用户名  新密码</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>安装nginx</p>
+</ol>
+<h1 id="三-安装nginx及其配置"><a class="markdownIt-Anchor" href="#三-安装nginx及其配置"></a> 三、安装nginx及其配置</h1>
+<ol>
+<li>
+<p>更新yum、安装EPEL存储库（Mq安装时一描述，不在赘述）</p>
+</li>
+<li>
+<p>安装nginx</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动Nginx服务：</span></span><br><span class="line">systemctl start nginx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查Nginx服务状态：</span></span><br><span class="line">systemctl status nginx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置Nginx开机自启：</span></span><br><span class="line">systemctl enable nginx</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>配置Nginx配置</p>
+<li>
+<p>配置Nginx配置</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">切换到配置文件目录</span></span><br><span class="line">cd /etc/nginx/conf.d/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建配置文件</span></span><br><span class="line">touch nginx.conf</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑(配置信息如下)</span></span><br><span class="line">vim nginx.conf</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">map</span> <span class="variable">$http_host</span> <span class="variable">$this_host</span> &#123;</span><br><span class="line">  &quot;&quot; $host;</span><br><span class="line">  <span class="attribute">default</span> <span class="variable">$http_host</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">map</span> <span class="variable">$http_x_forwarded_proto</span> <span class="variable">$the_scheme</span> &#123;</span><br><span class="line">  <span class="attribute">default</span> <span class="variable">$http_x_forwarded_proto</span>;</span><br><span class="line">  &quot;&quot; $scheme;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">map</span> <span class="variable">$http_x_forwarded_host</span> <span class="variable">$the_host</span> &#123;</span><br><span class="line">  <span class="attribute">default</span> <span class="variable">$http_x_forwarded_host</span>;</span><br><span class="line">  &quot;&quot; $this_host;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">map</span> <span class="variable">$http_upgrade</span> <span class="variable">$proxy_connection</span> &#123;</span><br><span class="line">  <span class="attribute">default</span> upgrade;</span><br><span class="line">  &quot;&quot; close;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">proxy_set_header</span> Host <span class="variable">$http_host</span>;</span><br><span class="line"><span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line"><span class="attribute">proxy_set_header</span> Connection <span class="variable">$proxy_connection</span>;</span><br><span class="line"><span class="attribute">proxy_set_header</span> X-Forwarded-Host <span class="variable">$the_host</span>;</span><br><span class="line"><span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$the_scheme</span>;</span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">  <span class="attribute">listen</span> <span class="number">0.0.0.0:80</span>;</span><br><span class="line">  <span class="attribute">listen</span> [::]:<span class="number">80</span> default_server;</span><br><span class="line">  <span class="attribute">server_tokens</span> <span class="literal">off</span>;</span><br><span class="line">  <span class="attribute">rewrite</span><span class="regexp"> ^\/OfficeWeb(\/apps\/.*)$</span> /web-apps<span class="variable">$1</span> <span class="literal">redirect</span>;</span><br><span class="line">  <span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://localhost:8000;</span><br><span class="line">    <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>重启Nginx</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure></li>
+<li>
+<p>重启Nginx</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h1 id="四、修改项目配置文件"><a href="#四、修改项目配置文件" class="headerlink" title="四、修改项目配置文件"></a>四、修改项目配置文件</h1><p>配置文件路径：.&#x2F;out&#x2F;linux_64&#x2F;onlyoffice&#x2F;documentserver&#x2F;server&#x2F;Common&#x2F;config&#x2F;</p>
+<h1 id="四-修改项目配置文件"><a class="markdownIt-Anchor" href="#四-修改项目配置文件"></a> 四、修改项目配置文件</h1>
+<p>配置文件路径：./out/linux_64/onlyoffice/documentserver/server/Common/config/</p>
 <p><strong>不知道的配置项含义及其作用时，建议不要自己调整。</strong></p>
 <ol>
-<li><p>数据库（因项目需要，将数据库替换为Mysql）</p>
+<li>
+<p>数据库（因项目需要，将数据库替换为Mysql）</p>
 <ol>
-<li><p>数据库SQL路径：.&#x2F;out&#x2F;linux_64&#x2F;onlyoffice&#x2F;documentserver&#x2F;server&#x2F;schema&#x2F;</p>
+<li>
+<p>数据库SQL路径：./out/linux_64/onlyoffice/documentserver/server/schema/</p>
 </li>
-<li><p>搜索sql关键字。type根据需要进行调整。dbHost(数据库ip)、dbPort(端口)、dbName(库名)、dbUser(用户名)、dbPass(密码)</p>
-<p><img src="/2025/03/14/onlyoffice-deploy/image-20250314182832093.png" alt="image-20250314182832093"></p>
+<li>
+<p>搜索sql关键字。type根据需要进行调整。dbHost(数据库ip)、dbPort(端口)、dbName(库名)、dbUser(用户名)、dbPass(密码)</p>
+<p><img src="./onlyoffice-deploy/image-20250314182832093.png" alt="image-20250314182832093" /></p>
 </li>
 </ol>
 </li>
-<li><p>Redis</p>
+<li>
+<p>Redis</p>
 <ol>
-<li><p>根据自己的需要，调整host、port、password(密码这个属性不一定存在，请自行测试！)</p>
-<p><img src="/2025/03/14/onlyoffice-deploy/image-20250314183248722.png" alt="image-20250314183248722"></p>
+<li>
+<p>根据自己的需要，调整host、port、password(密码这个属性不一定存在，请自行测试！)</p>
+<p><img src="./onlyoffice-deploy/image-20250314183248722.png" alt="image-20250314183248722" /></p>
 </li>
 </ol>
 </li>
-<li><p>RabbitMq</p>
+<li>
+<p>RabbitMq</p>
 <ol>
 <li>使用vim搜索关键词rabbitmq，因为我的rabbitmq与服务在同一主机，所以无需调整。</li>
 </ol>
-<p><img src="/2025/03/14/onlyoffice-deploy/image-20250314182528117.png" alt="image-20250314182528117"></p>
+<p><img src="./onlyoffice-deploy/image-20250314182528117.png" alt="image-20250314182528117" /></p>
 </li>
 </ol>
-<h1 id="五、启动项目"><a href="#五、启动项目" class="headerlink" title="五、启动项目"></a>五、启动项目</h1><ol>
-<li><p>生成字体数据信息</p>
+<h1 id="五-启动项目"><a class="markdownIt-Anchor" href="#五-启动项目"></a> 五、启动项目</h1>
+<ol>
+<li>
+<p>生成字体数据信息</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd out/linux_64/onlyoffice/documentserver/</span><br><span class="line">mkdir fonts</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成命令</span></span><br><span class="line">LD_LIBRARY_PATH=$&#123;PWD&#125;/server/FileConverter/bin server/tools/allfontsgen \</span><br><span class="line">  --input=&quot;$&#123;PWD&#125;/core-fonts&quot; \</span><br><span class="line">  --allfonts-web=&quot;$&#123;PWD&#125;/sdkjs/common/AllFonts.js&quot; \</span><br><span class="line">  --allfonts=&quot;$&#123;PWD&#125;/server/FileConverter/bin/AllFonts.js&quot; \</span><br><span class="line">  --images=&quot;$&#123;PWD&#125;/sdkjs/common/Images&quot; \</span><br><span class="line">  --selection=&quot;$&#123;PWD&#125;/server/FileConverter/bin/font_selection.bin&quot; \</span><br><span class="line">  --output-web=&#x27;fonts&#x27; \</span><br><span class="line">  --use-system=&quot;true&quot;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>生成演示主题</p>
+<li>
+<p>生成演示主题</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd out/linux_64/onlyoffice/documentserver/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成命令</span></span><br><span class="line">LD_LIBRARY_PATH=$&#123;PWD&#125;/server/FileConverter/bin server/tools/allthemesgen \</span><br><span class="line">  --converter-dir=&quot;$&#123;PWD&#125;/server/FileConverter/bin&quot;\</span><br><span class="line">  --src=&quot;$&#123;PWD&#125;/sdkjs/slide/themes&quot;\</span><br><span class="line">  --output=&quot;$&#123;PWD&#125;/sdkjs/common/Images&quot;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>启动FileConverter</p>
+<li>
+<p>启动FileConverter</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd out/linux_64/onlyoffice/documentserver/server/FileConverter</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">环境变量</span></span><br><span class="line">export LD_LIBRARY_PATH=$PWD/bin</span><br><span class="line">export NODE_ENV=development-linux</span><br><span class="line">export NODE_CONFIG_DIR=$PWD/../Common/config ./converter</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">守护执行</span></span><br><span class="line">nohup ./converter &gt; /xxxx/converter.log 2&gt;&amp;1 &amp; </span><br></pre></td></tr></table></figure>
 </li>
-<li><p>启动DocService</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd out/linux_64/onlyoffice/documentserver/server/DocService</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">环境变量</span></span><br><span class="line">export NODE_ENV=development-linux</span><br><span class="line">export NODE_CONFIG_DIR=$PWD/../Common/config</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">守护执行</span></span><br><span class="line">nohup ./docservice &gt; /xxxx/docservice.log 2&gt;&amp;1 &amp; </span><br></pre></td></tr></table></figure></li>
+<li>
+<p>启动DocService</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd out/linux_64/onlyoffice/documentserver/server/DocService</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">环境变量</span></span><br><span class="line">export NODE_ENV=development-linux</span><br><span class="line">export NODE_CONFIG_DIR=$PWD/../Common/config</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">守护执行</span></span><br><span class="line">nohup ./docservice &gt; /xxxx/docservice.log 2&gt;&amp;1 &amp; </span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 
     </div>

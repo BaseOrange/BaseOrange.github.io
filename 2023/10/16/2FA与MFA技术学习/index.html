@@ -122,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%812FA%E5%92%8CMFA"><span class="nav-text">一、2FA和MFA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%812FA%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-text">二、2FA的实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-TOTP%EF%BC%88%E5%9F%BA%E4%BA%8E%E6%97%B6%E9%97%B4%E7%9A%84%E4%B8%80%E6%AC%A1%E6%80%A7%E5%AF%86%E7%A0%81%EF%BC%89"><span class="nav-text">2.1 TOTP（基于时间的一次性密码）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-HOTP%EF%BC%88%E5%9F%BA%E4%BA%8E%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%B8%80%E6%AC%A1%E6%80%A7%E5%AF%86%E7%A0%81%EF%BC%89"><span class="nav-text">2.2 HOTP（基于事件的一次性密码）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-U2F%EF%BC%88%E9%80%9A%E7%94%A8%E7%AC%AC%E4%BA%8C%E5%9B%A0%E7%B4%A0%EF%BC%89"><span class="nav-text">2.3 U2F（通用第二因素）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-NFC%EF%BC%88%E8%BF%91%E5%9C%BA%E9%80%9A%E4%BF%A1%EF%BC%89"><span class="nav-text">2.4 NFC（近场通信）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-text">三、总结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-2fa%E5%92%8Cmfa"><span class="nav-text"> 一、2FA和MFA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-2fa%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-text"> 二、2FA的实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-totp%E5%9F%BA%E4%BA%8E%E6%97%B6%E9%97%B4%E7%9A%84%E4%B8%80%E6%AC%A1%E6%80%A7%E5%AF%86%E7%A0%81"><span class="nav-text"> 2.1 TOTP（基于时间的一次性密码）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-hotp%E5%9F%BA%E4%BA%8E%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%B8%80%E6%AC%A1%E6%80%A7%E5%AF%86%E7%A0%81"><span class="nav-text"> 2.2 HOTP（基于事件的一次性密码）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-u2f%E9%80%9A%E7%94%A8%E7%AC%AC%E4%BA%8C%E5%9B%A0%E7%B4%A0"><span class="nav-text"> 2.3 U2F（通用第二因素）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-nfc%E8%BF%91%E5%9C%BA%E9%80%9A%E4%BF%A1"><span class="nav-text"> 2.4 NFC（近场通信）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E6%80%BB%E7%BB%93"><span class="nav-text"> 三、总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -217,46 +217,59 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="一、2FA和MFA"><a href="#一、2FA和MFA" class="headerlink" title="一、2FA和MFA"></a>一、2FA和MFA</h1><ul>
-<li><p>2FA（Two-Factor Authentication）：双因子身份验证。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="一-2fa和mfa"><a class="markdownIt-Anchor" href="#一-2fa和mfa"></a> 一、2FA和MFA</h1>
+<ul>
+<li>
+<p>2FA（Two-Factor Authentication）：双因子身份验证。</p>
 </li>
-<li><p>MFA（Multi-Factor Authentication）：多重因子身份验证，通常两个或更多。</p>
+<li>
+<p>MFA（Multi-Factor Authentication）：多重因子身份验证，通常两个或更多。</p>
 </li>
 </ul>
-<h1 id="二、2FA的实现方式"><a href="#二、2FA的实现方式" class="headerlink" title="二、2FA的实现方式"></a>二、2FA的实现方式</h1><p>本文以TOTP和HOTP为主介绍，U2F以及NFC仅简单介绍。</p>
-<h2 id="2-1-TOTP（基于时间的一次性密码）"><a href="#2-1-TOTP（基于时间的一次性密码）" class="headerlink" title="2.1 TOTP（基于时间的一次性密码）"></a>2.1 TOTP（基于时间的一次性密码）</h2><ul>
-<li>原理：<ul>
+<h1 id="二-2fa的实现方式"><a class="markdownIt-Anchor" href="#二-2fa的实现方式"></a> 二、2FA的实现方式</h1>
+<p>本文以TOTP和HOTP为主介绍，U2F以及NFC仅简单介绍。</p>
+<h2 id="21-totp基于时间的一次性密码"><a class="markdownIt-Anchor" href="#21-totp基于时间的一次性密码"></a> 2.1 TOTP（基于时间的一次性密码）</h2>
+<ul>
+<li>原理：
+<ul>
 <li>客户端与服务端之间保存一个秘钥</li>
 <li>客户端获取到当期时间戳，将时间戳转为30秒（一般为30—60秒）的计数器</li>
 <li>客户端使用秘钥和计数器计算出一次性密码</li>
 <li>将密码发送给服务器验证</li>
 </ul>
 </li>
-<li>实现：使用BastiaanJansen&#x2F;otp-java来实现TOTP算法</li>
+<li>实现：使用BastiaanJansen/otp-java来实现TOTP算法</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.bastiaanjansen<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>otp-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>生成otpauth 并 进行验证</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">totp</span><span class="params">()</span> <span class="keyword">throws</span> URISyntaxException &#123;</span><br><span class="line">        <span class="comment">// 生成一个共享秘钥 (或者使用你自己的共享秘钥)</span></span><br><span class="line">        <span class="type">byte</span>[] secret = SecretGenerator.generate();</span><br><span class="line"></span><br><span class="line">        <span class="type">TOTPGenerator</span> <span class="variable">totp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TOTPGenerator</span>.Builder(secret)</span><br><span class="line">                .withHOTPGenerator(builder -&gt; &#123;</span><br><span class="line">                    builder.withPasswordLength(<span class="number">6</span>);</span><br><span class="line">                    <span class="comment">// 还支持SHA256和SHA512</span></span><br><span class="line">                    builder.withAlgorithm(HMACAlgorithm.SHA1);</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="comment">// 密码有效时间（单位秒）</span></span><br><span class="line">                .withPeriod(Duration.ofSeconds(<span class="number">30</span>))</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="type">URI</span> <span class="variable">uri</span> <span class="operator">=</span> totp.getURI(<span class="string">&quot;User_Name&quot;</span>);</span><br><span class="line">        System.out.println(uri);</span><br><span class="line">    	</span><br><span class="line">    	<span class="type">String</span> <span class="variable">code</span> <span class="operator">=</span> totp.now();</span><br><span class="line">        System.out.println(<span class="string">&quot;code:&quot;</span> + code);</span><br><span class="line">        <span class="comment">// 验证令牌:</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">isValid</span> <span class="operator">=</span> totp.verify(code);</span><br><span class="line">        System.out.println(<span class="string">&quot;isValid:&quot;</span> + isValid);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li>Java生成的otpauth，生成二维码，通过Authenticator App扫描即可绑定<ul>
-<li>otpauth:&#x2F;&#x2F;totp&#x2F;User_Name?period&#x3D;30&amp;digits&#x3D;6&amp;secret&#x3D;VV3KOX7UQJ4KYAKOHMZPPH3US4CJIMH6F3ZKNB5C2OOBQ6V2KIYHM27Q&amp;issuer&#x3D;User_Name&amp;algorithm&#x3D;SHA1</li>
+<li>Java生成的otpauth，生成二维码，通过Authenticator App扫描即可绑定
+<ul>
+<li>otpauth://totp/User_Name?period=30&amp;digits=6&amp;secret=VV3KOX7UQJ4KYAKOHMZPPH3US4CJIMH6F3ZKNB5C2OOBQ6V2KIYHM27Q&amp;issuer=User_Name&amp;algorithm=SHA1</li>
 </ul>
 </li>
-<li>通过Authenticator App生成的OTP<ul>
-<li><img src="/2023/10/16/2FA%E4%B8%8EMFA%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/f53c5172be1ea02a5c6c96a855def5f.jpg" alt="f53c5172be1ea02a5c6c96a855def5f" style="zoom: 33%;"></li>
-</ul>
-</li>
-<li>Java代码生成的OTP<ul>
-<li><img src="/2023/10/16/2FA%E4%B8%8EMFA%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/image-20231017123738816.png" alt="image-20231017123738816" style="zoom:150%;"></li>
-</ul>
+<li>通过Authenticator App生成的OTP
+<ul>
+<li>
+<style>.yrqfpwlewwpl{zoom: 33%;}</style><img src="/2023/10/16/2FA%E4%B8%8EMFA%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/f53c5172be1ea02a5c6c96a855def5f.jpg" class="yrqfpwlewwpl" alt="f53c5172be1ea02a5c6c96a855def5f">
 </li>
 </ul>
-<h2 id="2-2-HOTP（基于事件的一次性密码）"><a href="#2-2-HOTP（基于事件的一次性密码）" class="headerlink" title="2.2 HOTP（基于事件的一次性密码）"></a>2.2 HOTP（基于事件的一次性密码）</h2><ul>
-<li>原理：<ul>
+</li>
+<li>Java代码生成的OTP
+<ul>
+<li>
+<style>.pyssdmcjbuqa{zoom:150%;}</style><img src="/2023/10/16/2FA%E4%B8%8EMFA%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/image-20231017123738816.png" class="pyssdmcjbuqa" alt="image-20231017123738816">
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="22-hotp基于事件的一次性密码"><a class="markdownIt-Anchor" href="#22-hotp基于事件的一次性密码"></a> 2.2 HOTP（基于事件的一次性密码）</h2>
+<ul>
+<li>原理：
+<ul>
 <li>客户端和服务端之间共享一个密钥。</li>
 <li>客户端和服务端都有一个计数器，用于记录已经生成过的密码的次数。</li>
 <li>客户端使用密钥和计数器来计算出一个一次性密码HOTP。</li>
@@ -266,27 +279,33 @@
 <li>实现：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hotp</span><span class="params">()</span> <span class="keyword">throws</span> URISyntaxException &#123;</span><br><span class="line">        <span class="comment">// 共享密钥，可以是任意字符串，长度一般为8-10个字符  将共享密钥转换为字节数组</span></span><br><span class="line">        <span class="type">byte</span>[] secret = <span class="string">&quot;VV3KOX7UQJ4KYAKOHMZPPH3US4CJIMH6F3ZKNB5C2OOBQ6V2KIYHM27Q&quot;</span>.getBytes();</span><br><span class="line">        <span class="comment">// 创建“HOTPGenerator”实例</span></span><br><span class="line">        <span class="type">HOTPGenerator</span> <span class="variable">hotp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HOTPGenerator</span>.Builder(secret)</span><br><span class="line">                <span class="comment">// 生成的密码长度</span></span><br><span class="line">                .withPasswordLength(<span class="number">6</span>)</span><br><span class="line">                <span class="comment">// 加密方式</span></span><br><span class="line">                .withAlgorithm(HMACAlgorithm.SHA256)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="type">URI</span> <span class="variable">uri</span> <span class="operator">=</span> hotp.getURI(<span class="number">5</span>, <span class="string">&quot;HTOP_USER&quot;</span>);</span><br><span class="line">        System.out.println(uri);</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">code</span> <span class="operator">=</span> hotp.generate(<span class="number">5</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;code:&quot;</span> + code);</span><br><span class="line">        <span class="comment">// 验证令牌:</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">isValid</span> <span class="operator">=</span> hotp.verify(code, <span class="number">5</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;isValid:&quot;</span> + isValid);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li>Java生成的otpauth，生成二维码，通过Authenticator App扫描即可绑定<ul>
-<li>otpauth:&#x2F;&#x2F;hotp&#x2F;HTOP_USER?digits&#x3D;6&amp;counter&#x3D;5&amp;secret&#x3D;VV3KOX7UQJ4KYAKOHMZPPH3US4CJIMH6F3ZKNB5C2OOBQ6V2KIYHM27Q&amp;issuer&#x3D;HTOP_USER&amp;algorithm&#x3D;SHA256</li>
+<li>Java生成的otpauth，生成二维码，通过Authenticator App扫描即可绑定
+<ul>
+<li>otpauth://hotp/HTOP_USER?digits=6&amp;counter=5&amp;secret=VV3KOX7UQJ4KYAKOHMZPPH3US4CJIMH6F3ZKNB5C2OOBQ6V2KIYHM27Q&amp;issuer=HTOP_USER&amp;algorithm=SHA256</li>
 </ul>
 </li>
-<li>Java代码生成的OTP<ul>
-<li><img src="/2023/10/16/2FA%E4%B8%8EMFA%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/image-20231017125403815.png" alt="image-20231017125403815" style="zoom:150%;"></li>
+<li>Java代码生成的OTP
+<ul>
+<li>
+<style>.bvogiompysvc{zoom:150%;}</style><img src="/2023/10/16/2FA%E4%B8%8EMFA%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/image-20231017125403815.png" class="bvogiompysvc" alt="image-20231017125403815">
+</li>
 </ul>
 </li>
 </ul>
-<h2 id="2-3-U2F（通用第二因素）"><a href="#2-3-U2F（通用第二因素）" class="headerlink" title="2.3 U2F（通用第二因素）"></a>2.3 U2F（通用第二因素）</h2><p>使用USB接口的硬件安全模块，它通过在用户和计算机之间添加硬件安全层来保护用户登录信息。</p>
+<h2 id="23-u2f通用第二因素"><a class="markdownIt-Anchor" href="#23-u2f通用第二因素"></a> 2.3 U2F（通用第二因素）</h2>
+<p>使用USB接口的硬件安全模块，它通过在用户和计算机之间添加硬件安全层来保护用户登录信息。</p>
 <p>例如：Yubico、Nitrokey、Feitian等</p>
-<p><img src="/2023/10/16/2FA%E4%B8%8EMFA%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/image-20231017130357031.png" alt="image-20231017130357031"></p>
-<h2 id="2-4-NFC（近场通信）"><a href="#2-4-NFC（近场通信）" class="headerlink" title="2.4 NFC（近场通信）"></a>2.4 NFC（近场通信）</h2><ol>
+<p><img src="image-20231017130357031.png" alt="image-20231017130357031" /></p>
+<h2 id="24-nfc近场通信"><a class="markdownIt-Anchor" href="#24-nfc近场通信"></a> 2.4 NFC（近场通信）</h2>
+<ol>
 <li>用户在设备上生成一个密钥，并将密钥存储在安全芯片中。</li>
 <li>当用户需要进行身份验证时，只需将设备靠近读卡器即可。</li>
 <li>读卡器会读取用户的密钥信息，并将其发送到服务器进行验证。</li>
 <li>服务器根据用户提供的密钥信息进行验证，并返回验证结果。</li>
 </ol>
-<h1 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h1><p>TOTP是基于时间戳算法的一次性密码，而HOTP则是基于HMAC算法的一次性密码。</p>
+<h1 id="三-总结"><a class="markdownIt-Anchor" href="#三-总结"></a> 三、总结</h1>
+<p>TOTP是基于时间戳算法的一次性密码，而HOTP则是基于HMAC算法的一次性密码。</p>
 <p>TOTP以<strong>客户端和服务端的时间为基础</strong>，要求它们能够精确地保持正确的时钟，以便在任何特定时刻生成相同的一次性密码。</p>
 <p>HOTP以<strong>特定的事件次序和相同的种子值为输入</strong>，通过HASH算法运算出一致的密码。</p>
 <p>相比TOTP和HOTP，2.3和2.4都需要额外硬件才能实现，而TOTP和HOTP只需要智能手机。</p>

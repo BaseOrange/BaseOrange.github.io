@@ -28,13 +28,13 @@
 <meta property="og:site_name" content="大橙子">
 <meta property="og:description" content="编译OnlyOffice【填坑教程】">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-compile/image-20250314083925823.png">
+<meta property="og:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-compile/onlyoffice-compile/image-20250314083925823.png">
 <meta property="article:published_time" content="2025-03-14T00:46:17.000Z">
 <meta property="article:modified_time" content="2025-03-14T11:21:45.632Z">
 <meta property="article:author" content="BigOrange">
 <meta property="article:tag" content="onlyoffice">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-compile/image-20250314083925823.png">
+<meta name="twitter:image" content="https://log.660066.xyz/2025/03/14/onlyoffice-compile/onlyoffice-compile/image-20250314083925823.png">
 
 
 <link rel="canonical" href="https://log.660066.xyz/2025/03/14/onlyoffice-compile/">
@@ -119,7 +119,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83"><span class="nav-text">一、编译环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">二、注意事项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BC%96%E8%AF%91"><span class="nav-text">三、编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%85%8B%E9%9A%86%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%EF%BC%88build-tools%EF%BC%89"><span class="nav-text">3.1 克隆编译工具（build_tools）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%88%87%E6%8D%A2%E5%88%B0linux%E7%BC%96%E8%AF%91%E7%9B%AE%E5%BD%95"><span class="nav-text">3.2 切换到linux编译目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E6%89%A7%E8%A1%8C%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4"><span class="nav-text">3.3 执行编译命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">3.4 编译命令注意事项</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83"><span class="nav-text"> 一、编译环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text"> 二、注意事项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E7%BC%96%E8%AF%91"><span class="nav-text"> 三、编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#31-%E5%85%8B%E9%9A%86%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7build_tools"><span class="nav-text"> 3.1 克隆编译工具（build_tools）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-%E5%88%87%E6%8D%A2%E5%88%B0linux%E7%BC%96%E8%AF%91%E7%9B%AE%E5%BD%95"><span class="nav-text"> 3.2 切换到linux编译目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-%E6%89%A7%E8%A1%8C%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4"><span class="nav-text"> 3.3 执行编译命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34-%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text"> 3.4 编译命令注意事项</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -208,14 +208,16 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="一、编译环境"><a href="#一、编译环境" class="headerlink" title="一、编译环境"></a>一、编译环境</h1><table>
+    <div class="post-body" itemprop="articleBody"><h1 id="一-编译环境"><a class="markdownIt-Anchor" href="#一-编译环境"></a> 一、编译环境</h1>
+<table>
 <thead>
 <tr>
 <th>系统、硬件</th>
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>物理机</td>
 <td>ThinkPad</td>
 </tr>
@@ -247,25 +249,29 @@
 <td>Npm</td>
 <td>apt直接安装的即可</td>
 </tr>
-</tbody></table>
-<h1 id="二、注意事项"><a href="#二、注意事项" class="headerlink" title="二、注意事项"></a>二、注意事项</h1><p>因部分依赖在阿里云镜像中可能不存在，因此镜像源未进行更改，编译全过程使用依赖软件自带镜像源。</p>
+</tbody>
+</table>
+<h1 id="二-注意事项"><a class="markdownIt-Anchor" href="#二-注意事项"></a> 二、注意事项</h1>
+<p>因部分依赖在阿里云镜像中可能不存在，因此镜像源未进行更改，编译全过程使用依赖软件自带镜像源。</p>
 <p><strong>系统版本、架构</strong>一定要按官方要求来，我踩坑路线：</p>
 <ul>
-<li>Ubuntu25（Arm）&#x3D;&gt; 内嵌的python不支持arm架构</li>
-<li>Ubuntu24.04（X64）&#x3D;&gt; 编译V8相关内容是卡住，综合来看，可能是clang或其他打包工具版本过高的原因。</li>
-<li>Ubuntu16.04（X64）&#x3D;&gt; 目前跑过了上面的错误，还不知道有没有其他坑。</li>
+<li>Ubuntu25（Arm）=&gt; 内嵌的python不支持arm架构</li>
+<li>Ubuntu24.04（X64）=&gt; 编译V8相关内容是卡住，综合来看，可能是clang或其他打包工具版本过高的原因。</li>
+<li>Ubuntu16.04（X64）=&gt; 目前跑过了上面的错误，还不知道有没有其他坑。</li>
 </ul>
 <p>系统的内存、Swap也不能随便搞（可以大，不能小！）：</p>
-<p><img src="/2025/03/14/onlyoffice-compile/image-20250314083925823.png" alt="image-20250314083925823"></p>
+<p><img src="./onlyoffice-compile/image-20250314083925823.png" alt="image-20250314083925823" /></p>
 <p>总结一下就是，系统版本得按照上图，CPU、RAM、HDD、SWAP都要安装上图官方的来！</p>
 <p>如果你用的是带Gui的桌面版乌班图，建议吧RAM、SWAP适当的调高一些。</p>
-<h1 id="三、编译"><a href="#三、编译" class="headerlink" title="三、编译"></a>三、编译</h1><h2 id="3-1-克隆编译工具（build-tools）"><a href="#3-1-克隆编译工具（build-tools）" class="headerlink" title="3.1 克隆编译工具（build_tools）"></a>3.1 克隆编译工具（build_tools）</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ONLYOFFICE/build_tools.git</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-2-切换到linux编译目录"><a href="#3-2-切换到linux编译目录" class="headerlink" title="3.2 切换到linux编译目录"></a>3.2 切换到linux编译目录</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd build_tools/tools/linux</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-3-执行编译命令"><a href="#3-3-执行编译命令" class="headerlink" title="3.3 执行编译命令"></a>3.3 执行编译命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./automate.py server</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-4-编译命令注意事项"><a href="#3-4-编译命令注意事项" class="headerlink" title="3.4 编译命令注意事项"></a>3.4 编译命令注意事项</h2><blockquote>
+<h1 id="三-编译"><a class="markdownIt-Anchor" href="#三-编译"></a> 三、编译</h1>
+<h2 id="31-克隆编译工具build_tools"><a class="markdownIt-Anchor" href="#31-克隆编译工具build_tools"></a> 3.1 克隆编译工具（build_tools）</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ONLYOFFICE/build_tools.git</span><br></pre></td></tr></table></figure>
+<h2 id="32-切换到linux编译目录"><a class="markdownIt-Anchor" href="#32-切换到linux编译目录"></a> 3.2 切换到linux编译目录</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd build_tools/tools/linux</span><br></pre></td></tr></table></figure>
+<h2 id="33-执行编译命令"><a class="markdownIt-Anchor" href="#33-执行编译命令"></a> 3.3 执行编译命令</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./automate.py server</span><br></pre></td></tr></table></figure>
+<h2 id="34-编译命令注意事项"><a class="markdownIt-Anchor" href="#34-编译命令注意事项"></a> 3.4 编译命令注意事项</h2>
+<blockquote>
 <p>如果在没有任何参数的情况下运行脚本，这将构建 <strong>ONLYOFFICE 文档</strong>以及 <strong>Document Builder</strong> 和 <strong>Desktop Editors</strong>。</p>
 <p>如有必要，可以使用与必要产品对应的参数运行脚本，从而一次构建多个产品。</p>
 </blockquote>

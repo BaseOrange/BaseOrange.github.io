@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81Doris%E6%9E%B6%E6%9E%84"><span class="nav-text">一、Doris架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-FE"><span class="nav-text">1. FE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-BE"><span class="nav-text">2. BE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-MySQL-Client"><span class="nav-text">3. MySQL Client</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Broker"><span class="nav-text">4. Broker</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%BC%96%E8%AF%91Doris"><span class="nav-text">二、编译Doris</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85docker"><span class="nav-text">1. 安装docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8Docker%E5%BC%80%E5%8F%91%E9%95%9C%E5%83%8F%E7%BC%96%E8%AF%91"><span class="nav-text">2. 使用Docker开发镜像编译</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Doris%E5%AE%89%E8%A3%85%E8%A6%81%E6%B1%82"><span class="nav-text">三、Doris安装要求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">1. 注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%BB%98%E8%AE%A4%E7%AB%AF%E5%8F%A3"><span class="nav-text">2. 默认端口</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-doris%E6%9E%B6%E6%9E%84"><span class="nav-text"> 一、Doris架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-fe"><span class="nav-text"> 1. FE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-be"><span class="nav-text"> 2. BE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-mysql-client"><span class="nav-text"> 3. MySQL Client</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-broker"><span class="nav-text"> 4. Broker</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E7%BC%96%E8%AF%91doris"><span class="nav-text"> 二、编译Doris</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85docker"><span class="nav-text"> 1. 安装docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8docker%E5%BC%80%E5%8F%91%E9%95%9C%E5%83%8F%E7%BC%96%E8%AF%91"><span class="nav-text"> 2. 使用Docker开发镜像编译</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-doris%E5%AE%89%E8%A3%85%E8%A6%81%E6%B1%82"><span class="nav-text"> 三、Doris安装要求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text"> 1. 注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%BB%98%E8%AE%A4%E7%AB%AF%E5%8F%A3"><span class="nav-text"> 2. 默认端口</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -213,66 +213,92 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="一、Doris架构"><a href="#一、Doris架构" class="headerlink" title="一、Doris架构"></a>一、Doris架构</h1><p>分为FE（Frontend）、BE（Backend）两种角色、两个进程。FE、BE都可以线性扩展。</p>
-<h2 id="1-FE"><a href="#1-FE" class="headerlink" title="1. FE"></a>1. FE</h2><ul>
+    <div class="post-body" itemprop="articleBody"><h1 id="一-doris架构"><a class="markdownIt-Anchor" href="#一-doris架构"></a> 一、Doris架构</h1>
+<p>分为FE（Frontend）、BE（Backend）两种角色、两个进程。FE、BE都可以线性扩展。</p>
+<h2 id="1-fe"><a class="markdownIt-Anchor" href="#1-fe"></a> 1. FE</h2>
+<ul>
 <li>存储、维护集群<strong>元数据</strong></li>
 <li>接收、解析查询请求，规划查询计划，调度查询执行，返回查询结果。</li>
-<li>主要为三个角色：<ul>
+<li>主要为三个角色：
+<ul>
 <li><strong>Leader</strong>和<strong>Follower</strong>：用来达到元数据的高可用，保证单节点宕机后，元数据仍能实时在线恢复，不影响服务。</li>
 <li><strong>Observer</strong>：用来扩展查询节点，同时起到了备份作用。（集群压力非常大，需要扩展整个查询能力，可以增加Observer节点。Observer不参与写入，只参与查询）</li>
 </ul>
 </li>
 </ul>
-<h2 id="2-BE"><a href="#2-BE" class="headerlink" title="2. BE"></a>2. BE</h2><ul>
+<h2 id="2-be"><a class="markdownIt-Anchor" href="#2-be"></a> 2. BE</h2>
+<ul>
 <li>负责物理数据的存储和计算</li>
 <li>数据的可靠性由BE保证，对整个数据存储多副本或者三副本。</li>
 </ul>
-<h2 id="3-MySQL-Client"><a href="#3-MySQL-Client" class="headerlink" title="3. MySQL Client"></a>3. MySQL Client</h2><p>Doris借助MySQL协议，用户可以通过ODBC&#x2F;JDBC以及MySQL客户端来直接访问Doris</p>
-<h2 id="4-Broker"><a href="#4-Broker" class="headerlink" title="4. Broker"></a>4. Broker</h2><p>Broker是一个独立的无状态进程。封装了文件系统接口，可以读取远端存储系统中文件的能力，包括HDFS、S3、BOS等。</p>
-<h1 id="二、编译Doris"><a href="#二、编译Doris" class="headerlink" title="二、编译Doris"></a>二、编译Doris</h1><h2 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1. 安装docker"></a>1. 安装docker</h2><ol>
-<li><p>更新yum包</p>
+<h2 id="3-mysql-client"><a class="markdownIt-Anchor" href="#3-mysql-client"></a> 3. MySQL Client</h2>
+<p>Doris借助MySQL协议，用户可以通过ODBC/JDBC以及MySQL客户端来直接访问Doris</p>
+<h2 id="4-broker"><a class="markdownIt-Anchor" href="#4-broker"></a> 4. Broker</h2>
+<p>Broker是一个独立的无状态进程。封装了文件系统接口，可以读取远端存储系统中文件的能力，包括HDFS、S3、BOS等。</p>
+<h1 id="二-编译doris"><a class="markdownIt-Anchor" href="#二-编译doris"></a> 二、编译Doris</h1>
+<h2 id="1-安装docker"><a class="markdownIt-Anchor" href="#1-安装docker"></a> 1. 安装docker</h2>
+<ol>
+<li>
+<p>更新yum包</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update -y</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>卸载旧版本的docker</p>
+<li>
+<p>卸载旧版本的docker</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker docker-common docker-selinux  docker-engine</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>安装yum-util工具包和devicemapper驱动依赖</p>
+<li>
+<p>安装yum-util工具包和devicemapper驱动依赖</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>更新yum镜像源</p>
+<li>
+<p>更新yum镜像源</p>
 </li>
-<li><p>查看所有仓库中的docker版本，并选择特定的版本安装，一般可直接安装最新版</p>
+<li>
+<p>查看所有仓库中的docker版本，并选择特定的版本安装，一般可直接安装最新版</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list docker-ce --showduplicates | sort -r</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>安装docker</p>
+<li>
+<p>安装docker</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装最新稳定版</span></span><br><span class="line">yum install docker-ce -y </span><br></pre></td></tr></table></figure>
 </li>
-<li><p>启动并设置开机自启</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure></li>
+<li>
+<p>启动并设置开机自启</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h2 id="2-使用Docker开发镜像编译"><a href="#2-使用Docker开发镜像编译" class="headerlink" title="2. 使用Docker开发镜像编译"></a>2. 使用Docker开发镜像编译</h2><ol>
-<li><p>下载源码并解压</p>
+<h2 id="2-使用docker开发镜像编译"><a class="markdownIt-Anchor" href="#2-使用docker开发镜像编译"></a> 2. 使用Docker开发镜像编译</h2>
+<ol>
+<li>
+<p>下载源码并解压</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/apache/doris/1.2/1.2.3-rc02/apache-doris-1.2.3-src.tar.gz</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>解压源码</p>
+<li>
+<p>解压源码</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-doris-1.2.3-src.tar.gz</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>拉取docker镜像</p>
+<li>
+<p>拉取docker镜像</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull apache/doris:build-env-for-1.2</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>挂载本都目录运行镜像</p>
+<li>
+<p>挂载本都目录运行镜像</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -it \ </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">挂载Maven的仓库</span></span><br><span class="line">-v [maven的.m2目录]:/root/.m2 \ </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">挂载Doris源码</span></span><br><span class="line">-v [刚刚解压的doris目录]:/root/doris/ \</span><br><span class="line">apache/doris:build-env-for-1.2</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>切换JDK8</p>
+<li>
+<p>切换JDK8</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alternatives --set java java-1.8.0-openjdk.x86_64</span><br><span class="line">alternatives --set javac java-1.8.0-openjdk.x86_64</span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/java-1.8.0</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>编译</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh build.sh --clean --be --fe --ui</span><br></pre></td></tr></table></figure></li>
+<li>
+<p>编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh build.sh --clean --be --fe --ui</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h1 id="三、Doris安装要求"><a href="#三、Doris安装要求" class="headerlink" title="三、Doris安装要求"></a>三、Doris安装要求</h1><h2 id="1-注意事项"><a href="#1-注意事项" class="headerlink" title="1. 注意事项"></a>1. 注意事项</h2><ol>
+<h1 id="三-doris安装要求"><a class="markdownIt-Anchor" href="#三-doris安装要求"></a> 三、Doris安装要求</h1>
+<h2 id="1-注意事项"><a class="markdownIt-Anchor" href="#1-注意事项"></a> 1. 注意事项</h2>
+<ol>
 <li><strong>FE</strong>主要存储元数据、日志和image。通常几百MB到几GB不等。</li>
 <li><strong>BE</strong>主要存储用户数据。<strong>磁盘空间按用户总数据量*副本数计算</strong>，<strong>额外预留40%空间</strong>用作后台compaction以及中间数据存放。</li>
-<li><strong>一台机器可以部署多个BE实例，但是只能部署一个FE。</strong>需要三个副本数据，至少需要三台机器部署BE实例。</li>
+<li>**一台机器可以部署多个BE实例，但是只能部署一个FE。**需要三个副本数据，至少需要三台机器部署BE实例。</li>
 <li>多个FE所在服务器时钟需要保持一致，<strong>最多允许偏差5秒</strong>。</li>
 <li>测试环境可以一个BE。实际生成环境<strong>BE实例数量决定了整体查询延迟</strong>。</li>
 <li>所有部署节点关闭SWAP</li>
@@ -281,80 +307,83 @@
 <li><strong>集群可用性</strong>要求高时，部署一个Follower和一到三个Observer。<strong>离线业务</strong>部署一个Follower和一到三个Observer。</li>
 <li>Broker通常每台机器部署一个实例即可。</li>
 </ol>
-<h2 id="2-默认端口"><a href="#2-默认端口" class="headerlink" title="2. 默认端口"></a>2. 默认端口</h2><table>
+<h2 id="2-默认端口"><a class="markdownIt-Anchor" href="#2-默认端口"></a> 2. 默认端口</h2>
+<table>
 <thead>
 <tr>
-<th align="center">实例名称</th>
-<th align="center">端口名称</th>
-<th align="center">默认端口</th>
-<th align="center">通讯方向</th>
-<th align="center">说明</th>
+<th style="text-align:center">实例名称</th>
+<th style="text-align:center">端口名称</th>
+<th style="text-align:center">默认端口</th>
+<th style="text-align:center">通讯方向</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">BE</td>
-<td align="center">be_port</td>
-<td align="center">9060</td>
-<td align="center">FE—&gt;BE</td>
-<td align="center">BE上的thrift server的端口<br>用于接收FE的请求</td>
+<tbody>
+<tr>
+<td style="text-align:center">BE</td>
+<td style="text-align:center">be_port</td>
+<td style="text-align:center">9060</td>
+<td style="text-align:center">FE—&gt;BE</td>
+<td style="text-align:center">BE上的thrift server的端口<br/>用于接收FE的请求</td>
 </tr>
 <tr>
-<td align="center">BE</td>
-<td align="center">webserver_port</td>
-<td align="center">8040</td>
-<td align="center">BE&lt;—&gt;FE</td>
-<td align="center">BE上的Http server端口</td>
+<td style="text-align:center">BE</td>
+<td style="text-align:center">webserver_port</td>
+<td style="text-align:center">8040</td>
+<td style="text-align:center">BE&lt;—&gt;FE</td>
+<td style="text-align:center">BE上的Http server端口</td>
 </tr>
 <tr>
-<td align="center">BE</td>
-<td align="center">heartbeat_serivce_port</td>
-<td align="center">9050</td>
-<td align="center">FE—&gt;BE</td>
-<td align="center">BE上的心跳服务端口<br>用于接收来自FE的心跳</td>
+<td style="text-align:center">BE</td>
+<td style="text-align:center">heartbeat_serivce_port</td>
+<td style="text-align:center">9050</td>
+<td style="text-align:center">FE—&gt;BE</td>
+<td style="text-align:center">BE上的心跳服务端口<br/>用于接收来自FE的心跳</td>
 </tr>
 <tr>
-<td align="center">BE</td>
-<td align="center">brpc_port</td>
-<td align="center">8060</td>
-<td align="center">FE&lt;—&gt;BE<br>BE&lt;—&gt;BE</td>
-<td align="center">BE上的brpc端口<br>用于BE之间的通信</td>
+<td style="text-align:center">BE</td>
+<td style="text-align:center">brpc_port</td>
+<td style="text-align:center">8060</td>
+<td style="text-align:center">FE&lt;—&gt;BE<br/>BE&lt;—&gt;BE</td>
+<td style="text-align:center">BE上的brpc端口<br/>用于BE之间的通信</td>
 </tr>
 <tr>
-<td align="center">FE</td>
-<td align="center">http_port</td>
-<td align="center">8030</td>
-<td align="center">FE&lt;—&gt;FE<br>用户&lt;—&gt;FE</td>
-<td align="center">FE上的http server端口</td>
+<td style="text-align:center">FE</td>
+<td style="text-align:center">http_port</td>
+<td style="text-align:center">8030</td>
+<td style="text-align:center">FE&lt;—&gt;FE<br/>用户&lt;—&gt;FE</td>
+<td style="text-align:center">FE上的http server端口</td>
 </tr>
 <tr>
-<td align="center">FE</td>
-<td align="center">rpc_port</td>
-<td align="center">9020</td>
-<td align="center">BE—&gt;FE<br>FE&lt;—&gt;FE</td>
-<td align="center">FE上的thrift server端口</td>
+<td style="text-align:center">FE</td>
+<td style="text-align:center">rpc_port</td>
+<td style="text-align:center">9020</td>
+<td style="text-align:center">BE—&gt;FE<br/>FE&lt;—&gt;FE</td>
+<td style="text-align:center">FE上的thrift server端口</td>
 </tr>
 <tr>
-<td align="center">FE</td>
-<td align="center">query_port</td>
-<td align="center">9030</td>
-<td align="center">用户&lt;—&gt;FE</td>
-<td align="center">FE上的mysql server端口</td>
+<td style="text-align:center">FE</td>
+<td style="text-align:center">query_port</td>
+<td style="text-align:center">9030</td>
+<td style="text-align:center">用户&lt;—&gt;FE</td>
+<td style="text-align:center">FE上的mysql server端口</td>
 </tr>
 <tr>
-<td align="center">FE</td>
-<td align="center">edit_log_port</td>
-<td align="center">9010</td>
-<td align="center">FE&lt;—&gt;FE</td>
-<td align="center">FE上bdbje之间通信用的端口</td>
+<td style="text-align:center">FE</td>
+<td style="text-align:center">edit_log_port</td>
+<td style="text-align:center">9010</td>
+<td style="text-align:center">FE&lt;—&gt;FE</td>
+<td style="text-align:center">FE上bdbje之间通信用的端口</td>
 </tr>
 <tr>
-<td align="center">Broker</td>
-<td align="center">broker_ipc_port</td>
-<td align="center">8000</td>
-<td align="center">BE—&gt;Broker<br>FE—&gt;Broker</td>
-<td align="center">Boker上的thrift server<br>用于接收请求</td>
+<td style="text-align:center">Broker</td>
+<td style="text-align:center">broker_ipc_port</td>
+<td style="text-align:center">8000</td>
+<td style="text-align:center">BE—&gt;Broker<br/>FE—&gt;Broker</td>
+<td style="text-align:center">Boker上的thrift server<br/>用于接收请求</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
     </div>
 

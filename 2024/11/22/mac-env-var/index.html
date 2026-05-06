@@ -117,7 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-paths"><span class="nav-text">&#x2F;etc&#x2F;paths</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-paths-d"><span class="nav-text">&#x2F;etc&#x2F;paths.d&#x2F;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-profile"><span class="nav-text">&#x2F;etc&#x2F;profile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bash-profile"><span class="nav-text">~&#x2F;.bash_profile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bashrc"><span class="nav-text">~&#x2F;.bashrc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zshrc"><span class="nav-text">~&#x2F;.zshrc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#profile"><span class="nav-text">~&#x2F;.profile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etc-launchd-conf"><span class="nav-text">&#x2F;etc&#x2F;launchd.conf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#launchctl"><span class="nav-text">launchctl</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-text">示例</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#etcpaths"><span class="nav-text"> &#x2F;etc&#x2F;paths</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etcpathsd"><span class="nav-text"> &#x2F;etc&#x2F;paths.d&#x2F;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etcprofile"><span class="nav-text"> &#x2F;etc&#x2F;profile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#~bash_profile"><span class="nav-text"> ~&#x2F;.bash_profile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#~bashrc"><span class="nav-text"> ~&#x2F;.bashrc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#~zshrc"><span class="nav-text"> ~&#x2F;.zshrc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#~profile"><span class="nav-text"> ~&#x2F;.profile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#etclaunchdconf"><span class="nav-text"> &#x2F;etc&#x2F;launchd.conf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#launchctl"><span class="nav-text"> launchctl</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-text"> 示例</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -207,70 +207,83 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>在macOS中，配置环境变量可以通过多个文件来完成，这些文件根据不同的场景和需求有所不同。以下是一些常用的文件及其用途：</p>
-<h1 id="etc-paths"><a href="#etc-paths" class="headerlink" title="&#x2F;etc&#x2F;paths"></a><strong>&#x2F;etc&#x2F;paths</strong></h1><ul>
+<h1 id="etcpaths"><a class="markdownIt-Anchor" href="#etcpaths"></a> <strong>/etc/paths</strong></h1>
+<ul>
 <li>作用：定义系统的路径列表，即命令搜索路径。</li>
 <li>适用范围：全局，影响所有用户。</li>
 <li>使用方法：直接编辑此文件，添加或修改路径条目。</li>
 </ul>
-<h1 id="etc-paths-d"><a href="#etc-paths-d" class="headerlink" title="&#x2F;etc&#x2F;paths.d&#x2F;"></a><strong>&#x2F;etc&#x2F;paths.d&#x2F;</strong></h1><ul>
+<h1 id="etcpathsd"><a class="markdownIt-Anchor" href="#etcpathsd"></a> <strong>/etc/paths.d/</strong></h1>
+<ul>
 <li>作用：这是一个目录，可以在这个目录下创建多个文件，每个文件可以包含一个或多个路径条目，这些路径将被添加到PATH环境变量中。</li>
 <li>适用范围：全局，影响所有用户。</li>
 <li>使用方法：在<code>/etc/paths.d/</code>目录下创建文件，每行一个路径条目。</li>
 </ul>
-<h1 id="etc-profile"><a href="#etc-profile" class="headerlink" title="&#x2F;etc&#x2F;profile"></a><strong>&#x2F;etc&#x2F;profile</strong></h1><ul>
+<h1 id="etcprofile"><a class="markdownIt-Anchor" href="#etcprofile"></a> <strong>/etc/profile</strong></h1>
+<ul>
 <li>作用：系统级的配置文件，当用户登录时，它会被读取以设置环境变量。</li>
 <li>适用范围：全局，影响所有用户。</li>
 <li>使用方法：编辑此文件，添加或修改环境变量设置。</li>
 </ul>
-<h1 id="bash-profile"><a href="#bash-profile" class="headerlink" title="~&#x2F;.bash_profile"></a><strong>~&#x2F;.bash_profile</strong></h1><ul>
+<h1 id="~bash_profile"><a class="markdownIt-Anchor" href="#~bash_profile"></a> <strong>~/.bash_profile</strong></h1>
+<ul>
 <li>作用：用户级的配置文件，当用户登录时，它会被读取以设置环境变量和启动命令。</li>
 <li>适用范围：仅影响当前用户。</li>
 <li>使用方法：编辑此文件，添加或修改环境变量设置。</li>
 </ul>
-<h1 id="bashrc"><a href="#bashrc" class="headerlink" title="~&#x2F;.bashrc"></a><strong>~&#x2F;.bashrc</strong></h1><ul>
+<h1 id="~bashrc"><a class="markdownIt-Anchor" href="#~bashrc"></a> <strong>~/.bashrc</strong></h1>
+<ul>
 <li>作用：用户级的配置文件，当用户打开一个新的终端窗口（非登录shell）时，它会被读取。</li>
 <li>适用范围：仅影响当前用户。</li>
 <li>使用方法：编辑此文件，添加或修改环境变量设置。</li>
 </ul>
-<h1 id="zshrc"><a href="#zshrc" class="headerlink" title="~&#x2F;.zshrc"></a><strong>~&#x2F;.zshrc</strong></h1><ul>
+<h1 id="~zshrc"><a class="markdownIt-Anchor" href="#~zshrc"></a> <strong>~/.zshrc</strong></h1>
+<ul>
 <li>作用：如果你使用的是Zsh作为默认shell，这个文件会在每次打开新的终端窗口时被读取。</li>
 <li>适用范围：仅影响当前用户。</li>
 <li>使用方法：编辑此文件，添加或修改环境变量设置。</li>
 </ul>
-<h1 id="profile"><a href="#profile" class="headerlink" title="~&#x2F;.profile"></a><strong>~&#x2F;.profile</strong></h1><ul>
+<h1 id="~profile"><a class="markdownIt-Anchor" href="#~profile"></a> <strong>~/.profile</strong></h1>
+<ul>
 <li>作用：用户级的配置文件，如果<code>~/.bash_profile</code>不存在，Bash会尝试读取这个文件。</li>
 <li>适用范围：仅影响当前用户。</li>
 <li>使用方法：编辑此文件，添加或修改环境变量设置。</li>
 </ul>
-<h1 id="etc-launchd-conf"><a href="#etc-launchd-conf" class="headerlink" title="&#x2F;etc&#x2F;launchd.conf"></a><strong>&#x2F;etc&#x2F;launchd.conf</strong></h1><ul>
+<h1 id="etclaunchdconf"><a class="markdownIt-Anchor" href="#etclaunchdconf"></a> <strong>/etc/launchd.conf</strong></h1>
+<ul>
 <li>作用：系统级的配置文件，用于设置环境变量，这些变量在系统启动时生效。</li>
 <li>适用范围：全局，影响所有用户。</li>
 <li>使用方法：编辑此文件，添加或修改环境变量设置。注意：在macOS Catalina及更高版本中，<code>/etc/launchd.conf</code>可能不再被支持，建议使用<code>launchctl</code>命令来设置环境变量。</li>
 </ul>
-<h1 id="launchctl"><a href="#launchctl" class="headerlink" title="launchctl"></a><strong>launchctl</strong></h1><ul>
-<li><p>作用：命令行工具，用于设置系统级或用户级的环境变量。</p>
-</li>
-<li><p>适用范围：全局或用户级。</p>
-</li>
-<li><p>使用方法：</p>
+<h1 id="launchctl"><a class="markdownIt-Anchor" href="#launchctl"></a> <strong>launchctl</strong></h1>
 <ul>
-<li><p>设置系统级环境变量：</p>
+<li>
+<p>作用：命令行工具，用于设置系统级或用户级的环境变量。</p>
+</li>
+<li>
+<p>适用范围：全局或用户级。</p>
+</li>
+<li>
+<p>使用方法：</p>
+<ul>
+<li>
+<p>设置系统级环境变量：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo launchctl setenv VARIABLE_NAME value</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>设置用户级环境变量：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">launchctl setenv VARIABLE_NAME value</span><br></pre></td></tr></table></figure></li>
+<li>
+<p>设置用户级环境变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">launchctl setenv VARIABLE_NAME value</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 </ul>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>假设你想为当前用户设置一个环境变量<code>MY_VARIABLE</code>，可以编辑<code>~/.bash_profile</code>文件：</p>
+<h1 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例</h1>
+<p>假设你想为当前用户设置一个环境变量<code>MY_VARIABLE</code>，可以编辑<code>~/.bash_profile</code>文件：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano ~/.bash_profile</span><br></pre></td></tr></table></figure>
-
 <p>添加以下内容：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export MY_VARIABLE=value</span><br></pre></td></tr></table></figure>
-
 <p>保存并退出编辑器，然后使更改生效：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
-
 <p>这样，每次你登录或打开一个新的终端窗口时，<code>MY_VARIABLE</code>就会被设置。</p>
 
     </div>

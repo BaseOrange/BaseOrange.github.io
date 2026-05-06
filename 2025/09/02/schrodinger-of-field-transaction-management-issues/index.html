@@ -220,7 +220,7 @@
 <p>进一步检查发现，该方法内部存在 <code>this.</code> 方式的自调用，可能因为 Spring AOP 代理机制导致事务失效？尝试改为通过 <code>service</code> Bean 引用进行外部调用后，问题依然存在。</p>
 <h2 id="24-xxl-job-反射调用与事务管理"><a class="markdownIt-Anchor" href="#24-xxl-job-反射调用与事务管理"></a> 2.4 XXL-JOB 反射调用与事务管理</h2>
 <p>这里就猛的想起，XXL-JOB好像是通过反射进行定时调用的。立马Google确认， 确定是通过反射进行调用的。那么就基本确定，很有可能是XXL-JOB执行器反射，导致方法不受Springboot的事务管理。</p>
-<p><img src="/2025/09/02/schrodinger-of-field-transaction-management-issues/1756776777447-f0a032e4-d164-4cc9-8961-f36e20757cf8.png" alt></p>
+<p><img src="1756776777447-f0a032e4-d164-4cc9-8961-f36e20757cf8.png" alt="" /></p>
 <p>上图原文链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yejg1212/p/14794098.html">https://www.cnblogs.com/yejg1212/p/14794098.html</a></p>
 <h1 id="三-解决"><a class="markdownIt-Anchor" href="#三-解决"></a> 三、解决：</h1>
 <p>在定时任务类和方法上加上@Transactional注解，经过多轮测试，null值不再出现。</p>

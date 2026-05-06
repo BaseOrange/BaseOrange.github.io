@@ -262,7 +262,7 @@
 </ol>
 <h2 id="23-处理冲突拓展和装填因子"><a class="markdownIt-Anchor" href="#23-处理冲突拓展和装填因子"></a> 2.3 处理冲突拓展和装填因子</h2>
 <p>链地址法：</p>
-<p><img src="/2025/08/27/zst-data-structure-volume-roll-down-notes/1755831156335-2f01f55d-6af6-41f2-b23b-cc8d45923d57.png" alt></p>
+<p><img src="1755831156335-2f01f55d-6af6-41f2-b23b-cc8d45923d57.png" alt="" /></p>
 <p>哈希表的填装因子定义为：α = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mtext>表中装入的记录数</mtext><mtext>哈希表的长度</mtext></mfrac></mrow><annotation encoding="application/x-tex"> \frac{表中装入的记录数}{哈希表的长度} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2173em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">哈希表的长度</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">表中装入的记录数</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <p>α越小，发生冲突的可能性越小。</p>
 <h1 id="三-排序"><a class="markdownIt-Anchor" href="#三-排序"></a> 三、排序</h1>
@@ -344,7 +344,7 @@
 <li>拿第三张牌，从右往左一个个比，把它<strong>插到正确的位置</strong>，让前三张有序。</li>
 <li>继续这样，每拿一张新牌，都把它<strong>插入到前面已排序部分的正确位置</strong>。</li>
 </ol>
-<p><img src="/2025/08/27/zst-data-structure-volume-roll-down-notes/1756178038456-5afd7275-0dac-4584-8d19-da16e110a602.gif" alt></p>
+<p><img src="1756178038456-5afd7275-0dac-4584-8d19-da16e110a602.gif" alt="" /></p>
 <h2 id="32-希尔排序"><a class="markdownIt-Anchor" href="#32-希尔排序"></a> 3.2 希尔排序</h2>
 <p>🌰：整理书架上的书（按高度排序）：</p>
 <ol>
@@ -352,14 +352,14 @@
 <li>缩小间隔，比如每隔 2 本一组</li>
 <li>最后，间隔为1，做一次普通插入排序</li>
 </ol>
-<p><img src="/2025/08/27/zst-data-structure-volume-roll-down-notes/1756177887931-3bcdfb4d-0df2-49ca-8e56-1e2a6decd255.gif" alt></p>
+<p><img src="1756177887931-3bcdfb4d-0df2-49ca-8e56-1e2a6decd255.gif" alt="" /></p>
 <h2 id="33-计数排序"><a class="markdownIt-Anchor" href="#33-计数排序"></a> 3.3 计数排序</h2>
 <p>假设你有一堆小朋友的年龄，范围是 0 到 5 岁，想把他们按年龄从小到大排序。</p>
 <ol>
 <li>数一数每个年龄有多少人，拿一个表格（数组），从 0 开始，数每个年龄出现的次数：</li>
 <li>按顺序把年龄写出来。从年龄 0 开始，写 1 个 0，写 2 个 1，写 1 个 2，写 2 个 3……以此类推。</li>
 </ol>
-<p><img src="/2025/08/27/zst-data-structure-volume-roll-down-notes/1756178393350-f677791b-1d75-4408-aa49-323481ab5a0c.gif" alt></p>
+<p><img src="1756178393350-f677791b-1d75-4408-aa49-323481ab5a0c.gif" alt="" /></p>
 <h2 id="34-简单选择排序"><a class="markdownIt-Anchor" href="#34-简单选择排序"></a> 3.4 简单选择排序</h2>
 <p>每次从剩下的数里，挑出最小的那个，放到前面。</p>
 <ol>
@@ -368,13 +368,13 @@
 <li>在剩下的 [4, 5, 3]` 中找最小的</li>
 <li>在剩下的 [5, 4]` 中找最小的</li>
 </ol>
-<p><img src="/2025/08/27/zst-data-structure-volume-roll-down-notes/1756189664935-7d6ddfc6-2d75-430c-a12f-bf314cdafc13.gif" alt></p>
+<p><img src="1756189664935-7d6ddfc6-2d75-430c-a12f-bf314cdafc13.gif" alt="" /></p>
 <h2 id="35-堆排序"><a class="markdownIt-Anchor" href="#35-堆排序"></a> 3.5 堆排序</h2>
 <ol>
 <li>建立大顶堆</li>
 <li>将大的权值向后排（重复此步骤）</li>
 </ol>
-<p><img src="/2025/08/27/zst-data-structure-volume-roll-down-notes/1756189702353-6589fc11-c8d4-4145-8ef4-61006983259a.gif" alt></p>
+<p><img src="1756189702353-6589fc11-c8d4-4145-8ef4-61006983259a.gif" alt="" /></p>
 <h2 id="36-冒泡排序"><a class="markdownIt-Anchor" href="#36-冒泡排序"></a> 3.6 冒泡排序</h2>
 <p>一排站在一起的高矮不一的学生（比如5个人），把他们按照从矮到高的顺序重新排列。</p>
 <ol>
@@ -383,7 +383,7 @@
 <li>一直比到最后：继续这个过程，一直比到最后一对（第4个和第5个学生），最高的那个学生一定会被排到最右边</li>
 <li>重复这个过程：现在，最高的学生已经就位了。我们忽略最后一个位置（因为他已经排好了）。</li>
 </ol>
-<p><img src="/2025/08/27/zst-data-structure-volume-roll-down-notes/849589-20171015223238449-2146169197.gif" alt="img"></p>
+<p><img src="849589-20171015223238449-2146169197.gif" alt="img" /></p>
 <h2 id="37-快速排序"><a class="markdownIt-Anchor" href="#37-快速排序"></a> 3.7 快速排序</h2>
 <p>想象你有一堆杂乱无章的书，你需要把它们按照高度从矮到高排列。</p>
 <ol>
@@ -416,7 +416,7 @@
 <p>合并：当每一堆小书堆都只剩下0本或1本书时（0或1本书本身就有序，不需要再排），把所有排好序的小书堆从左到右（矮区 + 标杆 + 高区）合并起来，整个序列就有序了。</p>
 </li>
 </ol>
-<p><img src="/2025/08/27/zst-data-structure-volume-roll-down-notes/1756259399527-48b04dfc-882d-4130-aaba-0f9d265179c6.gif" alt></p>
+<p><img src="1756259399527-48b04dfc-882d-4130-aaba-0f9d265179c6.gif" alt="" /></p>
 <h2 id="38-归并排序"><a class="markdownIt-Anchor" href="#38-归并排序"></a> 3.8 归并排序</h2>
 <p>有两叠已经按从小到大排好序的扑克牌（比如一叠是[3, 8, Q]，另一叠是[5, 9, K]），合并成一叠新的有序牌。</p>
 <ol>
@@ -426,7 +426,7 @@
 <li>重复直到完：继续这个过程（比较8和9，拿8；比较Q和9，拿9；最后把Q和K依次拿出）。</li>
 <li>最终：你得到了一个全新的、有序的牌堆：[3, 5, 8, 9, Q, K]。</li>
 </ol>
-<p><img src="/2025/08/27/zst-data-structure-volume-roll-down-notes/1756259439615-6a92c3b1-20a3-42ac-b286-10e494bd35eb.gif" alt></p>
+<p><img src="1756259439615-6a92c3b1-20a3-42ac-b286-10e494bd35eb.gif" alt="" /></p>
 <h2 id="39-排序算法总结"><a class="markdownIt-Anchor" href="#39-排序算法总结"></a> 3.9 排序算法总结</h2>
 <table>
 <thead>
