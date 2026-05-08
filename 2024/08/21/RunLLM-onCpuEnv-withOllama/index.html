@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.2">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/o.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/o.png">
@@ -16,10 +16,10 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"log.660066.xyz","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"onmobile":false,"dimmer":true},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"log.660066.xyz","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"onmobile":false,"dimmer":true},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="使用Ollama在Windows的CPU上运行大模型">
 <meta property="og:type" content="article">
@@ -38,14 +38,13 @@
 <meta property="article:published_time" content="2024-08-21T02:41:55.000Z">
 <meta property="article:modified_time" content="2024-11-17T12:46:27.000Z">
 <meta property="article:author" content="BigOrange">
-<meta property="article:tag" content="大模型">
 <meta property="article:tag" content="AI">
+<meta property="article:tag" content="大模型">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://log.660066.xyz/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821141849416.png">
 
 
 <link rel="canonical" href="https://log.660066.xyz/2024/08/21/RunLLM-onCpuEnv-withOllama/">
-
 
 
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://log.660066.xyz/2024/08/21/RunLLM-onCpuEnv-withOllama/","path":"2024/08/21/RunLLM-onCpuEnv-withOllama/","title":"使用Ollama在Windows的CPU上运行大模型"}</script>
@@ -61,6 +60,30 @@
 
 
   <script defer data-domain="660066.xyz" src="https://plausible.io/js/script.js"></script>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha256-UF1fgpAiu3tPJN/uCqEUHNe7pnr+QR0SQDNfgglgtcM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js" defer></script>
+
+
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
@@ -226,7 +249,7 @@
 <p>本文以Windows平台为例，想必在Linux或者Mac上使用的同学不是很需要看这篇文章，基本都是有运维或编程基础的同学。</p>
 <h2 id="11-下载"><a class="markdownIt-Anchor" href="#11-下载"></a> 1.1 下载</h2>
 <p>Ollama的官网比较简洁，打开就能看到“Download”按钮，点击选择适合自己电脑的Ollama安装即可。</p>
-<style>.uwkarlybisqd{zoom:50%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821141849416.png" class="uwkarlybisqd" alt="image-20240821141849416">
+<style>.drjaeobwddxm{zoom:50%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821141849416.png" class="drjaeobwddxm" alt="image-20240821141849416">
 <h2 id="12-安装"><a class="markdownIt-Anchor" href="#12-安装"></a> 1.2 安装</h2>
 <ol>
 <li>
@@ -241,19 +264,19 @@
 </ol>
 <h2 id="13-检查是否安装成功"><a class="markdownIt-Anchor" href="#13-检查是否安装成功"></a> 1.3 检查是否安装成功</h2>
 <p>首先运行命令窗口，输入ollama，如果命令无效，检查Ollama是否启动了，或者尝试重启系统，检查环境变量是否存在Ollama的安装路径等操作。</p>
-<style>.gbwptqothpyn{zoom: 67%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821142835564.png" class="gbwptqothpyn" alt="ollama">
+<style>.eomupibfewkw{zoom: 67%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821142835564.png" class="eomupibfewkw" alt="ollama">
 <h1 id="二-下载模型-并-运行模型"><a class="markdownIt-Anchor" href="#二-下载模型-并-运行模型"></a> 二、下载模型 并 运行模型</h1>
 <h2 id="21-ollama官方模型库"><a class="markdownIt-Anchor" href="#21-ollama官方模型库"></a> 2.1 ollama官方模型库</h2>
 <p><a target="_blank" rel="noopener" href="https://ollama.com/library">https://ollama.com/library</a></p>
 <p>需要啥模型，自己来找吧，根据自己电脑配置，尝试不同参数量的模型。</p>
-<style>.nftdvkmaaciz{zoom: 50%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821143115786.png" class="nftdvkmaaciz" alt="image-20240821143115786">
+<style>.tpjhybzupvrf{zoom: 50%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821143115786.png" class="tpjhybzupvrf" alt="image-20240821143115786">
 <h2 id="23-下载qwen205b"><a class="markdownIt-Anchor" href="#23-下载qwen205b"></a> 2.3 下载Qwen2:0.5b</h2>
 <p>这里演示一下下载Qwen2的0.5b参数，这个模型小下的快，在一个我的ThinkPad太拉了，实在是不配跑更大的模型。</p>
-<style>.gqmqedonbhoq{zoom:50%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821143453681.png" class="gqmqedonbhoq" alt="image-20240821143453681">
+<style>.wsqtjgujwsct{zoom:50%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821143453681.png" class="wsqtjgujwsct" alt="image-20240821143453681">
 <p>模型库找到Qwen2，选择0.5b，右侧会自动生成运行命令，直接在命令窗口运行即可。</p>
-<style>.wlhyfwfmmlpc{zoom: 67%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821143612433.png" class="wlhyfwfmmlpc" alt="image-20240821143612433">
+<style>.mpddrwaqdicb{zoom: 67%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821143612433.png" class="mpddrwaqdicb" alt="image-20240821143612433">
 <p>正在下载模型，下载完后会自动启动模型，这时候下载的数据，就会放到第一配好的环境变量路径上。</p>
-<style>.qelvjkyftwlu{zoom: 67%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821143739085.png" class="qelvjkyftwlu" alt="image-20240821143739085">
+<style>.gsnmtqwzhwmw{zoom: 67%;}</style><img src="/2024/08/21/RunLLM-onCpuEnv-withOllama/image-20240821143739085.png" class="gsnmtqwzhwmw" alt="image-20240821143739085">
 <p>这个回答属实是我没想到的，哈哈哈哈哈哈哈哈哈哈哈哈哈。但是我大约得体验了一下0.5b这个模型，感觉已经很不错了，毕竟才0.5b的参数量，剩下的就需要自己进行微调了。</p>
 <h1 id="三-后文"><a class="markdownIt-Anchor" href="#三-后文"></a> 三、后文</h1>
 <h2 id="31-ollama模型库不存在的模型"><a class="markdownIt-Anchor" href="#31-ollama模型库不存在的模型"></a> 3.1 ollama模型库不存在的模型</h2>
@@ -352,35 +375,10 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-  
-
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha256-UF1fgpAiu3tPJN/uCqEUHNe7pnr+QR0SQDNfgglgtcM=" crossorigin="anonymous">
-  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
-  <script src="/js/third-party/math/katex.js"></script>
-
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"BaseOrange","repo":"BaseOrange.github.io","client_id":"8f8eb36a78230e56ee7e","client_secret":"c826afd9bd0b45f07426463094a3ad186de52bd8","admin_user":"BaseOrange","distraction_free_mode":true,"proxy":"https://proxy.660066.xyz/github_access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"b54d40af5b6554a0b60e0d05b58f39bb"}</script>
-<script src="/js/third-party/comments/gitalk.js"></script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"BaseOrange","repo":"BaseOrange.github.io","client_id":"8f8eb36a78230e56ee7e","client_secret":"c826afd9bd0b45f07426463094a3ad186de52bd8","admin_user":"BaseOrange","distraction_free_mode":true,"proxy":"https://proxy.660066.xyz/github_access_token","language":"zh-CN","body":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"b54d40af5b6554a0b60e0d05b58f39bb"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
 
 </body>
 </html>
