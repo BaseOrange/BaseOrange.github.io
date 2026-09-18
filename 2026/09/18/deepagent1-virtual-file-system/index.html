@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/o.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/o.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/o.png">
+  <link rel="mask-icon" href="/images/o.svg" color="#222">
+  <meta name="google-site-verification" content="JyJm6tHJ1q5mhbqwbRl4KEUE_ms1dc_9MJ0G0GIHnq8">
+  <meta name="baidu-site-verification" content="codeva-tXW0RgD5OZ">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"log.660066.xyz","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"onmobile":false,"dimmer":true},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="本次学习掌握了虚拟文件系统的存在意义，7 个文件系统工具的用途，上下文自动管理相关内容，8 种存储后端，以及自定义安全策略相关知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepAgent：虚拟文件系统">
+<meta property="og:url" content="https://log.660066.xyz/2026/09/18/deepagent1-virtual-file-system/index.html">
+<meta property="og:site_name" content="大橙子">
+<meta property="og:description" content="本次学习掌握了虚拟文件系统的存在意义，7 个文件系统工具的用途，上下文自动管理相关内容，8 种存储后端，以及自定义安全策略相关知识。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://log.660066.xyz/2026/09/18/deepagent1-virtual-file-system/image.png">
+<meta property="og:image" content="https://log.660066.xyz/2026/09/18/deepagent1-virtual-file-system/1789628729676-f4398762-52a3-4840-8c1f-6af643c244e3.png">
+<meta property="article:published_time" content="2026-09-18T05:41:47.000Z">
+<meta property="article:modified_time" content="2026-09-18T05:46:52.708Z">
+<meta property="article:author" content="BigOrange">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://log.660066.xyz/2026/09/18/deepagent1-virtual-file-system/image.png">
+
+
+<link rel="canonical" href="https://log.660066.xyz/2026/09/18/deepagent1-virtual-file-system/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://log.660066.xyz/2026/09/18/deepagent1-virtual-file-system/","path":"2026/09/18/deepagent1-virtual-file-system/","title":"DeepAgent：虚拟文件系统"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>DeepAgent：虚拟文件系统 | 大橙子</title>
+  
+
+
+
+
+
+
+
+  <script defer data-domain="660066.xyz" src="https://plausible.io/js/script.js"></script>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha256-UF1fgpAiu3tPJN/uCqEUHNe7pnr+QR0SQDNfgglgtcM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha512-fHwaWebuwA7NSF5Qg/af4UeDx9XqUpYpOGgubo3yWu+b2IQR4UeQwbb42Ti7gVAjNtVoI/I9TEoYeu9omwcC6g==" crossorigin="anonymous" referrerpolicy="no-referrer" /><!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="大橙子" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="大橙子" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">大橙子</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-工具箱"><a href="/tools/" rel="section"><i class="fa fa-flask fa-fw"></i>工具箱</a></li><li class="menu-item menu-item-友情链接"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友情链接</a></li><li class="menu-item menu-item-时间轴"><a href="/timeline/" rel="section"><i class="fa fa-link fa-fw"></i>时间轴</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-text"> 一、使用虚拟文件系统的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E5%86%85%E7%BD%AE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7"><span class="nav-text"> 二、内置文件系统工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-read_file%E7%89%B9%E6%80%A7"><span class="nav-text"> 2.1 read_file特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-grep%E7%9A%84%E4%B8%89%E7%A7%8D%E8%BE%93%E5%87%BA%E6%A8%A1%E5%BC%8F"><span class="nav-text"> 2.2 grep的三种输出模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E4%B8%8A%E4%B8%8B%E6%96%87%E8%87%AA%E5%8A%A8%E7%AE%A1%E7%90%86%E4%B8%8D%E5%8F%AA%E6%98%AF%E5%AD%98%E6%96%87%E4%BB%B6"><span class="nav-text"> 三、上下文自动管理：不只是存文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#31-%E5%A4%A7%E7%BB%93%E6%9E%9C%E8%87%AA%E5%8A%A8%E5%8D%B8%E8%BD%BD"><span class="nav-text"> 3.1 大结果自动卸载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-%E5%AF%B9%E8%AF%9D%E5%8E%86%E5%8F%B2%E6%80%BB%E7%BB%93"><span class="nav-text"> 3.2 对话历史总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B-%E5%8F%AF%E6%8F%92%E6%8B%94%E7%9A%84%E5%AD%98%E5%82%A8%E5%90%8E%E7%AB%AF"><span class="nav-text"> 四、可插拔的存储后端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#41-statebackend%E9%BB%98%E8%AE%A4%E4%B8%B4%E6%97%B6%E5%AD%98%E5%82%A8"><span class="nav-text"> 4.1 StateBackend（默认）：临时存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#42-filesystembackend%E6%9C%AC%E5%9C%B0%E7%A3%81%E7%9B%98"><span class="nav-text"> 4.2 FilesystemBackend：本地磁盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#43-localshellbackend%E6%9C%AC%E5%9C%B0-shell-%E6%89%A7%E8%A1%8C"><span class="nav-text"> 4.3 LocalShellBackend：本地 Shell 执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#44-storebackend%E8%B7%A8%E4%BC%9A%E8%AF%9D%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-text"> 4.4 StoreBackend：跨会话持久化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#45-compositebackend%E6%B7%B7%E5%90%88%E8%B7%AF%E7%94%B1"><span class="nav-text"> 4.5 CompositeBackend：混合路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#46-%E6%B2%99%E7%AE%B1%E5%90%8E%E7%AB%AF%E5%AE%89%E5%85%A8%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C"><span class="nav-text"> 4.6 沙箱后端：安全代码执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#47-%E5%90%8E%E7%AB%AF%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="nav-text"> 4.7 后端对比表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#48-%E5%85%B3%E9%94%AE%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%A3%8E%E9%99%A9%E6%8F%90%E9%86%92"><span class="nav-text"> 4.8 关键配置与风险提醒</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%8E%E7%AB%AF%E4%B8%8E%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5"><span class="nav-text"> 五、 自定义后端与安全策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#51-%E5%A3%B0%E6%98%8E%E5%BC%8F%E6%9D%83%E9%99%90"><span class="nav-text"> 5.1 声明式权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#52-%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%8E%E7%AB%AF"><span class="nav-text"> 5.2 实现自定义后端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#53-%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5policywrapper"><span class="nav-text"> 5.3 安全策略：PolicyWrapper</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">BigOrange</p>
+  <div class="site-description" itemprop="description">新的斗争开始了<br/>A new struggle has begun</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://log.660066.xyz/2026/09/18/deepagent1-virtual-file-system/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="BigOrange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大橙子">
+      <meta itemprop="description" content="新的斗争开始了<br/>A new struggle has begun">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="DeepAgent：虚拟文件系统 | 大橙子">
+      <meta itemprop="description" content="本次学习掌握了虚拟文件系统的存在意义，7 个文件系统工具的用途，上下文自动管理相关内容，8 种存储后端，以及自定义安全策略相关知识。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DeepAgent：虚拟文件系统
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-09-18 13:41:47 / 修改时间：13:46:52" itemprop="dateCreated datePublished" datetime="2026-09-18T13:41:47+08:00">2026-09-18</time>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本次学习掌握了虚拟文件系统的存在意义，7 个文件系统工具的用途，上下文自动管理相关内容，8 种存储后端，以及自定义安全策略相关知识。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="一-使用虚拟文件系统的原因"><a class="markdownIt-Anchor" href="#一-使用虚拟文件系统的原因"></a> 一、使用虚拟文件系统的原因</h1>
+<p>如果在Agent开发过程中，将会话记录，全部放入会话历史中，会导致出现以下问题：</p>
+<ol>
+<li><strong>上下文窗口溢出与截断</strong>：大量信息堆积在上下文中，导致超出模型的最大上下文容量，产生报错或被截断。</li>
+<li><strong>成本与延迟飙升</strong>：Transformer注意力复杂度随长度近似平方增长，每轮输入随轮数增长，成本线性上升。</li>
+<li><strong>模型注意力稀释，性能下降</strong>：中间部分信息被忽略。指令遵循下降、幻觉增加、重复提问、前后矛盾。</li>
+<li><strong>旧信息、过时状态污染决策</strong>：用户已经改口、撤销指令、更新偏好，但旧记录仍在上下文里。</li>
+<li><strong>上下文污染与安全风险</strong>：敏感信息、API Key、用户隐私也会因全量回传扩大泄露面，多租户场景还可能串数据。</li>
+<li><strong>工程与可维护性变差</strong>：出问题时很难定位是哪条历史影响了输出。</li>
+</ol>
+<p>在DeepAgent中使用虚拟文件系统可以实现，按需读取、结构化存储、搜索定位。</p>
+<h1 id="二-内置文件系统工具"><a class="markdownIt-Anchor" href="#二-内置文件系统工具"></a> 二、内置文件系统工具</h1>
+<table>
+<thead>
+<tr>
+<th><strong>工具</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>**ls**</code></td>
+<td>查看目录下内容</td>
+</tr>
+<tr>
+<td><code>**read_file**</code></td>
+<td>阅读文件</td>
+</tr>
+<tr>
+<td><code>**write_file**</code></td>
+<td>写文件（创建文件、覆盖）</td>
+</tr>
+<tr>
+<td><code>**edit_file**</code></td>
+<td>替换（改局部内容时）</td>
+</tr>
+<tr>
+<td><code>**delete**</code></td>
+<td>删除文件或目录</td>
+</tr>
+<tr>
+<td><code>**glob**</code></td>
+<td>模式匹配查找文件</td>
+</tr>
+<tr>
+<td><code>**grep**</code></td>
+<td>全文检索</td>
+</tr>
+</tbody>
+</table>
+<p>搜索结果及其边界：</p>
+<ol>
+<li>read_file：会返回<strong>分页信息</strong>和<strong>下一段偏移量</strong></li>
+<li>grep、glob：可能返回<strong>有效但不完整</strong>的结果，并通过 truncated=True 明示截断</li>
+<li>grep：默认<strong>最多</strong>保留 <strong>1000 个匹配</strong></li>
+</ol>
+<p><strong>调用成功只代表工具正常执行，不代表已经得到全集，后续应缩小目录或匹配条件继续搜索。</strong></p>
+<p><strong>工具输出文本是给模型读的，不是给程序解析的。程序应该消费结构化 Backend 结果；文本格式变化只影响展示和快照，不应影响业务逻辑。</strong></p>
+<h2 id="21-read_file特性"><a class="markdownIt-Anchor" href="#21-read_file特性"></a> 2.1 read_file特性</h2>
+<ol>
+<li>
+<p>分片读取</p>
+</li>
+<li>
+<p>对于大文件，支持按偏移量和行数读取，避免把整个文件塞进上下文</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># 默认最多读取前 100 行 read_file(&quot;/dcz/doc.md&quot;) # 从第 1 行开始，读取 50 行 read_file(&quot;/dcz/doc.md&quot;, offset=1, limit=50)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p>原生多模态支持</p>
+</li>
+<li>
+<p>图片：<code>**.png**</code> <code>**.jpg**</code> <code>**.jpeg**</code> <code>**.gif**</code> <code>**.webp**</code> <code>**.heic**</code> <code>**.heif**</code></p>
+</li>
+<li>
+<p>视频：<code>**.mp4**</code> <code>**.mpeg**</code> <code>**.mov**</code> <code>**.avi**</code> <code>**.flv**</code> <code>**.mpg**</code> <code>**.webm**</code> <code>**.wmv**</code> <code>**.3gpp**</code></p>
+</li>
+<li>
+<p>音频：<code>**.wav**</code> <code>**.mp3**</code> <code>**.aiff**</code> <code>**.aac**</code> <code>**.ogg**</code> <code>**.flac**</code></p>
+</li>
+<li>
+<p>文档：<code>**.pdf**</code> <code>**.ppt**</code> <code>**.pptx**</code></p>
+</li>
+</ol>
+<h2 id="22-grep的三种输出模式"><a class="markdownIt-Anchor" href="#22-grep的三种输出模式"></a> 2.2 grep的三种输出模式</h2>
+<ol>
+<li>files_with_matches：只返回文件路径（快速定位）</li>
+<li>content：返回匹配行和上下文（深入查看）</li>
+<li>count：返回匹配数量（概览统计）</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找到所有包含 &quot;TODO&quot; 的 Python 文件</span></span><br><span class="line">grep(<span class="string">&quot;TODO&quot;</span>, glob=<span class="string">&quot;**/*.py&quot;</span>, output_mode=<span class="string">&quot;files_with_matches&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看匹配内容</span></span><br><span class="line">grep(<span class="string">&quot;def create_agent&quot;</span>, output_mode=<span class="string">&quot;content&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="三-上下文自动管理不只是存文件"><a class="markdownIt-Anchor" href="#三-上下文自动管理不只是存文件"></a> 三、上下文自动管理：不只是存文件</h1>
+<h2 id="31-大结果自动卸载"><a class="markdownIt-Anchor" href="#31-大结果自动卸载"></a> 3.1 大结果自动卸载</h2>
+<p>当工具调用的输入或输出超过 20,000 tokens 时（可通过 <strong>tool_token_limit_before_evict 配置</strong>），Deep Agents 会自动：</p>
+<ol>
+<li>将完整内容写入虚拟文件系统</li>
+<li>在对话历史中替换为文件路径引用 + 前 10 行预览</li>
+<li>Agent 需要时可以按需读回</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">原始结果：[<span class="number">50000</span> tokens 的搜索结果]</span><br><span class="line"></span><br><span class="line">自动卸载后：</span><br><span class="line"><span class="string">&quot;结果已保存到 /workspace/search_results_001.md，</span></span><br><span class="line"><span class="string"> 前 10 行预览：</span></span><br><span class="line"><span class="string">   1  # Search Results for &#x27;LangGraph&#x27;</span></span><br><span class="line"><span class="string">   2</span></span><br><span class="line"><span class="string">   3  ## Result 1: Official Documentation</span></span><br><span class="line"><span class="string">   4  ...&quot;</span></span><br></pre></td></tr></table></figure>
+<p>这个机制是完全自动的——Agent 不需要手动管理，但可以随时通过 read_file 或 grep 重新访问完整内容。</p>
+<h2 id="32-对话历史总结"><a class="markdownIt-Anchor" href="#32-对话历史总结"></a> 3.2 对话历史总结</h2>
+<p>当上下文大小达到模型窗口的 85% 时，如果没有更多可卸载的内容，Deep Agents 会启动自动总结：</p>
+<ol>
+<li>用 LLM 生成对话的结构化摘要（意图、产出物、下一步）</li>
+<li>将完整的原始对话写入文件系统保存</li>
+<li>用摘要替换对话历史中的旧消息</li>
+</ol>
+<p>这种”双保险”设计意味着：</p>
+<ol>
+<li>Agent 既有精炼的工作记忆（摘要）</li>
+<li>又能在需要时回溯细节（文件系统中的完整记录）。</li>
+<li><img src="image.png" alt="img" /></li>
+</ol>
+<h1 id="四-可插拔的存储后端"><a class="markdownIt-Anchor" href="#四-可插拔的存储后端"></a> 四、可插拔的存储后端</h1>
+<p>可以根据场景选择不同的存储策略</p>
+<h2 id="41-statebackend默认临时存储"><a class="markdownIt-Anchor" href="#41-statebackend默认临时存储"></a> 4.1 StateBackend（默认）：临时存储</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> deepagents <span class="keyword">import</span> create_deep_agent</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认就是 StateBackend，不需要显式指定</span></span><br><span class="line">agent = create_deep_agent(model=model)</span><br></pre></td></tr></table></figure>
+<p>文件存在 LangGraph 的 Agent State 中。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>同一个对话线程内持久化（多轮对话不丢失）</li>
+<li>对话结束后丢失（换一个 thread 就没了）</li>
+<li>主 Agent 和子 Agent 共享文件</li>
+</ul>
+<p><strong>适合场景</strong>：大多数情况下的默认选择，Agent 的”草稿纸”。</p>
+<h2 id="42-filesystembackend本地磁盘"><a class="markdownIt-Anchor" href="#42-filesystembackend本地磁盘"></a> 4.2 FilesystemBackend：本地磁盘</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> deepagents.backends <span class="keyword">import</span> FilesystemBackend</span><br><span class="line"></span><br><span class="line">agent = create_deep_agent(</span><br><span class="line">    model=model,</span><br><span class="line">    backend=FilesystemBackend(root_dir=<span class="string">&quot;.&quot;</span>, virtual_mode=<span class="literal">True</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>文件直接读写本地文件系统。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>
+<p>root_dir 指定 Agent 可访问的根目录；</p>
+</li>
+<li>
+<p>相对路径会被解析为绝对路径（Path(root_dir).resolve()），“.” 即当前工作目录</p>
+</li>
+<li>
+<p>virtual_mode=True 启用路径沙箱（阻止 …、~ 及越界的绝对路径），强烈建议开启；</p>
+</li>
+<li>
+<p>若为默认的 virtual_mode=False，即使设了 root_dir 也不提供任何越界保护</p>
+</li>
+<li>
+<p>文件修改是永久的、不可逆的</p>
+</li>
+<li>
+<p>FilesystemBackend 的 virtual_mode=True 只提供路径遍历防护，不是完整沙箱。</p>
+</li>
+</ul>
+<p><strong>适合场景</strong>：本地开发 CLI（编程助手）、CI/CD 流水线。</p>
+<p><strong>⚠️</strong> <strong>安全提示：Agent 可以读取 root_dir 下所有文件，包括 .env、密钥等敏感文件。Web 服务或 API 场景中切勿使用此后端，应改用沙箱后端。建议配合 Human-in-the-Loop 使用。</strong></p>
+<h2 id="43-localshellbackend本地-shell-执行"><a class="markdownIt-Anchor" href="#43-localshellbackend本地-shell-执行"></a> 4.3 LocalShellBackend：本地 Shell 执行</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> deepagents.backends <span class="keyword">import</span> LocalShellBackend</span><br><span class="line"></span><br><span class="line">agent = create_deep_agent(</span><br><span class="line">    model=model,</span><br><span class="line">    backend=LocalShellBackend(root_dir=<span class="string">&quot;.&quot;</span>, virtual_mode=<span class="literal">True</span>, env=&#123;<span class="string">&quot;PATH&quot;</span>: <span class="string">&quot;/usr/bin:/bin&quot;</span>&#125;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>LocalShellBackend 是 FilesystemBackend 的扩展，在文件系统工具之外额外提供 execute 工具，可直接在宿主机运行 Shell 命令。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>命令通过 subprocess.run(shell=True) 执行，无任何沙箱隔离</li>
+<li>支持 timeout（默认 120 秒）、max_output_bytes（默认 100,000）、env 等参数</li>
+<li>root_dir 作为命令的工作目录，但命令可访问系统上任意路径</li>
+<li>LocalShellBackend 无沙箱隔离，生产/多用户环境禁用</li>
+</ul>
+<p><strong>适合场景</strong>：本地开发环境的编程助手、你<strong>完全信任 Agent 行为</strong>的个人开发机。</p>
+<p><strong>⚠️</strong> <strong>极高风险警告：Agent 可执行任意 Shell 命令，包括删除文件、外传数据、消耗资源。绝对不要在生产环境或多用户系统中使用。 沙箱后端是生产环境的安全替代方案。</strong></p>
+<p><strong>如果确实要在个人开发机中临时使用，至少做几层防护：</strong></p>
+<ol>
+<li><strong>将 root_dir 指向一个专门的临时工作区，而不是用户主目录或整个仓库上级目录</strong></li>
+<li><strong>显式设置 virtual_mode=True，并用最小化的 env / PATH 降低命令可见范围</strong></li>
+<li><strong>不把 .env、私钥、云凭证、生产配置文件放进 Agent 可访问目录</strong></li>
+<li><strong>对 rm、mv、安装依赖、修改配置、访问网络等高风险操作增加 Human-in-the-Loop 审批</strong></li>
+<li><strong>需要运行不可信代码、处理用户上传文件或对外提供服务时，直接换用沙箱后端，不要用 LocalShellBackend</strong></li>
+</ol>
+<h2 id="44-storebackend跨会话持久化"><a class="markdownIt-Anchor" href="#44-storebackend跨会话持久化"></a> 4.4 StoreBackend：跨会话持久化</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langgraph.store.memory <span class="keyword">import</span> InMemoryStore</span><br><span class="line"><span class="keyword">from</span> deepagents.backends <span class="keyword">import</span> StoreBackend</span><br><span class="line"></span><br><span class="line">agent = create_deep_agent(</span><br><span class="line">    model=model,</span><br><span class="line">    backend=StoreBackend(</span><br><span class="line">        namespace=<span class="keyword">lambda</span> rt: (rt.server_info.user.identity,),  <span class="comment"># 按用户隔离数据</span></span><br><span class="line">    ),</span><br><span class="line">    store=InMemoryStore()  <span class="comment"># 开发用；部署到 LangSmith 时可省略，平台自动提供</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>文件存在 LangGraph 的 Store 中。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>跨线程持久化——不同对话都能访问同一份文件</li>
+<li>namespace 参数控制数据隔离：lambda rt: (rt.server_info.user.identity,) 按用户隔离，防止数据混用</li>
+<li>开发用 InMemoryStore，部署到 LangSmith 时省略 store 参数（平台自动配置）</li>
+</ul>
+<p><strong>适合场景</strong>：长期记忆、跨会话的用户偏好、累积的知识库。</p>
+<h2 id="45-compositebackend混合路由"><a class="markdownIt-Anchor" href="#45-compositebackend混合路由"></a> 4.5 CompositeBackend：混合路由</h2>
+<p>这是最灵活的方案——不同路径走不同后端：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> deepagents <span class="keyword">import</span> create_deep_agent</span><br><span class="line"><span class="keyword">from</span> deepagents.backends <span class="keyword">import</span> CompositeBackend, StateBackend, StoreBackend</span><br><span class="line"><span class="keyword">from</span> langgraph.store.memory <span class="keyword">import</span> InMemoryStore</span><br><span class="line"></span><br><span class="line">agent = create_deep_agent(</span><br><span class="line">    model=model,</span><br><span class="line">    backend=CompositeBackend(</span><br><span class="line">        default=StateBackend(),            <span class="comment"># 默认：临时存储</span></span><br><span class="line">        routes=&#123;</span><br><span class="line">            <span class="string">&quot;/memories/&quot;</span>: StoreBackend(</span><br><span class="line">                namespace=<span class="keyword">lambda</span> rt: (rt.server_info.user.identity,),</span><br><span class="line">            ),</span><br><span class="line">        &#125;</span><br><span class="line">    ),</span><br><span class="line">    store=InMemoryStore()</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>💡 namespace 本地需要加 if rt.server_info else (“local-user”,) 兜底。</p>
+<p>效果：</p>
+<ul>
+<li>Agent 写入 /workspace/plan.md → StateBackend（临时）</li>
+<li>Agent 写入 /memories/preferences.txt → StoreBackend（持久化，按用户隔离）</li>
+<li>ls、glob、grep 自动聚合所有后端的结果，路径前缀保留</li>
+</ul>
+<p>这种设计让 Agent 既有快速的”草稿纸”（State），又有持久的”记忆库”（Store），通过路径前缀自然隔离。</p>
+<h2 id="46-沙箱后端安全代码执行"><a class="markdownIt-Anchor" href="#46-沙箱后端安全代码执行"></a> 4.6 沙箱后端：安全代码执行</h2>
+<p>当使用沙箱后端（Modal、Daytona、Runloop 等）时，除了文件系统工具外，Agent 还会获得一个额外的 execute 工具，可以在隔离环境中执行 Shell 命令：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 沙箱后端自动提供 execute 工具</span></span><br><span class="line">agent = create_deep_agent(</span><br><span class="line">    model=model,</span><br><span class="line">    backend=sandbox  <span class="comment"># 沙箱实例</span></span><br><span class="line">)</span><br><span class="line"><span class="comment"># Agent 现在可以运行: execute(&quot;pip install pandas &amp;&amp; python analyze.py&quot;)</span></span><br></pre></td></tr></table></figure>
+<p><img src="1789628729676-f4398762-52a3-4840-8c1f-6af643c244e3.png" alt="img" /></p>
+<h2 id="47-后端对比表"><a class="markdownIt-Anchor" href="#47-后端对比表"></a> 4.7 后端对比表</h2>
+<table>
+<thead>
+<tr>
+<th>后端</th>
+<th>数据/执行位置</th>
+<th>持久化范围</th>
+<th>Shell /execute 能力</th>
+<th>隔离与安全</th>
+<th>关键配置</th>
+<th>适合场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>StateBackend（默认）</strong></td>
+<td>LangGraph 的 Agent State</td>
+<td>同一对话线程内持久；换 thread 丢失</td>
+<td>无</td>
+<td>随 Agent State，无独立沙箱</td>
+<td>默认即可，无需显式指定</td>
+<td>大多数默认选择、Agent 的“草稿纸”；主 Agent 和子 Agent 共享文件</td>
+</tr>
+<tr>
+<td><strong>FilesystemBackend</strong></td>
+<td>本地磁盘</td>
+<td>永久、不可逆</td>
+<td>无，仅文件系统工具</td>
+<td>依赖 <code>virtual_mode=True</code>开启路径沙箱；否则即使设 <code>root_dir</code>也无越界保护</td>
+<td><code>root_dir=&quot;.&quot;</code>、<code>virtual_mode=True</code></td>
+<td>本地开发 CLI、编程助手、CI/CD</td>
+</tr>
+<tr>
+<td><strong>LocalShellBackend</strong></td>
+<td>本地磁盘 + 宿主机 Shell</td>
+<td>文件永久</td>
+<td>有 <code>execute</code>，通过 <code>subprocess.run(shell=True)</code>执行</td>
+<td><strong>无沙箱隔离</strong>；命令可访问系统任意路径</td>
+<td><code>root_dir</code>、<code>virtual_mode=True</code>、<code>env</code>、<code>timeout</code>（默认 120s）、<code>max_output_bytes</code>（默认 100,000）</td>
+<td>个人开发机、完全信任 Agent 行为的本地编程助手</td>
+</tr>
+<tr>
+<td><strong>StoreBackend</strong></td>
+<td>LangGraph Store</td>
+<td>跨线程、跨会话持久</td>
+<td>无</td>
+<td>通过 <code>namespace</code>做数据隔离</td>
+<td><code>namespace</code>必填；开发用 <code>InMemoryStore</code>，部署 LangSmith 可省略 <code>store</code></td>
+<td>长期记忆、跨会话用户偏好、累积知识库</td>
+</tr>
+<tr>
+<td><strong>CompositeBackend</strong></td>
+<td>按路径路由到不同后端</td>
+<td>取决于被路由的后端</td>
+<td>取决于被路由的后端</td>
+<td>取决于被路由的后端</td>
+<td><code>default</code>、<code>routes</code>；v0.7 必须直接传 <code>CompositeBackend(...)</code> 实例</td>
+<td>State 草稿 + Store 记忆混合，例如 <code>/workspace/</code>临时、<code>/memories/</code>持久</td>
+</tr>
+<tr>
+<td><strong>沙箱后端</strong>（Modal、Daytona、Runloop 等）</td>
+<td>隔离沙箱环境</td>
+<td>取决于沙箱配置</td>
+<td>自动提供 <code>execute</code></td>
+<td>隔离环境，生产环境的安全替代方案</td>
+<td><code>backend=sandbox</code>实例</td>
+<td>生产、不可信代码、用户上传文件、对外服务</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>默认 / 临时草稿</strong>：<code>StateBackend</code></li>
+<li><strong>本地文件持久化</strong>：<code>FilesystemBackend</code> + <code>virtual_mode=True</code></li>
+<li><strong>需要本地 Shell 且完全信任 Agent</strong>：<code>LocalShellBackend</code>，但必须加严格防护</li>
+<li><strong>跨会话长期记忆</strong>：<code>StoreBackend</code></li>
+<li><strong>草稿 + 长期记忆混合</strong>：<code>CompositeBackend</code></li>
+<li><strong>生产 / 不可信代码 / 多用户服务</strong>：沙箱后端，<strong>不要用 LocalShellBackend</strong></li>
+</ul>
+<h2 id="48-关键配置与风险提醒"><a class="markdownIt-Anchor" href="#48-关键配置与风险提醒"></a> 4.8 关键配置与风险提醒</h2>
+<table>
+<thead>
+<tr>
+<th>后端</th>
+<th>重点提醒</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>StateBackend</strong></td>
+<td>对话结束或换 thread 后文件丢失；适合临时草稿，不适合长期记忆。</td>
+</tr>
+<tr>
+<td><strong>FilesystemBackend</strong></td>
+<td><code>virtual_mode</code>从 0.5.0 起不显式声明会弃用警告，0.6.0 起必填，建议直接 <code>virtual_mode=True</code>。Agent 可读取 <code>root_dir</code> 下所有文件，包括 <code>.env</code>、密钥等；Web 服务或 API 场景切勿使用。</td>
+</tr>
+<tr>
+<td><strong>LocalShellBackend</strong></td>
+<td>极高风险：可删除文件、外传数据、消耗资源。绝对不要用于生产环境或多用户系统。若个人临时使用，至少：指向专用临时工作区、<code>virtual_mode=True</code>、最小化 <code>env/PATH</code>、不放敏感文件、高风险操作加 Human-in-the-Loop；不可信代码直接换沙箱后端。</td>
+</tr>
+<tr>
+<td><strong>StoreBackend</strong></td>
+<td><code>namespace</code>从 v0.5.0 起必填。<code>rt.server_info.user.identity</code> 在 LangSmith 部署时可用，但本地 <code>invoke()</code>时 <code>rt.server_info</code>是 <code>None</code>，需要兜底，例如 <code>(&quot;local-user&quot;,)</code>。</td>
+</tr>
+<tr>
+<td><strong>CompositeBackend</strong></td>
+<td>v0.7 兼容提醒：<code>backend=</code>必须直接传 <code>CompositeBackend(...)</code> 等实例；<code>backend=lambda rt: ...</code>工厂函数已移除。 <code>StoreBackend(namespace=lambda rt: ...)</code>仍支持。<code>ls</code>、<code>glob</code>、<code>grep</code>会自动聚合所有后端结果，并保留路径前缀。本地调试 <code>namespace</code>也要兜底。</td>
+</tr>
+<tr>
+<td><strong>沙箱后端</strong></td>
+<td>除文件系统工具外，Agent 会获得隔离环境中的 <code>execute</code>工具，例如可运行 <code>pip install pandas &amp;&amp; python analyze.py</code>。生产环境优先选它。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="五-自定义后端与安全策略"><a class="markdownIt-Anchor" href="#五-自定义后端与安全策略"></a> 五、 自定义后端与安全策略</h1>
+<h2 id="51-声明式权限"><a class="markdownIt-Anchor" href="#51-声明式权限"></a> 5.1 声明式权限</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> deepagents <span class="keyword">import</span> create_deep_agent, FilesystemPermission</span><br><span class="line"></span><br><span class="line">agent = create_deep_agent(</span><br><span class="line">    model=model,</span><br><span class="line">    backend=CompositeBackend(</span><br><span class="line">        default=StateBackend(),</span><br><span class="line">        routes=&#123;</span><br><span class="line">            <span class="string">&quot;/memories/&quot;</span>: StoreBackend(</span><br><span class="line">                namespace=<span class="keyword">lambda</span> rt: (rt.server_info.user.identity,),</span><br><span class="line">            ),</span><br><span class="line">        &#125;,</span><br><span class="line">    ),</span><br><span class="line">    permissions=[</span><br><span class="line">        FilesystemPermission(</span><br><span class="line">            operations=[<span class="string">&quot;write&quot;</span>],</span><br><span class="line">            paths=[<span class="string">&quot;/policies/**&quot;</span>],</span><br><span class="line">            mode=<span class="string">&quot;deny&quot;</span>,           <span class="comment"># 禁止写入 /policies/ 下的任何文件</span></span><br><span class="line">        ),</span><br><span class="line">    ],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>权限规则在工具调用前按声明顺序求值，采用 first-match-wins：第一个同时匹配 operations 和 paths 的规则决定结果；如果<strong>没有规则匹配，则默认允许</strong>。因此配置权限时，应将<strong>更具体的规则放在更宽泛的规则之前</strong>。</p>
+<p>FilesystemPermission 的 mode 决定命中规则后的处理方式：</p>
+<table>
+<thead>
+<tr>
+<th>mode</th>
+<th>行为</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>allow</td>
+<td>允许操作继续执行</td>
+<td>为特定路径设置显式例外</td>
+</tr>
+<tr>
+<td>deny</td>
+<td>直接拒绝，不执行文件操作</td>
+<td>无论谁发起都不应访问的路径</td>
+</tr>
+<tr>
+<td>interrupt</td>
+<td>暂停并等待人工决策</td>
+<td>可以操作，但必须先经过审批的敏感路径 <strong>需要 Checkpointer，并使用与工具审批相同的 Command(resume=…)恢复协议</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="52-实现自定义后端"><a class="markdownIt-Anchor" href="#52-实现自定义后端"></a> 5.2 实现自定义后端</h2>
+<p>如果内置后端不满足需求（比如要接入 S3 或 Postgres），可以实现 BackendProtocol 接口：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> deepagents.backends.protocol <span class="keyword">import</span> (</span><br><span class="line">    BackendProtocol, WriteResult, EditResult, DeleteResult,</span><br><span class="line">    LsResult, ReadResult, GrepResult, GlobResult,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">S3Backend</span>(<span class="title class_ inherited__">BackendProtocol</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, bucket: <span class="built_in">str</span>, prefix: <span class="built_in">str</span> = <span class="string">&quot;&quot;</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.bucket = bucket</span><br><span class="line">        <span class="variable language_">self</span>.prefix = prefix.rstrip(<span class="string">&quot;/&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">ls</span>(<span class="params">self, path: <span class="built_in">str</span></span>) -&gt; LsResult:</span><br><span class="line">        <span class="comment"># 列出 S3 对象，返回 FileInfo 列表</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">read</span>(<span class="params">self, file_path: <span class="built_in">str</span>, offset: <span class="built_in">int</span> = <span class="number">0</span>, limit: <span class="built_in">int</span> = <span class="number">2000</span></span>) -&gt; ReadResult:</span><br><span class="line">        <span class="comment"># 读取 S3 对象，返回 ReadResult(file_data=...) 或 ReadResult(error=...)</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">write</span>(<span class="params">self, file_path: <span class="built_in">str</span>, content: <span class="built_in">str</span></span>) -&gt; WriteResult:</span><br><span class="line">        <span class="comment"># 写入 S3 对象，外部存储后端 files_update=None</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">edit</span>(<span class="params">self, file_path: <span class="built_in">str</span>, old_string: <span class="built_in">str</span>, new_string: <span class="built_in">str</span>,</span></span><br><span class="line"><span class="params">             replace_all: <span class="built_in">bool</span> = <span class="literal">False</span></span>) -&gt; EditResult:</span><br><span class="line">        <span class="comment"># 读取 → 替换 → 写回</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">grep</span>(<span class="params">self, pattern: <span class="built_in">str</span>, path: <span class="built_in">str</span> | <span class="literal">None</span> = <span class="literal">None</span>, glob: <span class="built_in">str</span> | <span class="literal">None</span> = <span class="literal">None</span></span>) -&gt; GrepResult:</span><br><span class="line">        <span class="comment"># 搜索匹配内容</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">glob</span>(<span class="params">self, pattern: <span class="built_in">str</span>, path: <span class="built_in">str</span> = <span class="string">&quot;/&quot;</span></span>) -&gt; GlobResult:</span><br><span class="line">        <span class="comment"># 模式匹配，返回 FileInfo 列表</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">delete</span>(<span class="params">self, file_path: <span class="built_in">str</span></span>) -&gt; DeleteResult:</span><br><span class="line">        <span class="comment"># 删除对象或目录前缀；需要暴露 delete 工具时实现</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<p>BackendProtocol 的核心读写与搜索接口包括 ls、read、write、edit、grep、glob。如果后端要向 Agent 暴露 v0.7 的删除能力，还要实现 delete() 并返回 DeleteResult。包装器也必须同步转发或拒绝删除，不能只保护 write() 和 edit()。</p>
+<h2 id="53-安全策略policywrapper"><a class="markdownIt-Anchor" href="#53-安全策略policywrapper"></a> 5.3 安全策略：PolicyWrapper</h2>
+<p>对于需要拦截策略（速率限制、审计日志、内容检查）的场景，可以通过继承或包装后端实现：</p>
+<p><strong>方式一：继承现有后端</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> deepagents.backends.filesystem <span class="keyword">import</span> FilesystemBackend</span><br><span class="line"><span class="keyword">from</span> deepagents.backends.protocol <span class="keyword">import</span> WriteResult, EditResult, DeleteResult</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GuardedBackend</span>(<span class="title class_ inherited__">FilesystemBackend</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, *, deny_prefixes: <span class="built_in">list</span>[<span class="built_in">str</span>], **kwargs</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__(**kwargs)</span><br><span class="line">        <span class="variable language_">self</span>.deny_prefixes = [p <span class="keyword">if</span> p.endswith(<span class="string">&quot;/&quot;</span>) <span class="keyword">else</span> p + <span class="string">&quot;/&quot;</span> <span class="keyword">for</span> p <span class="keyword">in</span> deny_prefixes]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">write</span>(<span class="params">self, file_path: <span class="built_in">str</span>, content: <span class="built_in">str</span></span>) -&gt; WriteResult:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">any</span>(file_path.startswith(p) <span class="keyword">for</span> p <span class="keyword">in</span> <span class="variable language_">self</span>.deny_prefixes):</span><br><span class="line">            <span class="keyword">return</span> WriteResult(error=<span class="string">f&quot;写入被拒绝：<span class="subst">&#123;file_path&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().write(file_path, content)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">edit</span>(<span class="params">self, file_path: <span class="built_in">str</span>, old_string: <span class="built_in">str</span>, new_string: <span class="built_in">str</span>,</span></span><br><span class="line"><span class="params">             replace_all: <span class="built_in">bool</span> = <span class="literal">False</span></span>) -&gt; EditResult:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">any</span>(file_path.startswith(p) <span class="keyword">for</span> p <span class="keyword">in</span> <span class="variable language_">self</span>.deny_prefixes):</span><br><span class="line">            <span class="keyword">return</span> EditResult(error=<span class="string">f&quot;编辑被拒绝：<span class="subst">&#123;file_path&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().edit(file_path, old_string, new_string, replace_all)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">delete</span>(<span class="params">self, file_path: <span class="built_in">str</span></span>) -&gt; DeleteResult:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">any</span>(file_path.startswith(p) <span class="keyword">for</span> p <span class="keyword">in</span> <span class="variable language_">self</span>.deny_prefixes):</span><br><span class="line">            <span class="keyword">return</span> DeleteResult(error=<span class="string">f&quot;删除被拒绝：<span class="subst">&#123;file_path&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().delete(file_path)</span><br></pre></td></tr></table></figure>
+<p><strong>方式二：通用包装器（适用于任何后端）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> deepagents.backends.protocol <span class="keyword">import</span> BackendProtocol, WriteResult, EditResult, DeleteResult</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PolicyWrapper</span>(<span class="title class_ inherited__">BackendProtocol</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, inner: BackendProtocol, deny_prefixes: <span class="built_in">list</span>[<span class="built_in">str</span>]</span>):</span><br><span class="line">        <span class="variable language_">self</span>.inner = inner</span><br><span class="line">        <span class="variable language_">self</span>.deny_prefixes = [p <span class="keyword">if</span> p.endswith(<span class="string">&quot;/&quot;</span>) <span class="keyword">else</span> p + <span class="string">&quot;/&quot;</span> <span class="keyword">for</span> p <span class="keyword">in</span> deny_prefixes]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_deny</span>(<span class="params">self, path: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">any</span>(path.startswith(p) <span class="keyword">for</span> p <span class="keyword">in</span> <span class="variable language_">self</span>.deny_prefixes)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">ls</span>(<span class="params">self, path</span>): <span class="keyword">return</span> <span class="variable language_">self</span>.inner.ls(path)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">read</span>(<span class="params">self, file_path, offset=<span class="number">0</span>, limit=<span class="number">2000</span></span>): <span class="keyword">return</span> <span class="variable language_">self</span>.inner.read(file_path, offset=offset, limit=limit)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">grep</span>(<span class="params">self, pattern, path=<span class="literal">None</span>, glob=<span class="literal">None</span></span>): <span class="keyword">return</span> <span class="variable language_">self</span>.inner.grep(pattern, path, glob)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">glob</span>(<span class="params">self, pattern, path=<span class="string">&quot;/&quot;</span></span>): <span class="keyword">return</span> <span class="variable language_">self</span>.inner.glob(pattern, path)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">write</span>(<span class="params">self, file_path: <span class="built_in">str</span>, content: <span class="built_in">str</span></span>) -&gt; WriteResult:</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>._deny(file_path):</span><br><span class="line">            <span class="keyword">return</span> WriteResult(error=<span class="string">f&quot;写入被拒绝：<span class="subst">&#123;file_path&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.inner.write(file_path, content)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">edit</span>(<span class="params">self, file_path: <span class="built_in">str</span>, old_string: <span class="built_in">str</span>, new_string: <span class="built_in">str</span>,</span></span><br><span class="line"><span class="params">             replace_all: <span class="built_in">bool</span> = <span class="literal">False</span></span>) -&gt; EditResult:</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>._deny(file_path):</span><br><span class="line">            <span class="keyword">return</span> EditResult(error=<span class="string">f&quot;编辑被拒绝：<span class="subst">&#123;file_path&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.inner.edit(file_path, old_string, new_string, replace_all)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">delete</span>(<span class="params">self, file_path: <span class="built_in">str</span></span>) -&gt; DeleteResult:</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>._deny(file_path):</span><br><span class="line">            <span class="keyword">return</span> DeleteResult(error=<span class="string">f&quot;删除被拒绝：<span class="subst">&#123;file_path&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.inner.delete(file_path)</span><br></pre></td></tr></table></figure>
+<p>**本文参考文献如下，非原创、非原创、非原创：<br />
+**<a target="_blank" rel="noopener" href="https://datawhalechina.github.io/deepagents-in-action/chapters/ch03-virtual-filesystem/"><strong>https://datawhalechina.github.io/deepagents-in-action/chapters/ch03-virtual-filesystem/</strong></a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/09/01/jinan-fresh-rental-housing-guide/" rel="prev" title="济南应届租房指南【避坑、避雷】">
+                  <i class="fa fa-angle-left"></i> 济南应届租房指南【避坑、避雷】
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">BigOrange</span>
+  </div><div>
+  <a href="https://www.foreverblog.cn/" target="_blank" style="display:block; text-align:left;">
+    <img src="https://foreverblog.cn/assets/logo/logo_en_default.png" alt="" style="display:inline;height:16px;">
+  </a>
+</div>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js?id=3HGFkqwJpvEGaeV9&ck=3HGFkqwJpvEGaeV9&autoTrack=true"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="4d271e0d-e852-48ab-9777-6a09832bf70e"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"BaseOrange","repo":"BaseOrange.github.io","client_id":"8f8eb36a78230e56ee7e","client_secret":"c826afd9bd0b45f07426463094a3ad186de52bd8","admin_user":"BaseOrange","distraction_free_mode":true,"proxy":"https://proxy.660066.xyz/github_access_token","language":"zh-CN","body":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"f98b1927036cd40d5460b48689d5eb45"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>
